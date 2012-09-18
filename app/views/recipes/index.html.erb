@@ -1,8 +1,5 @@
+<% provide(:title, "Recipe Index") %>
 <h1>Recipe Index</h1>
-
-<% if flash[:success] %>
-  <div class="alert alert-success"><%= flash[:success] %></div><br>
-<% end %>
 
 <% @recipes.reverse_each do |recipe| %>
   <div>

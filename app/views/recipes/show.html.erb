@@ -1,8 +1,5 @@
+<% provide(:title, @recipe.name) %>
 <h1><%= @recipe.name %></h1>
-
-<% if flash[:success] %>
-  <div class="alert alert-success"><%= flash[:success] %></div><br>
-<% end %>
 
 <div>
   <%= @recipe.description %>
