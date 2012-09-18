@@ -1,0 +1,18 @@
+<h1><%= @recipe.name %></h1>
+
+<% if flash[:success] %>
+  <div class="alert alert-success"><%= flash[:success] %></div><br>
+<% end %>
+
+<div>
+  <%= @recipe.description %>
+</div>
+
+<section>
+  <span>
+    <%= link_to "edit", edit_recipe_path(@recipe) %>
+  </span>
+  <span>
+    <%= link_to "delete", @recipe, method: :delete, data: { confirm: "You sure?" } %>
+  </span>
+</section>

@@ -1,0 +1,20 @@
+<h1>Recipe Index</h1>
+
+<% if flash[:success] %>
+  <div class="alert alert-success"><%= flash[:success] %></div><br>
+<% end %>
+
+<% @recipes.reverse_each do |recipe| %>
+  <div>
+    <section>
+      <%= link_to recipe.name, recipe %>
+    </section>
+    <section>
+      <%= recipe.description %>
+    </section>
+    <section>
+      <%= link_to "delete", recipe, method: :delete, data: { confirm: "You sure?" } %>
+    </section>
+  </div>
+  <hr>
+<% end %>
