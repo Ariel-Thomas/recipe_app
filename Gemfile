@@ -10,6 +10,8 @@ gem 'pg', '0.14.1'
 gem 'thin', '1.4.1'
 gem 'bootstrap-sass', '2.0.0'
 gem 'bcrypt-ruby', '3.0.1'
+gem 'sunspot_rails'
+gem 'sunspot_solr'
 
 group :development, :test do
   gem 'rspec-rails', '2.11.0'

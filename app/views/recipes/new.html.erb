@@ -11,6 +11,10 @@
     <%= f.label :description %>
     <%= f.text_area :description, :placeholder => "Enter a brief description of the recipe..." %>
 
+    <%= f.label :ingredients %>
+    <%= f.text_area :ingredients, :placeholder => "Enter the ingredients for this recipe..." %>
+
+
     <%= f.submit "Submit", class: "btn btn-large btn-primary" %>
   <% end %>
 </div>

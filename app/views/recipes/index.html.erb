@@ -1,7 +1,16 @@
 <% provide(:title, "Recipe Index") %>
 <h1>Recipe Index</h1>
 
-<% @recipes.reverse_each do |recipe| %>
+<div>
+<%= form_tag recipes_path, method: 'get' do %>
+  <p>
+    <%= text_field_tag :search, params[:search], id: 'Search'  %>
+    <%= submit_tag "Search", name: nil  %>
+  </p>
+<% end %>
+</div>
+
+<% @recipes.each_hit_with_result do |hit, recipe| %>
   <div>
     <section>
       <%= link_to recipe.name, recipe %>

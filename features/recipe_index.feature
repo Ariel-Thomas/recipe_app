@@ -17,3 +17,10 @@ Feature: Show an index of current recipes
     When I click the delete link
     Then I should see the recipe removed
     And I should see a success message
+
+  Scenario: Search for a recipe
+    Given a recipe exists in the database
+    And I visit the index page
+    When I enter the recipe name in the search
+    And I click the search button
+    Then I should see the recipe

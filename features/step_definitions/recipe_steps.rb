@@ -2,7 +2,7 @@ Given /^I visit the new recipe page$/ do
   visit new_recipe_path
 end
 
-When /^I submit invalid recipe information$/ do
+When /^I submit the recipe$/ do
   click_button "Submit"
 end
 
@@ -14,10 +14,20 @@ Then /^I should return to the new page$/ do
   page.should have_selector('h1', text: "New Recipe")
 end
 
-When /^I submit valid recipe information$/ do
+When /^I input valid recipe information$/ do
   fill_in "Name",         with: "Cookies"
   fill_in "Description",  with: "Delicious Cookies"
-  click_button "Submit"
+  fill_in "Ingredients",  with: "1 C Sugar\n1 C Flour\n2 T Butter"
+end
+
+When /^I poorly format the ingredients$/ do
+  fill_in "Ingredients", with: "1 C Sugar\n\n1 C Flour                      \n2 T Butter"
+end
+
+Then /^I should see ingredients properly formatted$/ do
+  page.should have_selector('li', text: "1 C Sugar")
+  page.should have_selector('li', text: "1 C Flour")
+  page.should have_selector('li', text: "2 T Butter")
 end
 
 Then /^I should see a new recipe created$/ do
@@ -28,9 +38,8 @@ Then /^I should see a success message$/ do
   page.should have_selector('div.alert.alert-success')
 end
 
-
 Given /^a recipe exists in the database$/ do
-  @recipe = Recipe.create(name: "Cookies", description: "Delicious Cookies")
+  @recipe = Recipe.create!(name: "Cookies", description: "Delicious Cookies", ingredients:"1 C Sugar\n1 C Flour\n2 T Butter")
   end
 
 Given /^I visit the index page$/ do
@@ -38,7 +47,6 @@ Given /^I visit the index page$/ do
 end
 
 Then /^I should see the recipe$/ do
-  Recipe.count.should eq(1)
   page.should have_content(@recipe.name)
 end
 
@@ -79,6 +87,7 @@ end
 Then /^I should see the recipe's information$/ do
   page.should have_content(@recipe.name)
   page.should have_content(@recipe.description)
+  @recipe.ingredients_array.each{ |ingredient| page.should have_selector('li', text: ingredient) }
 end
 
 When /^I click the edit link$/ do
@@ -87,4 +96,12 @@ end
 
 Then /^I should see the recipe's edit page$/ do
   page.should have_selector('h1', text: "Edit Recipe")
+end
+
+When /^I enter the recipe name in the search$/ do
+  fill_in "Search",     with: @recipe.name
+end
+
+When /^I click the search button$/ do
+  click_button "Search"
 end

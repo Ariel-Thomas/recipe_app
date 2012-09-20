@@ -1,9 +1,18 @@
 <% provide(:title, @recipe.name) %>
 <h1><%= @recipe.name %></h1>
 
-<div>
+<section>
   <%= @recipe.description %>
-</div>
+</section>
+
+<section>
+  <h3>Ingredients</h3>
+  <ul>
+    <% @recipe.ingredients_array.each do |ingredient| %>
+      <li> <%= ingredient %> </li>
+    <% end %>
+  </ul>
+</section>
 
 <section>
   <span>
