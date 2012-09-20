@@ -1,12 +1,14 @@
 class RecipesController < ApplicationController
 
   def create
-    parse_ingredients!(params[:recipe][:ingredients])
 
-    @recipe = Recipe.new(params[:recipe])
+    @recipe = Recipe.new(name: params[:recipe][:name],
+      description: params[:recipe][:description],
+      ingredient_entries: parse_ingredients(params[:recipe][:ingredients]))
+
     if @recipe.save
       flash[:success] = "Recipe created!" 
-    flash[:debug] = @recipe.ingredients_array
+      flash[:debug] = @recipe.ingredients_array
       redirect_to @recipe
     else
       render 'new'
@@ -48,12 +50,16 @@ class RecipesController < ApplicationController
     redirect_to recipes_path
   end
 
-  private
 
-    def parse_ingredients!(text)
-      # match all line ends bounded by words, but not the last one
-      text.gsub!(/\s*$/,'')
-      text.gsub!(/$[^\z]/,'\n')
+  def parse_ingredients(text)
+    # match all line ends bounded by words, but not the last one
+
+    text.gsub(/\s*$/,'').split(/$[^\z]/).map! do |entry|
+      amount = entry.slice!(/^\d+ \w+ /).chop()
+      ingredient = Ingredient.create!(name: entry)
+
+      IngredientEntry.create!( amount: amount, ingredient: ingredient )
     end
+  end
 
 end
