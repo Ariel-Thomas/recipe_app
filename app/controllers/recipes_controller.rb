@@ -1,14 +1,16 @@
 class RecipesController < ApplicationController
 
   def create
-
     @recipe = Recipe.new(name: params[:recipe][:name],
-      description: params[:recipe][:description],
-      ingredient_entries: parse_ingredients(params[:recipe][:ingredients]))
+      description: params[:recipe][:description])
+
+    ingredient_entries = Recipe.parse_and_create_ingredients(params[:recipe][:ingredients_text])
+
+    @recipe.ingredient_entries = ingredient_entries
 
     if @recipe.save
       flash[:success] = "Recipe created!" 
-      flash[:debug] = @recipe.ingredients_array
+      flash[:debug] = params[:recipe][:ingredients_text]
       redirect_to @recipe
     else
       render 'new'
@@ -21,9 +23,7 @@ class RecipesController < ApplicationController
   end
 
   def index
-    @recipes = Recipe.search{ keywords(params[:search]) }
-    
-    #@recipes = Recipe.all if !@recipes
+    @recipes = Recipe.search{ keywords(params[:search]) }    
   end
 
   def show
@@ -32,7 +32,11 @@ class RecipesController < ApplicationController
 
   def update
     @recipe  = Recipe.find(params[:id])
-    if @recipe.update_attributes(params[:recipe])
+
+    ingredient_entries = Recipe.parse_and_create_ingredients(params[:recipe][:ingredients_text])
+
+    if @recipe.update_attributes(name: params[:recipe][:name],
+      description: params[:recipe][:description],      ingredient_entries: ingredient_entries)
       flash[:success] = "Recipe edited!" 
       redirect_to @recipe
     else
@@ -50,16 +54,18 @@ class RecipesController < ApplicationController
     redirect_to recipes_path
   end
 
+  private
+    def good_ingredients?(ingredients_entries, error_saver)
+      if (ingredients_entries == [])
+        error_saver[:ingredients] = " field must not be left blank"
+        return false
+      end
 
-  def parse_ingredients(text)
-    # match all line ends bounded by words, but not the last one
+      if (ingredients_entries == nil)
+        error_saver[:ingredients] = " field must be formated amount measurement ingredient_name"
+        return false
+      end
 
-    text.gsub(/\s*$/,'').split(/$[^\z]/).map! do |entry|
-      amount = entry.slice!(/^\d+ \w+ /).chop()
-      ingredient = Ingredient.create!(name: entry)
-
-      IngredientEntry.create!( amount: amount, ingredient: ingredient )
+      return true
     end
-  end
-
 end

@@ -1,0 +1,14 @@
+<% @recipes.each_hit_with_result do |hit, recipe| %>
+  <div>
+    <section>
+      <%= link_to recipe.name, recipe %>
+    </section>
+    <section>
+      <%= recipe.description %>
+    </section>
+    <section>
+      <%= link_to "delete", recipe, method: :delete, data: { confirm: "You sure?" } %>
+    </section>
+  </div>
+  <hr>
+<% end %>

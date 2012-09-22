@@ -2,25 +2,12 @@
 <h1>Recipe Index</h1>
 
 <div>
-<%= form_tag recipes_path, method: 'get' do %>
+<%= form_tag recipes_path, method: 'get', remote: true do %>
   <p>
     <%= text_field_tag :search, params[:search], id: 'Search'  %>
     <%= submit_tag "Search", name: nil  %>
-  </p>
+  </p>  
 <% end %>
 </div>
 
-<% @recipes.each_hit_with_result do |hit, recipe| %>
-  <div>
-    <section>
-      <%= link_to recipe.name, recipe %>
-    </section>
-    <section>
-      <%= recipe.description %>
-    </section>
-    <section>
-      <%= link_to "delete", recipe, method: :delete, data: { confirm: "You sure?" } %>
-    </section>
-  </div>
-  <hr>
-<% end %>
+<div id="recipes_list"><%= render 'recipes/recipe_list' %><div>

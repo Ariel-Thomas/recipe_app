@@ -39,8 +39,11 @@ Then /^I should see a success message$/ do
 end
 
 Given /^a recipe exists in the database$/ do
-  @recipe = Recipe.create!(name: "Cookies", description: "Delicious Cookies", ingredients:"1 C Sugar\n1 C Flour\n2 T Butter")
-  end
+  @recipe = Recipe.create!(name: "Cookies", description: "Delicious", ingredient_entries: Recipe.parse_and_create_ingredients("1 C Sugar\n1 C Flour\n2 T Butter"))
+  @recipe.save!
+
+  Recipe.reindex
+end
 
 Given /^I visit the index page$/ do
   visit recipes_path
@@ -73,8 +76,12 @@ end
 
 When /^I change the description$/ do
   fill_in "Description",  with: "Something silly"
+end
+
+When /^I click the edit button$/ do
   click_button "Edit"
 end
+
 
 Then /^I should see the description has changed$/ do
   page.should have_content("Something silly")
