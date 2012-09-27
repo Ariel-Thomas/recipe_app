@@ -4,17 +4,16 @@ class RecipesController < ApplicationController
     @recipe = Recipe.new(name: params[:recipe][:name],
       description: params[:recipe][:description])
 
-    ingredient_entries = Recipe.parse_and_create_ingredients(params[:recipe][:ingredients_text])
-
-    @recipe.ingredient_entries = ingredient_entries
+    @recipe.ingredient_entries = Recipe.parse_and_create_ingredients(params[:recipe][:ingredients_text])
 
     if @recipe.save
       flash[:success] = "Recipe created!"
 
       @direction = @recipe.directions.new()
-      @ingredient_entries = @recipe.ingredient_entries.where(:direction_id => nil)
+      @ingredient_entries = @recipe.ingredient_entries.reject { |entry| entry.direction != nil }
       @state = { current_form: "recipe_directions_form" } 
     else
+      @ingredient_entries = @recipe.ingredient_entries.reject { |entry| entry.direction != nil }
       @state = { current_form: "recipe_form" }
     end
 
@@ -34,19 +33,18 @@ class RecipesController < ApplicationController
   end
 
   def update
-    @recipe  = Recipe.find(params[:id])
-
-    ingredient_entries = Recipe.parse_and_create_ingredients(params[:recipe][:ingredients_text])
+    @recipe  = Recipe.find(params[:id]) 
 
     if @recipe.update_attributes(name: params[:recipe][:name],
-      description: params[:recipe][:description],      ingredient_entries: ingredient_entries)
+      description: params[:recipe][:description],      ingredient_entries: Recipe.parse_and_find_ingredients(params[:recipe][:ingredients_text], @recipe))
 
       flash[:success] = "Recipe edited!" 
 
       @direction = @recipe.directions.new()
-      @ingredient_entries = @recipe.ingredient_entries.where(:direction_id => nil)
+      @ingredient_entries = @recipe.ingredient_entries.reject { |entry| entry.direction != nil }
       @state = { current_form: "recipe_directions_form" } 
     else
+      @ingredient_entries = @recipe.ingredient_entries.reject { |entry| entry.direction != nil }
       @state = { current_form: "recipe_form" }
     end
   end

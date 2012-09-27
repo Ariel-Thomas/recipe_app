@@ -11,7 +11,9 @@
       <div class="directions pull-left">
         <%= direction.text %>
       </div>
-
+      <div class="clear-both">
+        <%= link_to "delete", recipe_direction_path(@recipe,direction), method: :delete, data: { confirm: "You sure?" }, id:"delete-direction", remote: true %>
+      </div>
     </div>
     <hr class="clear-both">
   <% end %>

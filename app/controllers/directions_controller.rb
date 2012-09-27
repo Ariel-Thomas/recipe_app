@@ -13,12 +13,12 @@ class DirectionsController < ApplicationController
       flash[:success] = "Direction Added"
 
       @direction = @recipe.directions.new
-      @ingredient_entries = @recipe.ingredient_entries.where(:direction_id => nil)
+      @ingredient_entries = @recipe.ingredient_entries.reject { |entry| entry.direction != nil }
       @state = { create: true }
     else  
       flash[:success] = "Direction Failed"
       @state = { create: false }
-      @ingredient_entries = @recipe.ingredient_entries.where(:direction_id => nil)
+      @ingredient_entries = @recipe.ingredient_entries.reject { |entry| entry.direction != nil }
     end
   end
 
@@ -26,6 +26,12 @@ class DirectionsController < ApplicationController
   end
 
   def destroy
+    @recipe = Recipe.find(params[:recipe_id])
+    @recipe.directions.find(params[:id]).destroy
+
+    @direction = @recipe.directions.new()
+    @ingredient_entries = @recipe.ingredient_entries.reject { |entry| entry.direction != nil }
+    flash[:success] = "Direction deleted!"
   end
 
 private

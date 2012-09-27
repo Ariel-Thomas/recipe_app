@@ -40,6 +40,22 @@ class Recipe < ActiveRecord::Base
     end
   end
 
+  def self.parse_and_find_ingredients(text, recipe)
+    text.gsub(/(\A\s*$\n)|(\s*$)/,'').split(/$[^\z]/).map! do |entry|
+
+      amount = entry.slice!(/^\d+ \w+ /)
+      if (amount != nil) then amount.chop!() else return end
+
+      find = Array(recipe.ingredient_entries.find_all_by_amount(amount)).find{|sub_entry|sub_entry.ingredient.name == entry}
+
+      if (find)
+        find
+      else      
+        IngredientEntry.create!( amount: amount, ingredient: Ingredient.create!(name: entry) )
+      end
+    end
+  end
+
   def self.valid_ingredients?(text)
     if text == nil
       return false

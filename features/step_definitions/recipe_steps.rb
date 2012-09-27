@@ -121,15 +121,6 @@ When /^I click the next button$/ do
   click_button "Next"
 end
 
-When /^I enter valid recipe directions$/ do
-  check "direction_ingredient_entries_0"
-  fill_in "direction_text",  with: "Mix all ingredients together with blender"
-end
-
-When /^I click the add new direction button$/ do
-  click_button "Add New Direction"
-end
-
-When /^I click the add direction button$/ do
-  click_button "Add Direction"
+Then /^I should still be on the recipe's show page$/ do
+  page.should have_selector('h1', text: @recipe.name)
 end
