@@ -5,7 +5,8 @@ Feature: Create a new recipe
     Given I visit the new recipe page
     When I click the next button
     Then I should return to the new page
-
+ 
+  @javascript  
   Scenario: Successful creation
     Given I visit the new recipe page
     When I input valid recipe information
@@ -18,9 +19,11 @@ Feature: Create a new recipe
     And I should see a success message
     And I should see the recipe's page
 
+  @javascript  
   Scenario: Successful creation, Poor ingredient formatting
     Given I visit the new recipe page
     When I input valid recipe information
     And I poorly format the ingredients
     And I click the next button
+    And I click the done button
     Then I should see a new recipe created

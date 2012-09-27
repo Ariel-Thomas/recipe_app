@@ -39,9 +39,13 @@ Then /^I should see a success message$/ do
 end
 
 Given /^a recipe exists in the database$/ do
+  Recipe.all.map!{ |recipe| recipe.destroy }
+
   @number_of_recipes_in_database_before = Recipe.count
+
   @recipe = Recipe.create!(name: "Cookies", description: "Delicious", ingredient_entries: Recipe.parse_and_create_ingredients("1 C Sugar\n1 C Flour\n2 T Butter"))
-  @recipe.save!
+
+  Recipe.count.should eq(@number_of_recipes_in_database_before + 1)
 
   Recipe.reindex
 end

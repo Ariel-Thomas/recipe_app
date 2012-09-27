@@ -40,17 +40,20 @@ class RecipesController < ApplicationController
 
     if @recipe.update_attributes(name: params[:recipe][:name],
       description: params[:recipe][:description],      ingredient_entries: ingredient_entries)
+
       flash[:success] = "Recipe edited!" 
-      redirect_to @recipe
+
+      @direction = @recipe.directions.new()
+      @ingredient_entries = @recipe.ingredient_entries.where(:direction_id => nil)
+      @state = { current_form: "recipe_directions_form" } 
     else
-      render 'edit'
+      @state = { current_form: "recipe_form" }
     end
   end
 
   def edit
     @recipe = Recipe.find(params[:id])
-    @direction = @recipe.directions.new()
-    @ingredient_entries = @recipe.ingredient_entries.where(:direction_id => nil)
+    @state = { current_form: "recipe_form" }
   end
 
   def destroy
