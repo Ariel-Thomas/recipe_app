@@ -1,7 +1,9 @@
 RecipeApp::Application.routes.draw do
   root to: 'recipes#index'
 
-  resources :recipes
+  resources :recipes do
+    resources :directions, only: [:create, :update, :destroy]
+  end
 
 
   # The priority is based upon order of creation:

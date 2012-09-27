@@ -9,17 +9,20 @@ class RecipesController < ApplicationController
     @recipe.ingredient_entries = ingredient_entries
 
     if @recipe.save
-      flash[:success] = "Recipe created!" 
-      flash[:debug] = params[:recipe][:ingredients_text]
-      redirect_to @recipe
+      flash[:success] = "Recipe created!"
+
+      @direction = @recipe.directions.new()
+      @ingredient_entries = @recipe.ingredient_entries.where(:direction_id => nil)
+      @state = { current_form: "recipe_directions_form" } 
     else
-      render 'new'
+      @state = { current_form: "recipe_form" }
     end
 
   end
 
   def new
     @recipe = Recipe.new
+    @state = { current_form: "recipe_form" }
   end
 
   def index
@@ -46,6 +49,8 @@ class RecipesController < ApplicationController
 
   def edit
     @recipe = Recipe.find(params[:id])
+    @direction = @recipe.directions.new()
+    @ingredient_entries = @recipe.ingredient_entries.where(:direction_id => nil)
   end
 
   def destroy

@@ -1,0 +1,21 @@
+<section id="directions_list">
+  <%= render 'directions/directions_list'%>
+</section>
+
+<section>
+  <div id="directions_form">
+    <%= render 'directions/directions_form_done' %>
+  </div>
+</section>
+
+<script>
+  $('#add_directions_button').click(function(){
+    $('#directions_form').html("<%= escape_javascript(render('directions/directions_form'))%>");
+  });
+</script>
+
+<style>
+.button-padding{
+  padding: 10px;
+}
+</style>

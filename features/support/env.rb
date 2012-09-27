@@ -5,6 +5,14 @@
 # files.
 
 require 'cucumber/rails'
+require 'prickle/capybara'    # require
+
+World(Capybara::DSL)
+World(Prickle::Capybara)  # include  Prickle
+
+Prickle::Capybara.wait_time = 5
+
+#end Prickle stuff
 
 # Capybara defaults to XPath selectors rather than Webrat's default of CSS3. In
 # order to ease the transition to Capybara we set the default here. If you'd
@@ -12,7 +20,11 @@ require 'cucumber/rails'
 # steps to use the XPath syntax.
 Capybara.default_selector = :css
 
-Capybara.server_port = 8888 + ENV['TEST_ENV_NUMBER'].to_i
+Capybara.default_driver = :webkit
+Capybara.javascript_driver = :webkit
+
+Capybara.default_wait_time = 2 #default: 2
+#Capybara.server_port = 8888 + ENV['TEST_ENV_NUMBER'].to_i
 
 # By default, any exception happening in your Rails application will bubble up
 # to Cucumber so that your scenario will fail. This is a different from how 

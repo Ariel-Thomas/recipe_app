@@ -1,19 +1,6 @@
 <% provide(:title, "Edit Recipe") %>
 <h1>Edit Recipe</h1>
 
-<div>
-  <%= form_for @recipe do |f| %>
-    <%= render 'shared/error_messages', object: f.object %>
-
-    <%= f.label :name %>
-    <%= f.text_field :name %>
-
-    <%= f.label :description %>
-    <%= f.text_area :description %>
-
-    <%= f.label :ingredients %>
-    <%= f.text_area :ingredients_text, id: "Ingredients"  %>
-
-    <%= f.submit "Edit", class: "btn btn-large btn-primary" %>
-  <% end %>
+<div id="form">
+  <%= render 'recipes/recipe_directions_form' %>
 </div>

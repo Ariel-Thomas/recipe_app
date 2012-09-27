@@ -5,6 +5,8 @@ class Recipe < ActiveRecord::Base
   accepts_nested_attributes_for :ingredient_entries, :allow_destroy => true
   has_many :ingredients, through: :ingredient_entries
   accepts_nested_attributes_for :ingredients
+  has_many :directions, dependent: :destroy
+  accepts_nested_attributes_for :directions, :allow_destroy => true
 
   validates :name, presence: true
   validates :description, presence: true
@@ -23,6 +25,10 @@ class Recipe < ActiveRecord::Base
 
   def ingredients_text
     ingredients_array.join("\n")
+  end
+
+  def directions_array
+    directions
   end
 
   def self.parse_and_create_ingredients(text)

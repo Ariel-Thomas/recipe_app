@@ -2,8 +2,8 @@ Given /^I visit the new recipe page$/ do
   visit new_recipe_path
 end
 
-When /^I submit the recipe$/ do
-  click_button "Submit"
+When /^I click the done button$/ do
+  click_link "Done"
 end
 
 Then /^I should see an error message$/ do
@@ -39,6 +39,7 @@ Then /^I should see a success message$/ do
 end
 
 Given /^a recipe exists in the database$/ do
+  @number_of_recipes_in_database_before = Recipe.count
   @recipe = Recipe.create!(name: "Cookies", description: "Delicious", ingredient_entries: Recipe.parse_and_create_ingredients("1 C Sugar\n1 C Flour\n2 T Butter"))
   @recipe.save!
 
@@ -54,12 +55,11 @@ Then /^I should see the recipe$/ do
 end
 
 When /^I click the delete link$/ do
-  click_link "delete"
+  popup.confirm{ click_link "delete" }
 end
 
 Then /^I should see the recipe removed$/ do
-  Recipe.count.should eq(0)
-  page.should_not have_content("Cookies")
+  Recipe.count.should eq(@number_of_recipes_in_database_before)
 end
 
 When /^I click the recipe's link$/ do
@@ -82,7 +82,6 @@ When /^I click the edit button$/ do
   click_button "Edit"
 end
 
-
 Then /^I should see the description has changed$/ do
   page.should have_content("Something silly")
 end
@@ -95,6 +94,7 @@ Then /^I should see the recipe's information$/ do
   page.should have_content(@recipe.name)
   page.should have_content(@recipe.description)
   @recipe.ingredients_array.each{ |ingredient| page.should have_selector('li', text: ingredient) }
+  @recipe.directions_array.each{ |direction| page.should have_content(direction) }
 end
 
 When /^I click the edit link$/ do
@@ -111,4 +111,21 @@ end
 
 When /^I click the search button$/ do
   click_button "Search"
+end
+
+When /^I click the next button$/ do
+  click_button "Next"
+end
+
+When /^I enter valid recipe directions$/ do
+  check "direction_ingredient_entries_0"
+  fill_in "direction_text",  with: "Mix all ingredients together with blender"
+end
+
+When /^I click the add new direction button$/ do
+  click_button "Add New Direction"
+end
+
+When /^I click the add direction button$/ do
+  click_button "Add Direction"
 end

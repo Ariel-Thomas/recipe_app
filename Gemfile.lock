@@ -42,6 +42,9 @@ GEM
       rack-test (>= 0.5.4)
       selenium-webdriver (~> 2.0)
       xpath (~> 0.1.4)
+    capybara-webkit (0.12.1)
+      capybara (>= 1.0.0, < 1.2)
+      json
     childprocess (0.3.5)
       ffi (~> 1.0, >= 1.0.6)
     coderay (1.0.7)
@@ -96,6 +99,8 @@ GEM
     pg (0.14.1)
     polyglot (0.3.3)
     pr_geohash (1.0.0)
+    prickle (0.0.6)
+      capybara
     pry (0.9.9.6)
       coderay (~> 1.0.5)
       method_source (~> 0.7.1)
@@ -196,12 +201,14 @@ DEPENDENCIES
   bcrypt-ruby (= 3.0.1)
   bootstrap-sass (= 2.0.0)
   capybara (= 1.1.2)
+  capybara-webkit
   coffee-rails (~> 3.2.1)
   cucumber-rails (= 1.2.1)
   database_cleaner (= 0.7.0)
   factory_girl_rails (= 1.4.0)
   jquery-rails
   pg (= 0.14.1)
+  prickle
   pry-doc
   pry-nav
   pry-rails

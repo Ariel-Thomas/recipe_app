@@ -1,0 +1,23 @@
+<%= form_for @recipe, remote: true do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+
+  <%= f.label :name %>
+  <%= f.text_field :name, :placeholder => "Enter recipe name..." %>
+  <div id="name_error"></div>
+
+  <%= f.label :description %>
+  <%= f.text_area :description, :placeholder => "Enter a brief description of the recipe..." %>
+  <div id="desc_error"></div>
+
+  <%= f.label :ingredients %>
+  <%= f.text_area :ingredients_text, :placeholder => "Enter the ingredients for this recipe...", id: "Ingredients" %>
+  <div id="ingredient_error"></div>
+
+  <%= f.submit "Next", class: "btn btn-large btn-primary", id: "recipe_next", :disabled => 'disabled' %>
+<% end %>
+
+
+<script>
+  $('body').keydown(findErrors);
+  $('body').keyup(findErrors);
+</script>

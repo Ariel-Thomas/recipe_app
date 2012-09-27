@@ -15,6 +15,10 @@
 </section>
 
 <section>
+    <%= render 'directions/directions_list'%>
+</section>
+
+<section class="clear-both">
   <span>
     <%= link_to "edit", edit_recipe_path(@recipe) %>
   </span>
@@ -22,3 +26,11 @@
     <%= link_to "delete", @recipe, method: :delete, data: { confirm: "You sure?" } %>
   </span>
 </section>
+
+<style>
+
+.clear-both{
+  clear:both;
+}
+
+</style>

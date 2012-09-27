@@ -1,0 +1,29 @@
+<h3>Directions</h3>
+
+<% @recipe.directions.each do |direction| %>
+  <% if direction != @direction %>
+    <div>
+      <div class="direction_ingredients pull-left">
+        <% direction.ingredient_entries.each do |entry| %>
+          <li><%= entry.amount + " " + entry.ingredient.name %></li>
+        <% end %>
+      </div>
+      <div class="directions pull-left">
+        <%= direction.text %>
+      </div>
+
+    </div>
+    <hr class="clear-both">
+  <% end %>
+<% end %>
+
+<style>
+.direction_ingredients{
+  width:100px;
+}
+
+.clear-both{
+  clear:both;
+}
+
+</style>

@@ -1,5 +1,6 @@
 Feature: Edit a recipe
 
+  @javascript
   Scenario: Edit content
     Given a recipe exists in the database
     And I visit the recipe's edit page
