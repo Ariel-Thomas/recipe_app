@@ -24,7 +24,7 @@ class RecipesController < ApplicationController
   def show
     @recipe = Recipe.find(params[:id])
 
-    #@directions_layout = make_directions_layout(@recipe)
+    @directions_layout = make_directions_layout(@recipe)
   end
 
   def update
@@ -52,7 +52,14 @@ class RecipesController < ApplicationController
   private
     def parse_ingredients
       if (params.include?(:id))
-        params[:recipe][:ingredient_entries] = Recipe.parse_and_find_ingredients(params[:recipe][:ingredients_text], Recipe.find(params[:id]))
+        recipe = Recipe.find(params[:id])
+
+        params[:recipe][:ingredient_entries] = Recipe.parse_and_find_ingredients(params[:recipe][:ingredients_text], recipe)
+
+        recipe.results_array.each do |result|
+          params[:recipe][:ingredient_entries] << result
+        end
+
       else
         params[:recipe][:ingredient_entries] = Recipe.parse_and_create_ingredients(params[:recipe][:ingredients_text])
       end
@@ -69,5 +76,36 @@ class RecipesController < ApplicationController
         when :unsuccessful_recipe_creation, :unsuccessful_recipe_update, :new_recipe, :editing_recipe    
           @state = { current_form: "recipe_form" }
       end
+    end
+
+    def make_directions_layout(recipe)
+      directions_layout = [[],[]]
+
+      recipe.directions.each do |direction|
+        hash = { title: direction.title, direction: direction, height: direction.ingredient_entries.length + 1,  depth: 1 }
+
+        #left most ingredient block
+        direction.ingredient_entries.each do |entry|
+          if entry.ingredient.type == 'Result'
+            result = directions_layout.flatten.select{ |n| n.class == Hash && n[:direction] == entry.ingredient.direction }.first
+
+            hash[:depth] = result[:depth] + 1
+            hash[:height] += result[:height] - 1
+
+          else
+            directions_layout[0] << entry.to_s
+          end
+        end
+
+        directions_layout[0] << "___________"
+
+        if (directions_layout[hash[:depth]] == nil)
+          directions_layout << []
+        end
+
+        directions_layout[ hash[:depth] ] << hash
+      end
+
+      return directions_layout
     end
 end
