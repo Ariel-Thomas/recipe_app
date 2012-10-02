@@ -97,8 +97,8 @@ end
 Then /^I should see the recipe's information$/ do
   page.should have_content(@recipe.name)
   page.should have_content(@recipe.description)
-  @recipe.ingredients_array.each{ |ingredient| page.should have_selector('li', text: ingredient) }
-  @recipe.directions_array.each{ |direction| page.should have_content(direction) }
+  @recipe.ingredient_entries.each{ |entry| page.should have_selector('li', text: entry.to_s) }
+  @recipe.directions.each{ |direction| page.should have_content(direction) }
 end
 
 When /^I click the edit link$/ do

@@ -8,14 +8,42 @@
 <section>
   <h3>Ingredients</h3>
   <ul>
-    <% @recipe.ingredients_array.each do |ingredient| %>
-      <li> <%= ingredient %> </li>
+    <% @recipe.ingredient_entries.each do |entry| %>
+      <li> <%= entry %> </li>
     <% end %>
   </ul>
 </section>
 
-<section id="directions_list">
-    <%= render 'directions/directions_list'%>
+<section class="clear-both">
+  <div class="pull-left">
+    <% Direction.direction_ingredient_array(@recipe.directions).each do |entry_array| %>
+      <% entry_array.each do |entry| %>
+        <li style="height:25px;width:150px"> <%= entry %> </li>
+      <% end %>
+      <li style="height:25px;width:150px"> ________ </li>
+    <% end %>
+  </div>
+
+  <div class="pull-left" style="padding-left:200px;position:absolute;height:1000px;width:1000px">
+    <% cur_indent = 0 %>
+    <% @recipe.directions.each_with_index do |direction,index| %>
+      <div class="<%= "direction" + index.to_s %>">   
+        <%= direction.title %>
+        <style>
+          .<%= "direction" + index.to_s %> {
+            position:absolute;
+            background-color:#<%= "%06x" % (rand * 0xffffff) %>;
+
+            height: <%= (direction.ingredient_entries.length + 1) * 25 %>px;
+            width: 250px;
+
+            top:<%= cur_indent * 25 %>px ;
+          }
+        </style>
+        <% cur_indent += direction.ingredient_entries.length + 1 %>
+      </div>
+    <% end %>
+  </div>
 </section>
 
 <section class="clear-both">

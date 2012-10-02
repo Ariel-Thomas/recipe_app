@@ -1,11 +1,14 @@
 <h3>Directions</h3>
 
-<% @recipe.directions.each do |direction| %>
+<% @recipe.directions.each_with_index do |direction,index| %>
   <% if direction != @direction %>
     <div>
+      <div class="clear-both">
+        <h4>Step <%= (index + 1).to_s %>. <%= direction.title %></h4>
+      </div>
       <div class="direction_ingredients pull-left">
         <% direction.ingredient_entries.each do |entry| %>
-          <li><%= entry.amount + " " + entry.ingredient.name %></li>
+          <li><%= entry %></li>
         <% end %>
       </div>
       <div class="directions pull-left">
@@ -21,7 +24,8 @@
 
 <style>
 .direction_ingredients{
-  width:100px;
+  width:150px;
+  padding-right: 50px;
 }
 
 .clear-both{

@@ -7,4 +7,8 @@ class IngredientEntry < ActiveRecord::Base
   belongs_to :recipe
   belongs_to :direction
   belongs_to :ingredient
+  
+  def to_s
+    amount + " " + ingredient.name
+  end
 end

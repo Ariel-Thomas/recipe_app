@@ -8,13 +8,13 @@
       <%= label_tag "Used Ingredients" %> 
 
       <% if (@ingredient_entries != nil) then %>
-        <% @ingredient_entries.each_with_index do |val,index| %>
+        <% @ingredient_entries.each_with_index do |entry,index| %>
           <div class="ingredient-list">
             <div class="ingredient-boxes pull-left">
-              <%= check_box_tag 'direction[ingredient_entries[' + index.to_s + ']]', @recipe.ingredient_entries[index].id %>
+              <%= check_box_tag 'direction[ingredient_entries[' + index.to_s + ']]', entry.id %>
             </div>
             <div class="ingredient-labels">
-            <label> <%= (val.amount + " " + val.ingredient.name) %> </label>
+            <label> <%= entry %> </label>
             </div>
           </div>
         <% end %>
@@ -22,6 +22,9 @@
     </section>
 
     <section class="right-col">
+      <%= f.label :title%>
+      <%= f.text_field :title %>
+
       <%= f.label :text%>
       <%= f.text_area :text, rows: 10, cols: 11 %>
     </section>

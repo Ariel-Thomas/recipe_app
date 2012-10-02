@@ -19,6 +19,7 @@ end
 
 When /^I enter valid recipe directions$/ do
   check "direction_ingredient_entries_0"
+  fill_in "direction_title",  with: "Mix all"
   fill_in "direction_text",  with: "Mix all ingredients together with blender"
 end
 
@@ -35,13 +36,17 @@ Then /^I should not see ingredients already used$/ do
 
   @recipe.ingredient_entries.each do |entry|
     if (entry.direction_id == @direction.id)
-      page.should_not have_selector('label', text: entry.amount + " " + entry.ingredient.name)
+      page.should_not have_selector('label', text: entry.to_s)
     else
-      page.should have_selector('label', text: entry.amount + " " + entry.ingredient.name)
+      page.should have_selector('label', text: entry.to_s)
     end
   end
 end
 
 Then /^I should see the direction$/ do
-  page.should have_content(@direction.text)
+  page.should have_content(@direction.title)
+end
+
+Then /^I should see the direction available for use as an ingredient$/ do
+  page.should have_selector('label', text: @direction.result.to_s)
 end

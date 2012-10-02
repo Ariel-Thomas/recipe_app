@@ -1,24 +1,18 @@
 class DirectionsController < ApplicationController
-  
+  before_filter :fix_ingredient_entries, only: [:create, :update]
+
+
   def create
     @recipe = Recipe.find(params[:recipe_id])
-
-    if (params[:direction][:ingredient_entries] != nil)
-      params[:direction][:ingredient_entries] = fix_ingredient_entries(params[:direction][:ingredient_entries])
-    end
-
     @direction = @recipe.directions.create(params[:direction])
 
     if @direction.save
       flash[:success] = "Direction Added"
 
-      @direction = @recipe.directions.new
-      @ingredient_entries = @recipe.ingredient_entries.reject { |entry| entry.direction != nil }
-      @state = { create: true }
+      @recipe.add_result_for @direction
+      set_state_for :successful_direction_creation
     else  
-      flash[:success] = "Direction Failed"
-      @state = { create: false }
-      @ingredient_entries = @recipe.ingredient_entries.reject { |entry| entry.direction != nil }
+      set_state_for :unsuccessful_direction_creation  
     end
   end
 
@@ -29,15 +23,27 @@ class DirectionsController < ApplicationController
     @recipe = Recipe.find(params[:recipe_id])
     @recipe.directions.find(params[:id]).destroy
 
-    @direction = @recipe.directions.new()
-    @ingredient_entries = @recipe.ingredient_entries.reject { |entry| entry.direction != nil }
+    set_state_for :direction_deletion
+
     flash[:success] = "Direction deleted!"
   end
 
 private
-  def fix_ingredient_entries(ingredient_entries)
-    ingredient_entries.values.map! do |entry_id|
-      IngredientEntry.find(entry_id)
+  def fix_ingredient_entries
+    if (!params[:direction][:ingredient_entries].nil?)
+      params[:direction][:ingredient_entries] =
+        params[:direction][:ingredient_entries].values.map! { |entry_id| IngredientEntry.find(entry_id) }
     end
+  end
+
+  def set_state_for(state)
+    case state
+    when :successful_direction_creation,:direction_deletion
+      @direction = @recipe.directions.new
+      @state = { create: true }
+    when :unsuccessful_direction_creation
+      @state = { create: false }
+    end
+     @ingredient_entries = @recipe.ingredient_entries.reject { |entry| entry.direction != nil }
   end
 end

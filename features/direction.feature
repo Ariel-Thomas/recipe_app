@@ -24,3 +24,12 @@ Feature: Directions manipulation
     And I click the next button
     And I click the add new direction button
     Then I should not see ingredients already used
+
+  @javascript
+  Scenario: The product of directions should be available to use as ingredients
+    Given a recipe exists in the database
+    And that recipe has a direction
+    When I visit the recipe's edit page
+    And I click the next button
+    And I click the add new direction button
+    Then I should see the direction available for use as an ingredient
