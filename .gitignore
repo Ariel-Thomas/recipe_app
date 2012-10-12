@@ -12,6 +12,7 @@
 
 # Ignore solr search data
 /solr/data/*
+/solr/pids/**/*
 
 # Ignore all logfiles and tempfiles.
 /log/*.log
