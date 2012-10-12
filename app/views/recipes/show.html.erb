@@ -5,6 +5,9 @@
   <%= @recipe.description %>
 </section>
 
+
+
+
 <section>
   <h3>Ingredients</h3>
   <ul>
@@ -26,22 +29,29 @@
   <div class="pull-left" style="padding-left:200px;position:absolute;height:1000px;width:1000px">
     <% current = 0 %>
     <% @directions_layout.drop(1).each_with_index do |column, index| %>
-      <% cur_height = 0 %>
       <% Array(column).each_with_index do |direction, i| %>
         <div class='pull-left direction<%= current %>'>
           <%= direction[:title] %>
+          
+          <div class='direction<%= current %>-text'>
+          </div>
+
           <style>
             .direction<%= current %>{
               width:225px;
               padding-left:25px;
               position:absolute;
               left: <%= (index + 1) * 250 %>px;
-              top: <%= cur_height * 25 %>px;
-              height: <%= direction[:height] * 25 %>px;
+              top: <%= direction[:top] * 25 %>px;
+              min-height: <%= direction[:height] * 25 %>px;
               background-color: #<%= "%06x" % (rand * 0xffffff) %>;
             }
           </style>
-          <% cur_height += direction[:height] %>
+          <script>
+            $('.direction<%= current %>').OnClick(function() = {
+              $('.direction<%= current %>-text').html(<%= direction[:direction].text %>)
+            });
+          </script>
           <% current += 1 %>
         </div>
       <% end %>

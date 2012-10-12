@@ -5,7 +5,8 @@
 # files.
 
 require 'cucumber/rails'
-require 'prickle/capybara'    # require
+require 'prickle/capybara'
+require 'sunspot_test/cucumber'
 
 World(Capybara::DSL)
 World(Prickle::Capybara)  # include  Prickle
