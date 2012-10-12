@@ -97,7 +97,7 @@ end
 Then /^I should see the recipe's information$/ do
   page.should have_content(@recipe.name)
   page.should have_content(@recipe.description)
-  @recipe.ingredient_entries.each{ |entry| page.should have_selector('li', text: entry.to_s) }
+  @recipe.ingredient_entries.each{ |entry| page.should have_selector('li', text: entry.to_s) if (entry.direction != nil)}
   @recipe.directions.each{ |direction| page.should have_content(direction) }
 end
 

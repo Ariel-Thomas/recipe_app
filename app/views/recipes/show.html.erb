@@ -7,6 +7,47 @@
 
 <br>
 
+<section class="clear-both" style="position:relative">
+  <div class="pull-left">
+    <% @directions_layout[0].each do |entry| %>
+      <li style="height:25px;width:150px"> <%= entry %> </li>
+    <% end %>
+  </div>
+
+  <div class="pull-left" style="padding-left:200px;position:absolute;height:1000px;width:1000px">
+    <% current = 0 %>
+    <% @directions_layout.drop(1).each_with_index do |column, index| %>
+      <% Array(column).each_with_index do |direction, i| %>
+        <div class='pull-left direction<%= current %>'>
+          <%= direction[:title] %>
+          
+          <div class='direction<%= current %>-text'>
+          </div>
+
+          <style>
+            .direction<%= current %>{
+              width:225px;
+              padding-left:25px;
+              position:absolute;
+              left: <%= (index + 1) * 250 %>px;
+              top: <%= direction[:top] * 25 %>px;
+              min-height: <%= direction[:height] * 25 %>px;
+              background-color: #<%= "%06x" % (rand * 0xffffff) %>;
+            }
+          </style>
+          <script>
+            $('.direction<%= current %>').OnClick(function() = {
+              $('.direction<%= current %>-text').html(<%= direction[:direction].text %>)
+            });
+          </script>
+          <% current += 1 %>
+        </div>
+      <% end %>
+    <% end%>
+  </div>
+</section>
+
+<!--
 <section id="formatted-directions" style="height:200px">
   <div class="pull-left" style="width:150px">
     <% @directions_layout[0].each do |entry| %>
@@ -50,49 +91,8 @@
   width: 75px;
 }
 </style>
-
-
-<!--
-<section class="clear-both" style="position:relative">
-  <div class="pull-left">
-    <% @directions_layout[0].each do |entry| %>
-      <li style="height:25px;width:150px"> <%= entry %> </li>
-    <% end %>
-  </div>
-
-  <div class="pull-left" style="padding-left:200px;position:absolute;height:1000px;width:1000px">
-    <% current = 0 %>
-    <% @directions_layout.drop(1).each_with_index do |column, index| %>
-      <% Array(column).each_with_index do |direction, i| %>
-        <div class='pull-left direction<%= current %>'>
-          <%= direction[:title] %>
-          
-          <div class='direction<%= current %>-text'>
-          </div>
-
-          <style>
-            .direction<%= current %>{
-              width:225px;
-              padding-left:25px;
-              position:absolute;
-              left: <%= (index + 1) * 250 %>px;
-              top: <%= direction[:top] * 25 %>px;
-              min-height: <%= direction[:height] * 25 %>px;
-              background-color: #<%= "%06x" % (rand * 0xffffff) %>;
-            }
-          </style>
-          <script>
-            $('.direction<%= current %>').OnClick(function() = {
-              $('.direction<%= current %>-text').html(<%= direction[:direction].text %>)
-            });
-          </script>
-          <% current += 1 %>
-        </div>
-      <% end %>
-    <% end%>
-  </div>
-</section>
 -->
+
 
 <br>
 

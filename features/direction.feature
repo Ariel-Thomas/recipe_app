@@ -40,11 +40,3 @@ Feature: Directions manipulation
     And that recipe has a direction
     When I visit the recipe's show page
     Then I should not see the direction text
-
-  @javascript
-  Scenario: Clicking on a direction title should show the direction text
-    Given a recipe exists in the database
-    And that recipe has a direction
-    When I visit the recipe's show page
-    And I click the direction title
-    Then I should see the direction text
