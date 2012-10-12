@@ -13,6 +13,7 @@ Feature: Show an individual recipe
     When I click the edit link
     Then I should see the recipe's edit page
 
+  @search
   @javascript
   Scenario: Delete the recipe
     Given a recipe exists in the database

@@ -1,7 +1,10 @@
 Given /^that recipe has a direction$/ do
   @number_of_directions_in_database_before = Direction.count
 
-  @direction = @recipe.directions.create!(text: "Do some stuff", ingredient_entries: [@recipe.ingredient_entries[0]])
+  @direction = @recipe.directions.create!(title: "Mix", text: "Do some stuff", ingredient_entries: Array(@recipe.ingredient_entries[0]))
+  @recipe.add_result_for @direction
+
+  @direction.result.should_not eq nil
 
   Recipe.count.should eq(@number_of_directions_in_database_before + 1)
 end
@@ -49,4 +52,16 @@ end
 
 Then /^I should see the direction available for use as an ingredient$/ do
   page.should have_selector('label', text: @direction.result.to_s)
+end
+
+Then /^I should not see the direction text$/ do
+  page.should_not have_selector('div', text: @direction.text)
+end
+
+When /^I click the direction title$/ do
+  click_link @direction.title
+end
+
+Then /^I should see the direction text$/ do
+  page.should have_content(@direction.text)
 end

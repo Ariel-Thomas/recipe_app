@@ -1,9 +1,7 @@
 common: &common
   adapter: postgresql
   encoding: unicode
-  username: ariel
-  pool: 5
-
+  
 development: &development
   <<: *common
   database: recipe_app_development

@@ -1,20 +1,11 @@
 <% provide(:title, @recipe.name) %>
 <h1><%= @recipe.name %></h1>
 
-<section>
+<section class="clear-both">
   <%= @recipe.description %>
 </section>
 
-<section>
-  <h3>Ingredients</h3>
-  <ul>
-    <% @recipe.ingredient_entries.each do |entry| %>
-      <% if (entry.ingredient.type != 'Result') %>
-        <li> <%= entry %> </li>
-      <% end %>
-    <% end %>
-  </ul>
-</section>
+<br>
 
 <section class="clear-both" style="position:relative">
   <div class="pull-left">
@@ -26,28 +17,84 @@
   <div class="pull-left" style="padding-left:200px;position:absolute;height:1000px;width:1000px">
     <% current = 0 %>
     <% @directions_layout.drop(1).each_with_index do |column, index| %>
-      <% cur_height = 0 %>
       <% Array(column).each_with_index do |direction, i| %>
         <div class='pull-left direction<%= current %>'>
           <%= direction[:title] %>
+          
+          <div class='direction<%= current %>-text'>
+          </div>
+
           <style>
             .direction<%= current %>{
               width:225px;
               padding-left:25px;
               position:absolute;
               left: <%= (index + 1) * 250 %>px;
-              top: <%= cur_height * 25 %>px;
-              height: <%= direction[:height] * 25 %>px;
+              top: <%= direction[:top] * 25 %>px;
+              min-height: <%= direction[:height] * 25 %>px;
               background-color: #<%= "%06x" % (rand * 0xffffff) %>;
             }
           </style>
-          <% cur_height += direction[:height] %>
+          <script>
+            $('.direction<%= current %>').OnClick(function() = {
+              $('.direction<%= current %>-text').html(<%= direction[:direction].text %>)
+            });
+          </script>
           <% current += 1 %>
         </div>
       <% end %>
     <% end%>
   </div>
 </section>
+
+<!--
+<section id="formatted-directions" style="height:200px">
+  <div class="pull-left" style="width:150px">
+    <% @directions_layout[0].each do |entry| %>
+      <li style="height:25px"> <%= entry %> </li>
+    <% end %>
+  </div>
+  <div class="pull-left direction-title" >
+    <div style="background-color: #<%= "%06x" % (rand * 0xffffff) %>;">
+      <div class="rotate-right" style="height:75px;width:75px;padding:5px;text-align: center">
+        col 1, row 1, more stuff that means nothing
+      </div>
+    </div>
+
+    <div style="background-color: #<%= "%06x" % (rand * 0xffffff) %>">
+      <div class="rotate-right" style="height:50px;width:75px;padding:5px;text-align: center">
+        col 1, row 2
+      </div>
+    </div>
+  </div>
+
+  <div class="pull-left direction-title">
+    <div style="background-color: #<%= "%06x" % (rand * 0xffffff) %>;height:125px;width:75px;">
+      <div class="rotate-right" style="padding:5px;text-align: center">
+        A column
+      </div>
+    </div>
+  </div>
+  
+  <div class="pull-left rotate-right direction-title">
+    A column
+  </div>
+  
+  <div class="pull-left rotate-right direction-title">
+    A column
+  </div>
+</section>
+
+<style>
+.direction-title{
+  height:30px;
+  width: 75px;
+}
+</style>
+-->
+
+
+<br>
 
 <section class="clear-both">
   <span>
@@ -62,6 +109,19 @@
 
 .clear-both{
   clear:both;
+}
+
+.rotate-right {
+    -webkit-transform: rotate(90deg);
+    -webkit-transform-origin: left;   
+    -moz-transform: rotate(90deg);
+    -moz-transform-origin: left; 
+    -o-transform: rotate(90deg);
+    -o-transform-origin: left; 
+    -ms-transform: rotate(90deg);
+    -ms-transform-origin: left; 
+    transform: rotate(90deg);
+    transform-origin: left;  
 }
 
 </style>
