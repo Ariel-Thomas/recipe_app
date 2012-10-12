@@ -82,14 +82,20 @@ class RecipesController < ApplicationController
       directions_layout = [[],[]]
 
       recipe.directions.each do |direction|
-        hash = { title: direction.title, direction: direction, height: direction.ingredient_entries.length + 1,  depth: 1 }
+        hash = { title: direction.title, direction: direction, top: -1, height: direction.ingredient_entries.length,  depth: 1 }
 
         #left most ingredient block
         direction.ingredient_entries.each do |entry|
           if entry.ingredient.type == 'Result'
             result = directions_layout.flatten.select{ |n| n.class == Hash && n[:direction] == entry.ingredient.direction }.first
+            if (result[:depth] >= hash[:depth])
+              hash[:depth] = result[:depth] + 1
+            end
 
-            hash[:depth] = result[:depth] + 1
+            if (result[:top] < hash[:top] || hash[:top] == -1 )
+              hash[:top] = result[:top]
+            end
+
             hash[:height] += result[:height] - 1
 
           else
@@ -97,10 +103,18 @@ class RecipesController < ApplicationController
           end
         end
 
-        directions_layout[0] << "___________"
-
         if (directions_layout[hash[:depth]] == nil)
           directions_layout << []
+        end
+
+        if (hash[:top] == -1)
+          result = directions_layout[1].last
+
+          if (result == nil)
+            hash[:top] = 0
+          else
+            hash[:top] = result[:top] + result[:height]
+          end
         end
 
         directions_layout[ hash[:depth] ] << hash

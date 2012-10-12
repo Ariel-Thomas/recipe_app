@@ -42,6 +42,7 @@ group :test do
   gem 'factory_girl_rails', '1.4.0'
   gem 'capybara-webkit'
   gem 'prickle'
+  gem "sunspot_test"
 end
 
 # To use Jbuilder templates for JSON
