@@ -28,8 +28,8 @@ class Recipe < ActiveRecord::Base
   end
 
   def add_result_for(direction)
-    self.ingredient_entries.create!(amount: "1 whole ",
-      ingredient: Result.create!(name: "results from " + direction.title, direction: direction))
+    self.ingredient_entries.create!(amount: "1 whole",
+      ingredient: direction.result = Result.create!(name: "results from " + direction.title, direction: direction))
   end
 
 

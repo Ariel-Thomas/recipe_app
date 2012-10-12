@@ -9,6 +9,6 @@ class IngredientEntry < ActiveRecord::Base
   belongs_to :ingredient
   
   def to_s
-    amount + " " + ingredient.name
+    amount + " " + ingredient.to_s
   end
 end

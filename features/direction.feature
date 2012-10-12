@@ -11,10 +11,10 @@ Feature: Directions manipulation
   Scenario: Destroy a direction
     Given a recipe exists in the database
     And that recipe has a direction
-    And I visit the recipe's show page
+    And I visit the recipe's edit page
+    And I click the next button
     When I click the delete button next to the direction
     Then I should see the direction has been removed
-    And I should still be on the recipe's show page
 
   @javascript
   Scenario: Ingredients cannot be used by multiple directions
@@ -33,3 +33,18 @@ Feature: Directions manipulation
     And I click the next button
     And I click the add new direction button
     Then I should see the direction available for use as an ingredient
+
+  @javascript
+  Scenario: I should only see the direction titles
+    Given a recipe exists in the database
+    And that recipe has a direction
+    When I visit the recipe's show page
+    Then I should not see the direction text
+
+  @javascript
+  Scenario: Clicking on a direction title should show the direction text
+    Given a recipe exists in the database
+    And that recipe has a direction
+    When I visit the recipe's show page
+    And I click the direction title
+    Then I should see the direction text
