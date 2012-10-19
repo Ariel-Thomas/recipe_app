@@ -1,6 +1,6 @@
 class DirectionsController < ApplicationController
+  include DirectionsHelper
   before_filter :fix_ingredient_entries, only: [:create, :update]
-
 
   def create
     @recipe = Recipe.find(params[:recipe_id])
@@ -17,6 +17,7 @@ class DirectionsController < ApplicationController
   end
 
   def update
+    render 'create', formats: [:js]
   end
 
   def destroy
@@ -26,24 +27,7 @@ class DirectionsController < ApplicationController
     set_state_for :direction_deletion
 
     flash[:success] = "Direction deleted!"
-  end
 
-private
-  def fix_ingredient_entries
-    if (!params[:direction][:ingredient_entries].nil?)
-      params[:direction][:ingredient_entries] =
-        params[:direction][:ingredient_entries].values.map! { |entry_id| IngredientEntry.find(entry_id) }
-    end
-  end
-
-  def set_state_for(state)
-    case state
-    when :successful_direction_creation,:direction_deletion
-      @direction = @recipe.directions.new
-      @state = { create: true }
-    when :unsuccessful_direction_creation
-      @state = { create: false }
-    end
-     @ingredient_entries = @recipe.ingredient_entries.reject { |entry| entry.direction != nil }
+    render 'create', formats: [:js]
   end
 end

@@ -6,7 +6,7 @@
       <div class="clear-both">
         <h4>Step <%= (index + 1).to_s %>. <%= direction.title %></h4>
       </div>
-      <div class="direction_ingredients pull-left">
+      <div class="direction-ingredients pull-left">
         <% direction.ingredient_entries.each do |entry| %>
           <li><%= entry %></li>
         <% end %>
@@ -21,15 +21,3 @@
     <hr class="clear-both">
   <% end %>
 <% end %>
-
-<style>
-.direction_ingredients{
-  width:150px;
-  padding-right: 50px;
-}
-
-.clear-both{
-  clear:both;
-}
-
-</style>

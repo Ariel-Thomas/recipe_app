@@ -28,7 +28,7 @@ class Recipe < ActiveRecord::Base
   end
 
   def add_result_for(direction)
-    self.ingredient_entries.create!(amount: "1 whole",
+    ingredient_entries.create!(amount: "1 whole",
       ingredient: direction.result = Result.create!(name: "results from " + direction.title, direction: direction))
   end
 
@@ -36,7 +36,7 @@ class Recipe < ActiveRecord::Base
   def self.parse_and_create_ingredients(text)
     text.gsub(/(\A\s*$\n)|(\s*$)/,'').split(/$[^\z]/).map! do |entry|
       amount = entry.slice!(/^\d+ \w+ /)
-      if (amount != nil) then amount.chop!() else return end
+      if (amount.present?) then amount.chop!() else return end
 
       #handles calls from parse_and_find_ingredients
       block_given? && yield(amount, entry) ||

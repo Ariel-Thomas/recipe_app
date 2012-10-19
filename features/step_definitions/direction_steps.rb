@@ -6,7 +6,7 @@ Given /^that recipe has a direction$/ do
 
   @direction.result.should_not eq nil
 
-  Recipe.count.should eq(@number_of_directions_in_database_before + 1)
+  Direction.count.should eq(@number_of_directions_in_database_before + 1)
 end
 
 When /^I click the delete button next to the direction$/ do

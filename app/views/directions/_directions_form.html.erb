@@ -7,7 +7,7 @@
     <section class="left-col">
       <%= label_tag "Used Ingredients" %> 
 
-      <% if (@ingredient_entries != nil) then %>
+      <% if (@ingredient_entries.present?) then %>
         <% @ingredient_entries.each_with_index do |entry,index| %>
           <div class="ingredient-list">
             <div class="ingredient-boxes pull-left">
@@ -36,23 +36,3 @@
     </section>
   <% end %>
 </div>
-
-<style>
-.ingredient-list{
-  height:25px;width:200px;
-}
-
-.ingredient-labels{
-  position:relative;float:left;top:5px
-}
-
-.left-col{
-  width:400px;float:left
-}
-.right-col{
-  float:left; width:500px
-}
-.add-button{
-  float:left;padding: 10px
-}
-</style>

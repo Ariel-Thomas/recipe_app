@@ -3,3 +3,34 @@
 body { padding: 60px }
 
 .logo { float: left }
+
+.ingredient-list{
+  height:25px;width:200px;
+}
+
+.ingredient-labels{
+  position:relative;float:left;top:5px
+}
+
+.left-col{
+  width:400px;float:left
+}
+.right-col{
+  float:left; width:500px
+}
+.add-button{
+  float:left;padding: 10px
+}
+
+.direction-ingredients{
+  width:150px;
+  padding-right: 50px;
+}
+
+.clear-both{
+  clear:both;
+}
+
+.button-padding{
+  padding: 10px;
+}

@@ -1,2 +1,21 @@
 module DirectionsHelper
+  private
+  
+  def fix_ingredient_entries
+    if (params[:direction][:ingredient_entries].present?)
+      params[:direction][:ingredient_entries] =
+        params[:direction][:ingredient_entries].values.map! { |entry_id| IngredientEntry.find(entry_id) }
+    end
+  end
+
+  def set_state_for(state)
+    case state
+    when :successful_direction_creation,:direction_deletion
+      @direction = @recipe.directions.new
+      @state = { create: true }
+    when :unsuccessful_direction_creation
+      @state = { create: false }
+    end
+     @ingredient_entries = @recipe.ingredient_entries.reject { |entry| entry.direction.present? }
+  end
 end
