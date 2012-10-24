@@ -21,7 +21,7 @@ module RecipesHelper
   def set_state_for(state)
     case state
       when :successful_recipe_creation, :successful_recipe_update   
-        @direction = @recipe.directions.new()
+        @direction = @recipe.directions.new
         @ingredient_entries = @recipe.ingredient_entries.reject { |entry| entry.direction.present? }
         @state = { current_form: "recipe_directions_form" }
       when :unsuccessful_recipe_creation, :unsuccessful_recipe_update, :new_recipe, :editing_recipe    

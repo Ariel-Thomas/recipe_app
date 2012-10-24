@@ -12,9 +12,9 @@ module DirectionsHelper
     case state
     when :successful_direction_creation,:direction_deletion
       @direction = @recipe.directions.new
-      @state = { create: true }
+      @state = { create_direction: true }
     when :unsuccessful_direction_creation
-      @state = { create: false }
+      @state = { create_direction: false }
     end
      @ingredient_entries = @recipe.ingredient_entries.reject { |entry| entry.direction.present? }
   end
