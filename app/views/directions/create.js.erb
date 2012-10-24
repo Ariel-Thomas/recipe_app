@@ -1,12 +1,7 @@
-$('#directions_list').html("<%= escape_javascript(render('directions/directions_list'))%>");
+$('#directions_list').html("<%= escape_javascript(render partial: 'directions/directions_list', formats: [:html])%>");
 
-<% if @state[:create] %>
+<% if @state[:create_direction] %>
   $('#directions_form').html("<%= escape_javascript(render('directions/directions_form_done'))%>");
 <% else %>
   $('#directions_form').html("<%= escape_javascript(render('directions/directions_form'))%>");
 <% end %>
-
-
-$('#add_directions_button').click(function(){
-  $('#directions_form').html("<%= escape_javascript(render('directions/directions_form'))%>");
-});

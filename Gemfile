@@ -23,6 +23,7 @@ group :development do
   gem "pry-rails"
   gem "pry-doc"
   gem "pry-nav"
+  gem 'quiet_assets'
 end
 
 # Gems used only for assets and not required

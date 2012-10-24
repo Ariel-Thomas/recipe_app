@@ -1,12 +1,12 @@
 Given /^that recipe has a direction$/ do
   @number_of_directions_in_database_before = Direction.count
 
-  @direction = @recipe.directions.create!(title: "Mix", text: "Do some stuff", ingredient_entries: [@recipe.ingredient_entries[0]])
+  @direction = @recipe.directions.create!(title: "Mix", text: "Do some stuff", ingredient_entries: Array(@recipe.ingredient_entries[0]))
   @recipe.add_result_for @direction
 
   @direction.result.should_not eq nil
 
-  Recipe.count.should eq(@number_of_directions_in_database_before + 1)
+  Direction.count.should eq(@number_of_directions_in_database_before + 1)
 end
 
 When /^I click the delete button next to the direction$/ do
