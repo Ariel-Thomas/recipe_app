@@ -20,16 +20,20 @@ class Recipe < ActiveRecord::Base
   end
 
   def ingredients_text
-    ingredient_entries.reject{ |entry| entry.ingredient.type == 'Result' }.join("\n")
+    ingredient_entries.reject{ |entry| entry.ingredient.nil? ||entry.ingredient.type == 'Result' }.join("\n")
   end
 
   def results_array
-    ingredient_entries.reject{ |entry| entry.ingredient.type != 'Result' }
+    Array(ingredient_entries.reject{ |entry| entry.ingredient.nil? ||entry.ingredient.type != 'Result' })
   end
 
   def add_result_for(direction)
     ingredient_entries.create!(amount: "1 whole",
       ingredient: direction.result = Result.create!(name: "results from " + direction.title, direction: direction))
+  end
+
+  def get_result_from_ingredient_entries(direction)
+    results_array.select{ |entry| entry.ingredient.direction == direction }.first
   end
 
 

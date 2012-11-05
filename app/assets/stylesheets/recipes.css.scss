@@ -34,3 +34,71 @@ body { padding: 60px }
 .button-padding{
   padding: 10px;
 }
+
+.ingredients-col{
+  width: 300px;
+  float: left;
+
+  background-color:white;
+  border: 5px solid black;
+  border-radius: 2px;
+
+  position:relative;
+  z-index:51;
+}
+
+.ingredients-row{
+  display:block;
+  height: 48px;
+  border-top: 1px solid grey;
+  border-bottom: 1px solid grey;
+  position:relative;
+}
+
+.ingredients-item{
+  color: black;
+  top:50%;
+  margin-top:-10px;
+  margin-left:10px;
+  position:absolute;
+}
+
+.no-rotate{
+  background:white;
+  color: black;
+  border: 5px solid black;
+  border-radius: 0px;
+}
+
+.directions-col{
+  float: left;
+}
+
+.directions-text{
+  text-align:center;
+  height:50px;
+  margin:0px auto; 
+  padding:0px;
+  position: relative;
+}
+
+.directions-present{
+  height:50px;
+  background:white;
+  color: black;
+  border: 5px solid black;
+  border-radius: 20px;
+  position: relative;
+}
+
+.clear-both{
+  clear:both;
+}
+
+.rotate-right {
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    transform: rotate(90deg);
+}

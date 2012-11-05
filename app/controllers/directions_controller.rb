@@ -22,7 +22,10 @@ class DirectionsController < ApplicationController
 
   def destroy
     @recipe = Recipe.find(params[:recipe_id])
-    @recipe.directions.find(params[:id]).destroy
+    direction = @recipe.directions.find(params[:id])
+
+    #@recipe.get_result_from_ingredient_entries(direction).destroy
+    direction.destroy
 
     set_state_for :direction_deletion
 

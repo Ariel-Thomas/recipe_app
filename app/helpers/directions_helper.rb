@@ -16,6 +16,7 @@ module DirectionsHelper
     when :unsuccessful_direction_creation
       @state = { create_direction: false }
     end
-     @ingredient_entries = @recipe.ingredient_entries.reject { |entry| entry.direction.present? }
+
+    @ingredient_entries = @recipe.ingredient_entries.reject { |entry| entry.direction.present? }
   end
 end

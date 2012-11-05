@@ -8,7 +8,10 @@ module RecipesHelper
       params[:recipe][:ingredient_entries] = Recipe.parse_and_find_ingredients(params[:recipe][:ingredients_text], recipe)
 
       recipe.results_array.each do |result|
-        params[:recipe][:ingredient_entries] << result
+        #if (result.ingredient.direction.ingredient_entries.length != 0)
+
+          params[:recipe][:ingredient_entries] << result
+        #end
       end
 
     else
@@ -33,38 +36,45 @@ module RecipesHelper
     directions_layout = [[],[]]
 
     recipe.directions.each do |direction|
-      hash = { title: direction.title, direction: direction, top: -1, height: direction.ingredient_entries.length,  depth: 1 }
+      hash = { title: direction.title, text: direction.text, direction: direction, width: direction.ingredient_entries.length,  depth: 1 }
 
       #left most ingredient block
-      direction.ingredient_entries.each do |entry|
-        if entry.ingredient.type == 'Result'
-          result = directions_layout.flatten.select{ |n| n.class == Hash && n[:direction] == entry.ingredient.direction }.first
-          if (result[:depth] >= hash[:depth])
-            hash[:depth] = result[:depth] + 1
-          end
+      direction.results_array.each do |entry|
+        result = directions_layout.flatten.select{ |n| n.class == Hash && n[:direction] == entry.ingredient.direction }.first
 
-          if (result[:top] < hash[:top] || hash[:top] == -1 )
-            hash[:top] = result[:top]
-          end
+        if (result.nil?)
+          next
+        end
 
-          hash[:height] += result[:height] - 1
+        if (result[:depth] >= hash[:depth])
+          hash[:depth] = result[:depth] + 1
+        end
 
-        else
-          directions_layout[0] << entry.to_s
+        hash[:width] += result[:width] - 1
+      end
+
+      direction.ingredients_array.each do |entry|
+        directions_layout[0] << entry.to_s
+
+        (hash[:depth] - 1).times do |index|
+          directions_layout[index + 1] << { title: "", width: 1,  depth: index + 1 }
         end
       end
+
 
       unless (directions_layout[hash[:depth]])
         directions_layout << []
       end
 
-      if (hash[:top] == -1)
-        result = directions_layout[1].last
+      direction.results_array.each do |entry|
+        result = directions_layout.flatten.select{ |n| n.class == Hash && n[:direction] == entry.ingredient.direction }.first
 
-        if (result)
-          hash[:top] = result[:top] + result[:height]
-        else
-          hash[:top] = 0
+        if (result.nil?)
+          next
+        end
+
+        (hash[:depth] - result[:depth] - 1).times do |index|
+          directions_layout[result[:depth] + index + 1] << { title: "", width: result[:width],  depth: result[:depth] + index + 1 }
         end
       end
 
