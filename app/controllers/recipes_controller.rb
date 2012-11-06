@@ -19,7 +19,9 @@ class RecipesController < ApplicationController
   end
 
   def index
-    @recipes = Recipe.search{ keywords(params[:search]) }  
+    @recipes = Recipe.search do
+      keywords(params[:search])
+    end.results
   end
 
   def show
