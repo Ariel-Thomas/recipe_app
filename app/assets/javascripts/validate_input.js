@@ -31,7 +31,7 @@ function findNameErrors(){
   if (isEmptyError("Name", $fieldContent, $errorDiv))
     return true;
 
-  $errorDiv.html('');
+  $errorDiv.html('<br>');
   return false;
 };
 
@@ -42,7 +42,7 @@ function findDescErrors(){
   if (isEmptyError("Description", $fieldContent, $errorDiv))
     return true;
 
-  $errorDiv.html('');
+  $errorDiv.html('<br>');
   return false;
 };    
 
@@ -51,7 +51,7 @@ function findIngredientErrors(){
   var $fieldContent = $('#Ingredients').val()
   var $errorDiv = $('#ingredient_error')
 
-  if (isEmptyError("Description", $fieldContent, $errorDiv))
+  if (isEmptyError("Ingredients", $fieldContent, $errorDiv))
     return true;
 
   if (!areValidIngredients($fieldContent))
@@ -61,7 +61,7 @@ function findIngredientErrors(){
     return true;
   }
 
-  $errorDiv.html('');
+  $errorDiv.html('<br>');
   return false;
 };
 

@@ -9,6 +9,7 @@
 
       <% if (@ingredient_entries.present?) then %>
         <% @ingredient_entries.each_with_index do |entry,index| %>
+        <p>
           <div class="ingredient-list">
             <div class="ingredient-boxes pull-left">
               <%= check_box_tag 'direction[ingredient_entries[' + index.to_s + ']]', entry.id %>
@@ -17,6 +18,7 @@
               <label> <%= entry %> </label>
             </div>
           </div>
+        </p>
         <% end %>
       <% end %>
     </section>

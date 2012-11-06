@@ -27,10 +27,13 @@
     <div class="directions-col">
       <% column.each do |direction| %>
         <% if (direction[:direction].nil?) %>
-          <div class="directions-text" style="width:<%= direction[:width] * 48 %>px;"></div>
+          <div class="directions-text" style="width:<%= direction[:width] * 48 %>px;">
+            <div class="empty-direction" style="width:<%= direction[:width] * 48 %>px;">
+            </div>
+          </div>
         <% else %>
           <div class="directions-text" style="z-index:<%= 50 - 2 * index %>;">
-            <div class="directions-present" style="width:<%= direction[:width] * 48 %>px;" onclick="showText(<%= index %>,'<%= direction[:text] %>');">
+            <div class="directions-present" style="width:<%= direction[:width] * 48 %>px;" onclick="showText(<%= index %>,'<%= direction[:text] %>')">
               <%= direction[:title] %>
             </div>
           </div>

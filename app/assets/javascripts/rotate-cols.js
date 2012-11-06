@@ -56,7 +56,8 @@ function clearText(){
 function showText(index, text){
   $textcol = $('.text-col' + index);
 
-  if($textcol.html() != "")
+  //if(/\S/.test($textcol.html()))
+  if (~$textcol.html().indexOf(text))
     { clearText(); rotate(); return;}
 
   clearText();
@@ -66,7 +67,7 @@ function showText(index, text){
   $textcol.html("<div class='directions-text no-rotate '>" +
     text + "</div>");
 
-  $('.no-rotate').css({ 'height': $(".ingredients-col").height(), 'width':'100px' });
+  $('.no-rotate').css({ 'height': $(".ingredients-col").height() });
 
   rotate();
 }

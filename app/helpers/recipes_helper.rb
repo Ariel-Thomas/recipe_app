@@ -61,7 +61,6 @@ module RecipesHelper
         end
       end
 
-
       unless (directions_layout[hash[:depth]])
         directions_layout << []
       end

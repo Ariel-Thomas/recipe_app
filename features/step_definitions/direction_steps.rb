@@ -59,7 +59,7 @@ Then /^I should not see the direction text$/ do
 end
 
 When /^I click the direction title$/ do
-  click_link @direction.title
+  find(".directions-present").click
 end
 
 Then /^I should see the direction text$/ do
