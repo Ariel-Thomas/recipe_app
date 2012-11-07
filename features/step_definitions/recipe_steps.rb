@@ -124,3 +124,15 @@ end
 Then /^I should still be on the recipe's show page$/ do
   page.should have_selector('h1', text: @recipe.name)
 end
+
+Given /^(\d+) recipes exist in the database$/ do |num_recipes|
+  num_recipes.times do |index|
+    @recipe = Recipe.create!(name: "Recipe" + index.to_s, description: "Delicious", ingredient_entries: Recipe.parse_and_create_ingredients("2 C Nothing"))
+  end
+
+  Recipe.reindex
+end
+
+Then /^I should not see the last recipe$/ do
+  page.should_not have_content(@recipe.name)
+end

@@ -53,7 +53,21 @@ function clearText(){
   }
 }
 
-function showText(index, text){
+function toggleActive(element){
+  $element = $(element);
+
+  if ($element.hasClass('active-tab')){
+    $element.removeClass('active-tab');
+  }
+  else{
+    $('.active-tab').removeClass('active-tab');
+    $element.addClass('active-tab'); 
+  }
+ 
+  $element.stop();
+}
+
+function showText(index, text, element){
   $textcol = $('.text-col' + index);
 
   //if(/\S/.test($textcol.html()))
@@ -64,10 +78,13 @@ function showText(index, text){
 
   $textcol = $('.text-col' + index);
   
-  $textcol.html("<div class='directions-text no-rotate '>" +
-    text + "</div>");
+  $textcol.html('<div class="directions-text no-rotate">' + '<div class="center-text">' + text + '</div>' + '</div>');
 
-  $('.no-rotate').css({ 'height': $(".ingredients-col").height() });
+  height = $(".ingredients-col").height();
+  $('.no-rotate').css({ 'height': height });
+  $('.no-rotate').click(function() { toggleActive(element); clearText(); rotate(); });
 
+  $('.center-text').css({'margin-top':  - $('.center-text').height() / 2 - 20})
   rotate();
 }
+

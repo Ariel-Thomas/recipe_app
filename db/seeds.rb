@@ -48,7 +48,7 @@ recipe.add_result_for direction
 recipe = Recipe.create(
   name: "Cake",
   description: "Delicious Cake",
-  ingredient_entries: Recipe.parse_and_create_ingredients("2 T Chocolate\n2 C Water\n5 C Awesomesuace\n4 C Flour\n2 T Butter")
+  ingredient_entries: Recipe.parse_and_create_ingredients("2 T Chocolate\n2 C Water\n5 C Awesomesauce\n4 C Flour\n2 T Butter")
   )
 
 direction = recipe.directions.create!(title: "Mix", text: "Mix dry ingredients", ingredient_entries: Array([recipe.ingredient_entries[0], recipe.ingredient_entries[1]]))

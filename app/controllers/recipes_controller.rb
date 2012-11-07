@@ -20,7 +20,8 @@ class RecipesController < ApplicationController
 
   def index
     @recipes = Recipe.search do
-      keywords(params[:search])
+      keywords params[:search]
+      paginate :per_page => 10, :page => params[:page] || 1
     end.results
   end
 
