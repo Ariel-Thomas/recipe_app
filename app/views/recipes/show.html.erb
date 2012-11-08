@@ -25,16 +25,16 @@
     <div class="directions-col text-col<%= index %>" style="z-index:<%= 50 - 2 * index + 1 %>;position:relative;">
     </div>
     <div class="directions-col">
-      <% column.each do |direction| %>
-        <% if (direction[:direction].nil?) %>
-          <div class="directions-text" style="width:<%= direction[:width] * 48 %>px;">
-            <div class="empty-direction" style="width:<%= direction[:width] * 48 %>px;">
+      <% column.each do |display_block| %>
+        <% if (display_block.direction.nil?) %>
+          <div class="directions-text" style="width:<%= display_block.width_in_pixels %>px;">
+            <div class="empty-direction" style="width:<%= display_block.width_in_pixels %>px;">
             </div>
           </div>
         <% else %>
           <div class="directions-text" style="z-index:<%= 50 - 2 * index %>;">
-            <div class="directions-present" style="width:<%= direction[:width] * 48 %>px;" onclick="toggleActive(this); showText(<%= index %>,'<%= direction[:text] %>', this);">
-              <%= direction[:title] %>
+            <div class="directions-present" style="width:<%= display_block.width_in_pixels %>px;" onclick="toggleActive(this); showText(<%= index %>,'<%= display_block.text %>', this);">
+              <%= display_block.title %>
             </div>
           </div>
         <% end %>

@@ -11,6 +11,20 @@ module DirectionsLayout
       @width = args[:width] || 1
       @depth = args[:depth] || 1
     end
+
+    def width_in_pixels
+      width * 48
+    end
+  end
+
+  def find_in_layout_by_direction(directions_layout, display_block)
+    directions_layout.flatten.select{ |n| n.class == DisplayBlocks && n.direction == display_block.ingredient.direction }.first
+  end
+
+  def add_spacing_blocks_to_layout(directions_layout, display_block)
+    (display_block.depth - 1).times do |index|
+      directions_layout[index + 1] << DisplayBlocks.new(depth: index + 1)
+    end
   end
 
   def make_directions_layout(recipe)
@@ -19,9 +33,9 @@ module DirectionsLayout
     recipe.directions.each do |direction|
       display_block = DisplayBlocks.new(title: direction.title, text: direction.text, direction: direction, width: direction.ingredient_entries.length,  depth: 1)
 
-      #left most ingredient block
+      #Cycle through directions and determine depth
       direction.results_array.each do |entry|
-        result = directions_layout.flatten.select{ |n| n.class == DisplayBlocks && n.direction == entry.ingredient.direction }.first
+        result = find_in_layout_by_direction(directions_layout,entry)
 
         if (result.nil?)
           next
@@ -34,32 +48,16 @@ module DirectionsLayout
         display_block.width += result.width - 1
       end
 
-      # check for spaces in layout
+      #leftmost ingredient block
       direction.ingredients_array.each do |entry|
         directions_layout[0] << entry.to_s
 
-        (display_block.depth - 1).times do |index|
-          directions_layout[index + 1] << DisplayBlocks.new(depth: index + 1)
-        end
+        add_spacing_blocks_to_layout(directions_layout, display_block)
       end
 
       #create additional layers of depth as necessary
       unless (directions_layout[display_block.depth])
         directions_layout << []
-      end
-
-      # check for spaces in layout
-      direction.results_array.each do |entry|
-
-        result = directions_layout.flatten.select{ |n| n.class == DisplayBlocks  && n.direction == entry.ingredient.direction }.first
-
-        if (result.nil?)
-          next
-        end
-
-        (display_block.depth - result.depth - 1).times do |index|
-          directions_layout[result.depth + index + 1] << DisplayBlocks.new(width: result.width, depth: result.depth + index + 1)
-        end
       end
 
       #put our newly create display_block into the layout
