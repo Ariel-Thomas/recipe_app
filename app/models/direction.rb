@@ -19,4 +19,12 @@ class Direction < ActiveRecord::Base
 
     result
   end
+
+  def results_array
+    Array(ingredient_entries.reject{ |entry| entry.ingredient.nil? || entry.ingredient.type != 'Result' })
+  end
+
+  def ingredients_array
+    Array(ingredient_entries.reject{ |entry| entry.ingredient.nil? || entry.ingredient.type == 'Result' })
+  end
 end

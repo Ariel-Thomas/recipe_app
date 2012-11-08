@@ -3,21 +3,25 @@
 
   <%= f.label :name %>
   <%= f.text_field :name, :placeholder => "Enter recipe name..." %>
-  <div id="name_error"></div>
+  <div id="name_error">
+    <br>
+  </div>
 
   <%= f.label :description %>
-  <%= f.text_area :description, :placeholder => "Enter a brief description of the recipe..." %>
-  <div id="desc_error"></div>
+  <%= f.text_area :description, :placeholder => "Enter a brief description of the recipe...", class: "input_area" %>
+  <div id="desc_error">
+    <br>
+  </div>
 
   <%= f.label :ingredients %>
-  <%= f.text_area :ingredients_text, :placeholder => "Enter the ingredients for this recipe...", id: "Ingredients" %>
-  <div id="ingredient_error"></div>
+  <%= f.text_area :ingredients_text, :placeholder => "Enter the ingredients for this recipe...", id: "Ingredients", class: "input_area" %>
+  <div id="ingredient_error">
+    <br>
+  </div>
+
+<br>
 
   <%= f.submit "Next", class: "btn btn-large btn-primary", id: "recipe_next" %>
 <% end %>
 
-
-<script>
-  $('body').keydown(findErrors);
-  $('body').keyup(findErrors);
-</script>
+<%= javascript_include_tag "validate_input" %>

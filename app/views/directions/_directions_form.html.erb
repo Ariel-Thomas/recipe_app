@@ -7,16 +7,18 @@
     <section class="left-col">
       <%= label_tag "Used Ingredients" %> 
 
-      <% if (@ingredient_entries != nil) then %>
+      <% if (@ingredient_entries.present?) then %>
         <% @ingredient_entries.each_with_index do |entry,index| %>
+        <p>
           <div class="ingredient-list">
             <div class="ingredient-boxes pull-left">
               <%= check_box_tag 'direction[ingredient_entries[' + index.to_s + ']]', entry.id %>
             </div>
             <div class="ingredient-labels">
-            <label> <%= entry %> </label>
+              <label> <%= entry %> </label>
             </div>
           </div>
+        </p>
         <% end %>
       <% end %>
     </section>
@@ -36,23 +38,3 @@
     </section>
   <% end %>
 </div>
-
-<style>
-.ingredient-list{
-  height:25px;width:200px;
-}
-
-.ingredient-labels{
-  position:relative;float:left;top:5px
-}
-
-.left-col{
-  width:400px;float:left
-}
-.right-col{
-  float:left; width:500px
-}
-.add-button{
-  float:left;padding: 10px
-}
-</style>

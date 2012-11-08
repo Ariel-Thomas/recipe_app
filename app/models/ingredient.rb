@@ -3,7 +3,7 @@ class Ingredient < ActiveRecord::Base
   
   validates :name, presence: true
 
-  has_many :ingredient_entries
+  has_many :ingredient_entries, dependent: :destroy
 
 
   def to_s

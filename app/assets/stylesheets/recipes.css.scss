@@ -3,3 +3,158 @@
 body { padding: 60px }
 
 .logo { float: left }
+
+label {
+  margin-top: 10px;
+}
+
+input {
+  width: 400px;
+}
+
+textarea {
+  height: 180px;
+  width: 400px;
+}
+
+.pagination ul {
+  background-color:#0F8790;
+}
+
+.pagination ul > li > a {
+  background-color:#0F8790;
+}
+
+.pagination li.active > a {
+  background-color:CornflowerBlue;
+  color:dimgrey;
+}
+
+.ingredient-list{
+  height:25px;width:200px;
+}
+
+.ingredient-labels{
+  position:relative;float:left; margin-top:-5px
+}
+
+.left-col{
+  width:400px;float:left
+}
+.right-col{
+  float:left; width:500px
+}
+.add-button{
+  float:left;padding: 10px
+}
+
+.direction-ingredients{
+  width:150px;
+  padding-right: 50px;
+}
+
+.clear-both{
+  clear:both;
+}
+
+.button-padding{
+  padding: 10px;
+}
+
+.ingredients-col{
+  width: 300px;
+  float: left;
+
+  background-color:white;
+  border: 5px solid black;
+  border-radius: 2px;
+
+  position:relative;
+  z-index:52;
+}
+
+.ingredients-row{
+  display:block;
+  height: 48px;
+  border-top: 1px solid grey;
+  border-bottom: 1px solid grey;
+  position:relative;
+}
+
+.ingredients-item{
+  color: black;
+  top:50%;
+  margin-top:-10px;
+  margin-left:10px;
+  position:absolute;
+}
+
+.no-rotate{
+  width: 200px;
+
+  background:gainsboro;
+  color: black;
+  border: 5px solid black;
+  border-radius: 0px;
+  text-align:center;
+}
+
+.no-rotate:hover{
+  cursor: pointer; cursor: hand;
+}
+
+.center-text{
+  top: 50%;
+  padding: 10px;
+  position: relative;
+}
+
+.directions-present.active-tab{
+  background:gainsboro;
+}
+
+.directions-present.active-tab:hover{
+  background:white;
+}
+
+.directions-col{
+  float: left;
+}
+
+.directions-text{ 
+  margin:0px auto;
+  text-align:center;
+  height:50px;
+  position: relative;
+}
+
+.empty-direction{
+  height:50px;
+  position: relative;
+}
+
+.directions-present{
+  height:50px;
+  background:white;
+  color: black;
+  border: 5px solid black;
+  border-radius: 20px;
+  position: relative;
+}
+
+.directions-present:hover{
+  background:gainsboro;
+  cursor: pointer; cursor: hand;
+}
+
+.clear-both{
+  clear:both;
+}
+
+.rotate-right {
+  -webkit-transform: rotate(90deg);
+  -moz-transform: rotate(90deg);
+  -o-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  transform: rotate(90deg);
+}

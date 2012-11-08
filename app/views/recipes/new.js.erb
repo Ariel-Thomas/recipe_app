@@ -1,7 +1,0 @@
-<% if (@state[:current_form] == "recipe_form") %>
-  $("#form").html("<%= escape_javascript(render('recipes/recipe_form'))%>");
-<% end %>
-
-<% if (@state[:current_form] == "recipe_directions_form") %>
-  $("#form").html("<%= escape_javascript(render('recipes/recipe_directions_form'))%>");
-<% end %>
