@@ -1,2 +1,2 @@
 solr:   rake sunspot:solr:run
-server: rails server -p 5879
+server: rails server -p $PORT
