@@ -17,10 +17,8 @@ module State
     begin
       @ingredient_entries = @recipe.ingredient_entries.reject { |entry| entry.direction.present? }
     rescue
-      @ingredinet_entries = nil
+      @ingredient_entries = nil
     end
-
   end
-
-
+  
 end
