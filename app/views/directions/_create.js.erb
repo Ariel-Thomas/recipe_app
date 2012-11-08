@@ -1,15 +1,7 @@
-<% if (@state[:current_form] == "recipe_form") %>
-  $("#form").html("<%= escape_javascript(render('recipes/recipe_form'))%>");
-<% end %>
-
-<% if (@state[:current_form] == "recipe_directions_form") %>
-  $("#form").html("<%= escape_javascript(render('recipes/recipe_directions_form'))%>");
-<% end %>
-
 $('#directions_list').html("<%= escape_javascript(render partial: 'directions/directions_list', formats: [:html])%>");
 
 <% if @state[:create_direction] %>
   $('#directions_form').html("<%= escape_javascript(render('directions/directions_form_done'))%>");
 <% else %>
   $('#directions_form').html("<%= escape_javascript(render('directions/directions_form'))%>");
-<% end %>1
+<% end %>

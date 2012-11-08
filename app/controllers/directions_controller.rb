@@ -14,10 +14,12 @@ class DirectionsController < ApplicationController
     else  
       set_state_for :unsuccessful_direction_creation  
     end
+
+    render 'recipes/edit', formats: [:html]
   end
 
   def update
-    render 'create', formats: [:js]
+    render 'recipes/edit', formats: [:html]
   end
 
   def destroy
@@ -31,6 +33,6 @@ class DirectionsController < ApplicationController
 
     flash[:success] = "Direction deleted!"
 
-    render 'create', formats: [:js]
+    render 'recipes/edit', formats: [:html]
   end
 end

@@ -11,6 +11,8 @@ class RecipesController < ApplicationController
     else
       set_state_for :unsuccessful_recipe_creation
     end
+     
+    render 'new', formats: [:html]
   end
 
   def new
@@ -41,7 +43,7 @@ class RecipesController < ApplicationController
       set_state_for :unsuccessful_recipe_update
     end
 
-    render 'create', formats: [:js]
+    render 'edit', formats: [:html]
   end
 
   def edit
