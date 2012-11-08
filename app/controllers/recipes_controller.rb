@@ -11,13 +11,15 @@ class RecipesController < ApplicationController
     else
       set_state_for :unsuccessful_recipe_creation
     end
-     
+
     render 'new', formats: [:html]
   end
 
   def new
     @recipe = Recipe.new
     set_state_for :new_recipe
+
+    session[:cur_page] = 'new';
   end
 
   def index
@@ -49,6 +51,8 @@ class RecipesController < ApplicationController
   def edit
     @recipe = Recipe.find(params[:id])
     set_state_for :editing_recipe
+
+    session[:cur_page] = 'edit';
   end
 
   def destroy

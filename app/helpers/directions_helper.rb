@@ -19,4 +19,8 @@ module DirectionsHelper
 
     @ingredient_entries = @recipe.ingredient_entries.reject { |entry| entry.direction.present? }
   end
+
+  def rerender_current_page
+    render 'recipes/' + session[:cur_page], formats: [:html]
+  end
 end
