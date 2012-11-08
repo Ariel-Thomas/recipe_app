@@ -1,1 +1,1 @@
-web:    bundle exec foreman start -p Procfile_heroku
+web:    bundle exec foreman start -f Procfile_heroku

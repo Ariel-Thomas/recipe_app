@@ -1,2 +1,2 @@
 solr:   rake sunspot:solr:run
-server: rails server
+server: rails server -p 5879
