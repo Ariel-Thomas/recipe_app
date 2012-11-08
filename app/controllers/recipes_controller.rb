@@ -1,5 +1,7 @@
 class RecipesController < ApplicationController
-  include RecipesHelper
+  include State
+  include IngredientParser
+  include DirectionsLayout
   before_filter :parse_ingredients, only: [:create, :update]
 
   def create
