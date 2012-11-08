@@ -21,13 +21,19 @@ function rotate(){
             
     $text.each(function(text_index){
       var $cur_text =  $(this);
+
+      var border_width = parseInt($cur_text.children('.directions-present').css("border-left-width"),10);
+
+      if(isNaN(border_width))
+        border_width = 0;
+
       var curWidth = $cur_text.width() / 2 - $cur_text.height() / 2;         
       curWidth = Math.round(curWidth);
       
       if (norotate) { curWidth = 0; }
       $cur_text.css({'margin-top': curWidth + prevWidth });
-              
-      prevWidth = curWidth;
+
+      prevWidth = curWidth - border_width + 1;
       
       //Rotate
       if (!norotate){
