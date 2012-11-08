@@ -97,7 +97,7 @@ end
 Then /^I should see the recipe's information$/ do
   page.should have_content(@recipe.name)
   page.should have_content(@recipe.description)
-  @recipe.ingredient_entries.each{ |entry| page.should have_selector('li', text: entry.to_s) if (entry.direction != nil)}
+  @recipe.ingredient_entries.each{ |entry| page.should have_selector('li', text: entry.to_s) if (entry.direction.present?) }
   @recipe.directions.each{ |direction| page.should have_content(direction) }
 end
 
@@ -123,4 +123,16 @@ end
 
 Then /^I should still be on the recipe's show page$/ do
   page.should have_selector('h1', text: @recipe.name)
+end
+
+Given /^(\d+) recipes exist in the database$/ do |num_recipes|
+  num_recipes.times do |index|
+    @recipe = Recipe.create!(name: "Recipe" + index.to_s, description: "Delicious", ingredient_entries: Recipe.parse_and_create_ingredients("2 C Nothing"))
+  end
+
+  Recipe.reindex
+end
+
+Then /^I should not see the last recipe$/ do
+  page.should_not have_content(@recipe.name)
 end

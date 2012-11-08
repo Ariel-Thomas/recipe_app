@@ -32,3 +32,10 @@ Feature: Show an index of current recipes
     When I enter the recipe name in the search
     And I click the search button
     Then I should see the recipe
+
+  @search
+  @javascript
+  Scenario: Paginate results
+    Given 11 recipes exist in the database
+    And I visit the index page
+    Then I should not see the last recipe
