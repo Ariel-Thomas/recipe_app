@@ -33,7 +33,7 @@ function rotate(){
       if (norotate) { curWidth = 0; }
       $cur_text.css({'margin-top': curWidth + prevWidth });
 
-      prevWidth = curWidth - border_width;
+      prevWidth = curWidth - border_width * 2;
       
       //Rotate
       if (!norotate){

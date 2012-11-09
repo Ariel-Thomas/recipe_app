@@ -17,13 +17,13 @@
   <div class="directions-col">
     <% column.each do |display_block| %>
       <% if (display_block.direction.nil?) %>
-        <div class="directions-text" style="width:<%= display_block.width_in_pixels %>px;">
-          <div class="empty-direction" style="width:<%= display_block.width_in_pixels %>px;">
+        <div class="directions-text" style="width:<%= display_block.display_width %>px;">
+          <div class="empty-direction" style="width:<%= display_block.display_width %>px;">
           </div>
         </div>
       <% else %>
         <div class="directions-text" style="z-index:<%= 50 - 2 * index %>;">
-          <div class="directions-present" style="width:<%= display_block.width_in_pixels %>px;" onclick="toggleActive(this); showText(<%= index %>,'<%= display_block.text %>', this);">
+          <div class="directions-present" style="width:<%= display_block.display_width %>px;" onclick="toggleActive(this); showText(<%= index %>,'<%= display_block.text %>', this);">
             <%= display_block.title %>
           </div>
         </div>

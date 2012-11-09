@@ -59,20 +59,20 @@ class RecipesController < ApplicationController
 
   private
 
-  def parse_ingredients
-    if (params.include?(:id))
-      recipe = Recipe.find(params[:id])
+    def parse_ingredients
+      if (params.include?(:id))
+        recipe = Recipe.find(params[:id])
 
-      params[:recipe][:ingredient_entries] = Recipe.parse_and_find_ingredients(params[:recipe][:ingredients_text], recipe)
+        params[:recipe][:ingredient_entries] = Recipe.parse_and_find_ingredients(params[:recipe][:ingredients_text], recipe)
 
-      recipe.results_array.each do |result|
-        params[:recipe][:ingredient_entries] << result
+        recipe.results_array.each do |result|
+          params[:recipe][:ingredient_entries] << result
+        end
+
+      else
+        params[:recipe][:ingredient_entries] = Recipe.parse_and_create_ingredients(params[:recipe][:ingredients_text])
       end
 
-    else
-      params[:recipe][:ingredient_entries] = Recipe.parse_and_create_ingredients(params[:recipe][:ingredients_text])
+      params[:recipe].delete(:ingredients_text)
     end
-
-    params[:recipe].delete(:ingredients_text)
-  end
 end
