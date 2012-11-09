@@ -1,6 +1,5 @@
 class RecipesController < ApplicationController
   include State
-  include DirectionsLayout
   before_filter :parse_ingredients, only: [:create, :update]
 
   def create
@@ -29,8 +28,6 @@ class RecipesController < ApplicationController
 
   def show
     @recipe = Recipe.find(params[:id])
-
-    @directions_layout = make_directions_layout(@recipe)
   end
 
   def update
@@ -69,10 +66,7 @@ class RecipesController < ApplicationController
       params[:recipe][:ingredient_entries] = Recipe.parse_and_find_ingredients(params[:recipe][:ingredients_text], recipe)
 
       recipe.results_array.each do |result|
-        #if (result.ingredient.direction.ingredient_entries.length != 0)
-
-          params[:recipe][:ingredient_entries] << result
-        #end
+        params[:recipe][:ingredient_entries] << result
       end
 
     else

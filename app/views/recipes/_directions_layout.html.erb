@@ -1,0 +1,33 @@
+<% @directions_layout = make_directions_layout(@recipe) %>
+<%= javascript_include_tag "rotate-cols" %>
+
+<div class="ingredients-col">
+  <% @directions_layout[0].each do |entry| %>
+    <li class="ingredients-row">
+      <div class="ingredients-item">
+        <%= entry %>
+      </div>
+    </li>
+  <% end %>
+</div>
+
+<% @directions_layout.drop(1).each_with_index do |column,index| %>
+  <div class="directions-col text-col<%= index %>" style="z-index:<%= 50 - 2 * index + 1 %>;position:relative;">
+  </div>
+  <div class="directions-col">
+    <% column.each do |display_block| %>
+      <% if (display_block.direction.nil?) %>
+        <div class="directions-text" style="width:<%= display_block.width_in_pixels %>px;">
+          <div class="empty-direction" style="width:<%= display_block.width_in_pixels %>px;">
+          </div>
+        </div>
+      <% else %>
+        <div class="directions-text" style="z-index:<%= 50 - 2 * index %>;">
+          <div class="directions-present" style="width:<%= display_block.width_in_pixels %>px;" onclick="toggleActive(this); showText(<%= index %>,'<%= display_block.text %>', this);">
+            <%= display_block.title %>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+<% end %>
