@@ -1,5 +1,5 @@
 <div>
-  <%= form_for @direction, url: recipe_directions_path(@recipe,@direction), remote: true do |f| %>
+  <%= form_for @direction, url: recipe_directions_path(@recipe,@direction) do |f| %>
     <%= render 'shared/error_messages', object: f.object %>
 
     <% hidden_field_tag :recipe, :id %>
