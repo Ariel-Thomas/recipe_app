@@ -46,8 +46,6 @@ Given /^a recipe exists in the database$/ do
   @recipe = Recipe.create!(name: "Cookies", description: "Delicious", ingredient_entries: Recipe.parse_and_create_ingredients("1 C Sugar\n1 C Flour\n2 T Butter"))
 
   Recipe.count.should eq(@number_of_recipes_in_database_before + 1)
-
-  Recipe.reindex
 end
 
 Given /^I visit the index page$/ do
@@ -126,11 +124,10 @@ Then /^I should still be on the recipe's show page$/ do
 end
 
 Given /^(\d+) recipes exist in the database$/ do |num_recipes|
-  num_recipes.times do |index|
+  num_recipes.to_i.times do |index|
     @recipe = Recipe.create!(name: "Recipe" + index.to_s, description: "Delicious", ingredient_entries: Recipe.parse_and_create_ingredients("2 C Nothing"))
   end
 
-  Recipe.reindex
 end
 
 Then /^I should not see the last recipe$/ do
