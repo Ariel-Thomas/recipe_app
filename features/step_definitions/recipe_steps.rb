@@ -124,7 +124,7 @@ Then /^I should still be on the recipe's show page$/ do
 end
 
 Given /^(\d+) recipes exist in the database$/ do |num_recipes|
-  num_recipes.times do |index|
+  num_recipes.to_i.times do |index|
     @recipe = Recipe.create!(name: "Recipe" + index.to_s, description: "Delicious", ingredient_entries: Recipe.parse_and_create_ingredients("2 C Nothing"))
   end
 

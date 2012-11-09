@@ -1,6 +1,5 @@
 class RecipesController < ApplicationController
   include State
-  include IngredientParser
   include DirectionsLayout
   before_filter :parse_ingredients, only: [:create, :update]
 
@@ -59,5 +58,27 @@ class RecipesController < ApplicationController
     flash[:success] = "Recipe deleted!"
     
     redirect_to recipes_path
+  end
+
+  private
+
+  def parse_ingredients
+    if (params.include?(:id))
+      recipe = Recipe.find(params[:id])
+
+      params[:recipe][:ingredient_entries] = Recipe.parse_and_find_ingredients(params[:recipe][:ingredients_text], recipe)
+
+      recipe.results_array.each do |result|
+        #if (result.ingredient.direction.ingredient_entries.length != 0)
+
+          params[:recipe][:ingredient_entries] << result
+        #end
+      end
+
+    else
+      params[:recipe][:ingredient_entries] = Recipe.parse_and_create_ingredients(params[:recipe][:ingredients_text])
+    end
+
+    params[:recipe].delete(:ingredients_text)
   end
 end
