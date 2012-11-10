@@ -1,3 +1,0 @@
-web:    bundle exec foreman start -f Procfile_heroku
-solr:   rake sunspot:solr:run
-server: rails server -p $PORT
