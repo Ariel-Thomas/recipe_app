@@ -12,12 +12,7 @@ class Recipe < ActiveRecord::Base
   validates :description, presence: true
   validates :ingredient_entries, presence: true
 
-  searchable do
-    text :name, :description
-    text :ingredients_name do
-      ingredients.map { |ingredient| ingredient.name}
-    end 
-  end
+  scoped_search on: [:name, :description]
 
   def ingredients_text
     ingredient_entries.reject{ |entry| entry.ingredient.nil? ||entry.ingredient.type == 'Result' }.join("\n")
