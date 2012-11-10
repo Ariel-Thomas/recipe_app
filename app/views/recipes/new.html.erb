@@ -2,7 +2,7 @@
 <h1>New Recipe</h1>
 
 <div id="form">
-  <%= render 'recipes/recipe_form' %>
+  <%= render 'recipes/recipe_form', formats: [:html] %>
 </div>
 
-<script><%= render "recipes/create.js.erb" %></script>
+<script><%= render partial: "recipes/form_state", formats: [:js], handlers: [:erb] %></script>
