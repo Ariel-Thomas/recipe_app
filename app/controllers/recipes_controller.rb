@@ -12,7 +12,7 @@ class RecipesController < ApplicationController
       set_state_for :unsuccessful_recipe_creation
     end
 
-    render 'new', formats: [:html]
+    render :new
   end
 
   def new
@@ -40,7 +40,7 @@ class RecipesController < ApplicationController
       set_state_for :unsuccessful_recipe_update
     end
 
-    render 'edit', formats: [:html]
+    render :edit
   end
 
   def edit
