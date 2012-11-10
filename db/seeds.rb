@@ -71,6 +71,3 @@ recipe.add_result_for direction
     ingredient_entries: Recipe.parse_and_create_ingredients("2 C Nothing")
     )
 end
-
-#reindex
-Recipe.reindex

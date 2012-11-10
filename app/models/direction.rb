@@ -27,4 +27,8 @@ class Direction < ActiveRecord::Base
   def ingredients_array
     Array(ingredient_entries.reject{ |entry| entry.ingredient.nil? || entry.ingredient.type == 'Result' })
   end
+
+  def has_ingredient(ingredient)
+    ingredients_array.include?(ingredient)
+  end
 end

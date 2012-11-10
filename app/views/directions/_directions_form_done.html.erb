@@ -6,4 +6,4 @@
   <%= link_to "Done", recipe_path(@recipe) ,class: "btn btn-large btn-primary", id: "Done" %>
 </div>
 
-<script><%= render "directions/add_directions_button.js.erb", formats: [:js] %></script>
+<script><%= render partial: "directions/add_directions_button", formats: [:js], handlers: [:erb] %></script>

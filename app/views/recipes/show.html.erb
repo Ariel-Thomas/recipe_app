@@ -1,8 +1,6 @@
 <% provide(:title, @recipe.name) %>
 <h1><%= @recipe.name %></h1>
 
-<%= javascript_include_tag "rotate-cols" %>
-
 <section class="clear-both">
   <%= @recipe.description %>
 </section>
@@ -10,37 +8,7 @@
 <br>
 
 <section id="formatted-directions">
-  <div class="ingredients-col">
-    <% @directions_layout[0].each do |entry| %>
-      <li class="ingredients-row">
-        <div class="ingredients-item">
-          <%= entry %>
-        </div>
-      </li>
-    <% end %>
-  </div>
-
-
-  <% @directions_layout.drop(1).each_with_index do |column,index| %>
-    <div class="directions-col text-col<%= index %>" style="z-index:<%= 50 - 2 * index + 1 %>;position:relative;">
-    </div>
-    <div class="directions-col">
-      <% column.each do |direction| %>
-        <% if (direction[:direction].nil?) %>
-          <div class="directions-text" style="width:<%= direction[:width] * 48 %>px;">
-            <div class="empty-direction" style="width:<%= direction[:width] * 48 %>px;">
-            </div>
-          </div>
-        <% else %>
-          <div class="directions-text" style="z-index:<%= 50 - 2 * index %>;">
-            <div class="directions-present" style="width:<%= direction[:width] * 48 %>px;" onclick="toggleActive(this); showText(<%= index %>,'<%= direction[:text] %>', this);">
-              <%= direction[:title] %>
-            </div>
-          </div>
-        <% end %>
-      <% end %>
-    </div>
-  <% end %>
+  <%= render "directions_layout" %>
 </section>
 <br>
 

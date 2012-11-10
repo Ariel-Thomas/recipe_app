@@ -1,7 +1,5 @@
 class RecipesController < ApplicationController
   include State
-  include IngredientParser
-  include DirectionsLayout
   before_filter :parse_ingredients, only: [:create, :update]
 
   def create
@@ -25,16 +23,11 @@ class RecipesController < ApplicationController
   end
 
   def index
-    @recipes = Recipe.search do
-      keywords params[:search]
-      paginate :per_page => 10, :page => params[:page] || 1
-    end.results
+    @recipes = Recipe.search_for(params[:search]).paginate(:page => params[:page] || 1, :per_page => 10)
   end
 
   def show
     @recipe = Recipe.find(params[:id])
-
-    @directions_layout = make_directions_layout(@recipe)
   end
 
   def update
@@ -63,4 +56,23 @@ class RecipesController < ApplicationController
     
     redirect_to recipes_path
   end
+
+  private
+
+    def parse_ingredients
+      if (params.include?(:id))
+        recipe = Recipe.find(params[:id])
+
+        params[:recipe][:ingredient_entries] = Recipe.parse_and_find_ingredients(params[:recipe][:ingredients_text], recipe)
+
+        recipe.results_array.each do |result|
+          params[:recipe][:ingredient_entries] << result
+        end
+
+      else
+        params[:recipe][:ingredient_entries] = Recipe.parse_and_create_ingredients(params[:recipe][:ingredients_text])
+      end
+
+      params[:recipe].delete(:ingredients_text)
+    end
 end

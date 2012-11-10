@@ -5,4 +5,4 @@
   <%= render 'recipes/recipe_form' %>
 </div>
 
-<script><%= render "recipes/create.js.erb" %></script>
+<script><%= render partial: "recipes/form_state", formats: [:js], handlers: [:erb] %></script>
