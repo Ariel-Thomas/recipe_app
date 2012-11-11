@@ -16,7 +16,6 @@ Feature: Create a new recipe
     And I click the add direction button
     And I click the done button
     Then I should see a new recipe created
-    And I should see a success message
     And I should see the recipe's page
 
   @javascript  

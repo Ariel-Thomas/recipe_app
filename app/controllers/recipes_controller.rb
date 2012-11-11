@@ -1,5 +1,4 @@
 class RecipesController < ApplicationController
-  include State
   before_filter :parse_ingredients, only: [:create, :update]
 
   def create
@@ -7,18 +6,14 @@ class RecipesController < ApplicationController
 
     if @recipe.save
       flash[:success] = "Recipe created!"
-      set_state_for :successful_recipe_creation 
+      redirect_to recipe_path(@recipe) + "/directions/new.html", action: 'index'
     else
-      set_state_for :unsuccessful_recipe_creation
+      render 'new', formats: [:html]
     end
-
-    render 'new', formats: [:html]
   end
 
   def new
     @recipe = Recipe.new
-    set_state_for :new_recipe
-
     session[:cur_page] = 'new';
   end
 
@@ -35,18 +30,15 @@ class RecipesController < ApplicationController
 
     if @recipe.update_attributes(params[:recipe])
       flash[:success] = "Recipe edited!"
-      set_state_for :successful_recipe_update 
+      redirect_to recipe_path(@recipe) + "/directions/new.html", action: 'index'
     else
-      set_state_for :unsuccessful_recipe_update
+        render 'edit', formats: [:html]
     end
 
-    render 'edit', formats: [:html]
   end
 
   def edit
     @recipe = Recipe.find(params[:id])
-    set_state_for :editing_recipe
-
     session[:cur_page] = 'edit';
   end
 

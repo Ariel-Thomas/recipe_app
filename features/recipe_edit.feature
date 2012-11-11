@@ -8,4 +8,3 @@ Feature: Edit a recipe
     And I click the next button
     And I click the done button
     Then I should see the description has changed
-    And I should see a success message
