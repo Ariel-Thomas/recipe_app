@@ -6,15 +6,15 @@ class RecipesController < ApplicationController
 
     if @recipe.save
       flash[:success] = "Recipe created!"
-      redirect_to recipe_path(@recipe) + "/directions/new.html", action: 'index'
+      redirect_to recipe_directions_path(@recipe)
     else
-      render 'new', formats: [:html]
+      flash.now[:alert] = "Error while creating recipe"
+      render :new
     end
   end
 
   def new
     @recipe = Recipe.new
-    session[:cur_page] = 'new';
   end
 
   def index
@@ -29,23 +29,21 @@ class RecipesController < ApplicationController
     @recipe  = Recipe.find(params[:id]) 
 
     if @recipe.update_attributes(params[:recipe])
-      flash[:success] = "Recipe edited!"
-      redirect_to recipe_path(@recipe) + "/directions/new.html", action: 'index'
+      flash[:success] = "Recipe updated!"
+      redirect_to recipe_directions_path(@recipe)
     else
-        render 'edit', formats: [:html]
+      flash.now[:alert] = "Error while updating recipe"
+      render :edit
     end
-
   end
 
   def edit
     @recipe = Recipe.find(params[:id])
-    session[:cur_page] = 'edit';
   end
 
   def destroy
     Recipe.find(params[:id]).destroy
     flash[:success] = "Recipe deleted!"
-    
     redirect_to recipes_path
   end
 

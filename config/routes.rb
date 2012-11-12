@@ -2,7 +2,7 @@ RecipeApp::Application.routes.draw do
   root to: 'recipes#index'
 
   resources :recipes do
-    resources :directions, only: [:create, :new, :update, :destroy]
+    resources :directions, only: [:index, :create, :update, :destroy]
   end
 
 

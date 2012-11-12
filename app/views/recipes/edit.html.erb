@@ -2,7 +2,5 @@
 <h1>Edit Recipe</h1>
 
 <div id="form">
-  <%= render 'recipes/recipe_form' %>
+  <%= render :partial => "recipes/form" %>
 </div>
-
-<script><%= render partial: "recipes/form_state", formats: [:js], handlers: [:erb] %></script>

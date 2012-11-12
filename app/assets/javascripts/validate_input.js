@@ -1,6 +1,3 @@
-$('body').keydown(findErrors);
-$('body').keyup(findErrors);
-
 function findErrors(){
   var any_errors = false;
   var $button = $('#recipe_next');
