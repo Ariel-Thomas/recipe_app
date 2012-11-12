@@ -1,5 +1,6 @@
 class DirectionsController < ApplicationController
   before_filter :fix_ingredient_entries, only: [:create, :update]
+  before_filter :get_recipe_and_ingredients
 
   def index
     @recipe = Recipe.find(params[:recipe_id])
@@ -8,7 +9,6 @@ class DirectionsController < ApplicationController
   end
 
   def create
-    @recipe = Recipe.find(params[:recipe_id])
     @direction = @recipe.directions.create(params[:direction])
 
     if @direction.save
@@ -22,7 +22,6 @@ class DirectionsController < ApplicationController
   end
 
   def destroy
-    @recipe = Recipe.find(params[:recipe_id])
     direction = @recipe.directions.find(params[:id])
     direction.destroy
     flash[:success] = "Direction deleted!"
