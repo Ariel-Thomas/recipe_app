@@ -1,6 +1,11 @@
 class DirectionsController < ApplicationController
-  include State
   before_filter :fix_ingredient_entries, only: [:create, :update]
+
+  def index
+    @recipe = Recipe.find(params[:recipe_id])
+    @direction = @recipe.directions.new
+    @ingredient_entries = @recipe.ingredient_entries.reject { |entry| entry.direction.present? }
+  end
 
   def create
     @recipe = Recipe.find(params[:recipe_id])
@@ -8,30 +13,20 @@ class DirectionsController < ApplicationController
 
     if @direction.save
       flash[:success] = "Direction Added"
-
       @recipe.add_result_for @direction
-      set_state_for :successful_direction_creation
-    else  
-      set_state_for :unsuccessful_direction_creation  
+    else
+      flash[:alert] = "Error while adding direction"
     end
 
-    rerender_current_page
-  end
-
-  def update_attributes
-    rerender_current_page
+    redirect_to recipe_directions_path(@recipe)
   end
 
   def destroy
     @recipe = Recipe.find(params[:recipe_id])
     direction = @recipe.directions.find(params[:id])
-    #@recipe.get_result_from_ingredient_entries(direction).destroy
     direction.destroy
-
-    set_state_for :direction_deletion
     flash[:success] = "Direction deleted!"
-
-    rerender_current_page
+    redirect_to recipe_directions_path(@recipe)
   end
 
   private
@@ -41,9 +36,5 @@ class DirectionsController < ApplicationController
         params[:direction][:ingredient_entries] =
           params[:direction][:ingredient_entries].values.map! { |entry_id| IngredientEntry.find(entry_id) }
       end
-    end
-
-    def rerender_current_page
-      render 'recipes/' + session[:cur_page], formats: [:html]
     end
 end

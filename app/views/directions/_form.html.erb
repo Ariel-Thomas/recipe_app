@@ -7,7 +7,7 @@
     <section class="left-col">
       <%= label_tag "Used Ingredients" %> 
 
-      <% if (@ingredient_entries.present?) then %>
+      <% if @ingredient_entries.present? %>
         <% @ingredient_entries.each_with_index do |entry,index| %>
         <p>
           <div class="ingredient-list">
