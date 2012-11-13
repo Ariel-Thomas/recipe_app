@@ -117,3 +117,18 @@ Then /^I should be able to log back in with the new password$/ do
   fill_in "Password",               with: "herp"
   click_button "Sign In"
 end
+
+Then /^the user should be deleted$/ do
+  User.count.should eq(0)
+end
+
+Given /^a recipe exists in the database created by that user$/ do
+  @recipe = Recipe.create!(name: "Cookies", description: "Delicious",user: @user, ingredient_entries: Recipe.parse_and_create_ingredients("1 C Sugar\n1 C Flour\n2 T Butter"))end
+
+When /^I visit that user's profile page$/ do
+  visit user_path(@user)
+end
+
+
+
+

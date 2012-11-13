@@ -16,7 +16,8 @@ class UsersController < ApplicationController
 
 
   def show
-    @user = current_user
+    @user = User.find(params[:id])
+    @recipes = Recipe.paginate(:page => params[:page] || 1, :per_page => 10).find_all_by_user_id(@user.id)
   end
 
   def update
@@ -39,5 +40,8 @@ class UsersController < ApplicationController
     user = current_user
     logout
     user.destroy
+
+    flash[:success] = "Profile deleted!"
+    redirect_to root_path
   end
 end

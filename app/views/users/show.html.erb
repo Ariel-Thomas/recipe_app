@@ -1,8 +1,11 @@
 <% provide(:title, "Sign Up") %>
-<h1><%= current_user.username %>'s Profile</h1>
+<h1><%= @user.username %>'s Profile</h1>
 
-<hr>
+<h3>Recipes</h3>
+<div id="recipes_list"><%= render 'recipes/list' %><div>
 
-<span>
-  <%= link_to "edit", edit_user_path(current_user) %>
-</span>
+<% if (@user == current_user) %>
+  <span>
+    <%= link_to "edit", edit_user_path(@user) %>
+  </span>
+<% end %>

@@ -17,3 +17,7 @@
 
   <%= f.submit class: "btn btn-large btn-primary" %>
 <% end %>
+
+<hr>
+
+<%= link_to "delete", @user, method: :delete, data: { confirm: "You sure?" } %>

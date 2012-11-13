@@ -41,11 +41,7 @@ end
 Given /^a recipe exists in the database$/ do
   Recipe.all.map!{ |recipe| recipe.destroy }
 
-  @number_of_recipes_in_database_before = Recipe.count
-
   @recipe = Recipe.create!(name: "Cookies", description: "Delicious", ingredient_entries: Recipe.parse_and_create_ingredients("1 C Sugar\n1 C Flour\n2 T Butter"))
-
-  Recipe.count.should eq(@number_of_recipes_in_database_before + 1)
 end
 
 Given /^I visit the index page$/ do
@@ -56,12 +52,16 @@ Then /^I should see the recipe$/ do
   page.should have_content(@recipe.name)
 end
 
+Then /^I should not see a delete link$/ do
+  page.should_not have_selector('a', text: "delete")
+end
+
 When /^I click the delete link$/ do
   popup.confirm{ click_link "delete" }
 end
 
 Then /^I should see the recipe removed$/ do
-  Recipe.count.should eq(@number_of_recipes_in_database_before)
+  Recipe.count.should eq(0)
 end
 
 When /^I click the recipe's link$/ do
@@ -78,6 +78,10 @@ end
 
 When /^I change the description$/ do
   fill_in "Description",  with: "Something silly"
+end
+
+Then /^I should not see an edit link$/ do
+  page.should_not have_selector('a', text: "edit")
 end
 
 When /^I click the edit button$/ do
