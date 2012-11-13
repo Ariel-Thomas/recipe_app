@@ -1,0 +1,8 @@
+<% provide(:title, "Sign Up") %>
+<h1><%= current_user.username %>'s Profile</h1>
+
+<hr>
+
+<span>
+  <%= link_to "edit", edit_user_path(current_user) %>
+</span>

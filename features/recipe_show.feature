@@ -20,3 +20,18 @@ Feature: Show an individual recipe
     When I click the delete link
     Then I should see the recipe removed
     And I should see a success message
+
+  @javascript
+  Scenario: I should only see the direction titles
+    Given a recipe exists in the database
+    And that recipe has a direction
+    When I visit the recipe's show page
+    Then I should not see the direction text
+
+  @javascript
+  Scenario: Clicking on a direction title should show the direction text
+    Given a recipe exists in the database
+    And that recipe has a direction
+    When I visit the recipe's show page
+    And I click the direction title
+    Then I should see the direction text
