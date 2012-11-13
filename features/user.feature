@@ -62,3 +62,19 @@ Feature: User authentication
     And I should see a success message
     And I should be able to log back in with the new password
 
+  @javascript
+  Scenario: User destroys self
+    Given a user exists in the database
+    And I am logged in
+    And I visit my user page
+    When I click the edit link
+    And I click the delete link
+    Then I should see the recipes index
+    And I should see a success message
+    And the user should be deleted
+
+  Scenario: Profile page shows submitted recipes
+    Given a user exists in the database
+    And a recipe exists in the database created by that user
+    When I visit that user's profile page
+    Then I should see the recipe

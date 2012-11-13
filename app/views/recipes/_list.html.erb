@@ -7,10 +7,12 @@
       <%= recipe.description %>
     </section>
     <section>
-      <%= link_to "delete", recipe, method: :delete, data: { confirm: "You sure?" } %>
+      <% if recipe.user == current_user %>
+        <%= link_to "delete", recipe, method: :delete, data: { confirm: "You sure?" } %>
+      <% end %>
     </section>
   </div>
   <hr>
 <% end %>
 
-<%= will_paginate %>
+<%= will_paginate @recipes %>

@@ -1,6 +1,7 @@
 class Recipe < ActiveRecord::Base
-  attr_accessible :name, :description, :ingredient_entries, :ingredients
+  attr_accessible :name, :description, :ingredient_entries, :ingredients, :user, :user_id
 
+  belongs_to :user
   has_many :ingredient_entries, dependent: :destroy
   accepts_nested_attributes_for :ingredient_entries, :allow_destroy => true
   has_many :ingredients, through: :ingredient_entries

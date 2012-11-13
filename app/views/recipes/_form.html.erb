@@ -1,6 +1,10 @@
 <%= form_for @recipe do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
 
+  <% if (current_user) %>
+    <%= f.hidden_field :user_id, value: @recipe.user ? @recipe.user.id : current_user.id  %>
+  <% end %>
+
   <%= f.label :name %>
   <%= f.text_field :name, :placeholder => "Enter recipe name..." %>
   <div id="name_error">

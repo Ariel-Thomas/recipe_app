@@ -1,5 +1,10 @@
 <% provide(:title, @recipe.name) %>
 <h1><%= @recipe.name %></h1>
+<% if (@recipe.user) %>
+  Submitted by <%= link_to @recipe.user.username, @recipe.user %>
+<% end %>
+
+<br>
 
 <section class="clear-both">
   <%= @recipe.description %>
@@ -12,11 +17,13 @@
 </section>
 <br>
 
-<section class="clear-both">
-  <span>
-    <%= link_to "edit", edit_recipe_path(@recipe) %>
-  </span>
-  <span>
-    <%= link_to "delete", @recipe, method: :delete, data: { confirm: "You sure?" } %>
-  </span>
+<section class="clear-both">    
+  <% if @recipe.user == current_user %>
+    <span>
+      <%= link_to "edit", edit_recipe_path(@recipe) %>
+    </span>
+    <span>
+      <%= link_to "delete", @recipe, method: :delete, data: { confirm: "You sure?" } %>
+    </span>
+  <% end %>
 </section>
