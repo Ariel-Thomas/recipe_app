@@ -1,0 +1,26 @@
+<% provide(:title, "Sign In") %>
+<h1>Sign In</h1>
+
+<section>
+  <%= form_tag sessions_path do %>
+
+    <section>
+      <%= label_tag :username %>
+      <%= text_field_tag :username, params[:username] %>
+
+      <%= label_tag :password %>
+      <%= password_field_tag :password %>
+    </section>
+
+    <section>
+      <div class="pull-left"><%= check_box_tag :remember_me, 1, params[:remember_me] %></div>
+      <div class="pull-left"><%= label_tag :remember_me %></div>
+    </section>
+
+    <div class="clear-both"><%= submit_tag "Sign In" %></div>
+  <% end %>
+</section>
+
+<hr class="clear-both">
+
+<h4>Not registered? <%= link_to "Sign up now!",  new_user_path %></h4>

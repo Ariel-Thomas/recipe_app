@@ -22,7 +22,7 @@ end
 
 When /^I enter valid recipe directions$/ do
   check "direction_ingredient_entries_0"
-  fill_in "direction_title",  with: "Mix all"
+  fill_in "direction_title",  with: "Test Title"
   fill_in "direction_text",  with: "Mix all ingredients together with blender"
 end
 
@@ -64,4 +64,27 @@ end
 
 Then /^I should see the direction text$/ do
   page.should have_content(@direction.text)
+end
+
+When /^I input invalid direction information$/ do
+  fill_in "direction_title",  with: ""
+  fill_in "direction_text",  with: "derp"
+end
+
+Then /^I should still see the direction form$/ do
+  page.should have_selector('form', id: 'new_direction' );
+end
+
+Then /^I should still see my previous input$/ do
+  page.should have_selector('input', test: "");
+  page.should have_selector('textarea', test: "derp");
+end
+
+Then /^I should not still see the direction form$/ do
+  page.should_not have_selector('form', id: 'new_direction' );
+end
+
+Then /^I should see the new direction$/ do
+  page.should have_content("Test Title")
+  page.should have_content("Mix all ingredients together with blender")
 end

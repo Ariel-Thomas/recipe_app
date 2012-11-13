@@ -1,4 +1,10 @@
 RecipeApp::Application.routes.draw do
+
+  get "logout" => "sessions#destroy", :as => "logout"
+  resources :sessions, only: [:new, :create, :destroy]
+
+  resources :users
+
   root to: 'recipes#index'
 
   resources :recipes do

@@ -3,46 +3,28 @@
 
 <div id="form">
   <section id="directions_list">
-    <h3>Directions</h3>
-
-    <% @recipe.directions.each_with_index do |direction,index| %>
-      <% if direction != @direction %>
-        <div>
-          <div class="clear-both">
-            <h4>Step <%= (index + 1).to_s %>. <%= direction.title %></h4>
-          </div>
-          <div class="direction-ingredients pull-left">
-            <% direction.ingredient_entries.each do |entry| %>
-              <li><%= entry %></li>
-            <% end %>
-          </div>
-          <div class="directions pull-left">
-            <%= direction.text %>
-          </div>
-          <div class="clear-both">
-            <%= link_to "delete", recipe_direction_path(@recipe,direction), method: :delete, data: { confirm: "You sure?" }, id:"delete-direction" %>
-          </div>
-        </div>
-        <hr class="clear-both">
-      <% end %>
-    <% end %>
+    <%= render partial: "directions/list" %>
   </section>
 
   <section>
     <div id="directions_form">
-      <div class="pull-left button-padding">
-        <button class="btn btn-large btn-primary" id="add_directions_button">Add New Direction</button>
-      </div>
+      <% if (@invalid_direction) %>
+        <%= render partial: "directions/form" %>
+      <% else %>
+        <div class="pull-left button-padding">
+          <button class="btn btn-large btn-primary" id="add_directions_button" onclick="ShowDirectionsForm();"> Add New Direction </button>
+        </div>
 
-      <div class="pull-left button-padding">
-        <%= link_to "Done", recipe_path(@recipe) ,class: "btn btn-large btn-primary", id: "Done" %>
-      </div>
+        <div class="pull-left button-padding">
+          <%= link_to "Done", recipe_path(@recipe) ,class: "btn btn-large btn-primary", id: "Done" %>
+        </div>
 
-      <script>
-        $('#add_directions_button').click(function(){
-          $('#directions_form').html("<%= escape_javascript(render('directions/form')) %>");
-        });
-      </script>
+        <script>
+          function ShowDirectionsForm() {
+            $('#directions_form').html("<%= escape_javascript(render('directions/form')) %>");
+          }
+        </script>
+      <% end %>
     </div>
   </section>
 </div>
