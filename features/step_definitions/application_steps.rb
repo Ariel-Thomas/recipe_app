@@ -17,3 +17,11 @@ end
 Then /^I should see the new recipe page$/ do
   page.should have_selector('h1', text: "New Recipe")
 end
+
+When /^I click the sign up link$/ do
+  click_link "Sign Up"
+end
+
+Then /^I should see the sign up page$/ do
+  page.should have_selector('h1', text: "Sign Up")
+end

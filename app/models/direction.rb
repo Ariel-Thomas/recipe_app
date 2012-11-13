@@ -1,6 +1,7 @@
 class Direction < ActiveRecord::Base
   attr_accessible :text, :ingredient_entries, :title
 
+  validates :title, presence: true
   validates :text, presence: true
   validates :ingredient_entries, presence: true
 

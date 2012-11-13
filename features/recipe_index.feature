@@ -34,3 +34,5 @@ Feature: Show an index of current recipes
     Given 11 recipes exist in the database
     And I visit the index page
     Then I should not see the last recipe
+
+    
