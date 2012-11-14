@@ -1,4 +1,6 @@
-class UsersController < ApplicationController
+class UsersController < AuthorizationController
+  skip_before_filter :require_login, only: [:create, :new, :show]
+
   def create
     @user = User.new(params[:user])
     if @user.save
@@ -21,7 +23,7 @@ class UsersController < ApplicationController
   end
 
   def update
-    @user = current_user
+    @user = User.find(params[:id])
 
     if @user.update_attributes(params[:user])
       flash[:success] = "Profile updated!"
@@ -33,7 +35,7 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user = current_user
+    @user = User.find(params[:id])
   end
 
   def destroy

@@ -1,5 +1,5 @@
 <% provide(:title, "Sign Up") %>
-<h1>Edit <%= current_user.username %>'s Profile</h1>
+<h1>Edit <%= @user.username %>'s Profile</h1>
 
 <%= form_for @user do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
@@ -20,4 +20,6 @@
 
 <hr>
 
-<%= link_to "delete", @user, method: :delete, data: { confirm: "You sure?" } %>
+<% if can? :destroy, @user %>
+  <%= link_to "delete", @user, method: :delete, data: { confirm: "You sure?" } %>
+<% end %>

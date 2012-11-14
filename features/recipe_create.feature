@@ -2,14 +2,18 @@ Feature: Create a new recipe
 
   @javascript  
   Scenario: Unsuccessful creation, Blank
-    Given I visit the new recipe page
-    When I click the next button
+    Given a user exists in the database
+    And I am logged in
+    When I visit the new recipe page
+    And I click the next button
     Then I should return to the new page
  
   @javascript  
   Scenario: Successful creation
-    Given I visit the new recipe page
-    When I input valid recipe information
+    Given a user exists in the database
+    And I am logged in
+    When I visit the new recipe page
+    And I input valid recipe information
     And I click the next button
     And I click the add new direction button
     And I enter valid recipe directions
@@ -20,8 +24,10 @@ Feature: Create a new recipe
 
   @javascript  
   Scenario: Successful creation, Poor ingredient formatting
-    Given I visit the new recipe page
-    When I input valid recipe information
+    Given a user exists in the database
+    And I am logged in
+    When I visit the new recipe page
+    And I input valid recipe information
     And I poorly format the ingredients
     And I click the next button
     And I click the done button

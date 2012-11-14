@@ -1,8 +1,13 @@
-class RecipesController < ApplicationController
-  before_filter :parse_ingredients, only: [:create, :update]
+class RecipesController < AuthorizationController
+  skip_before_filter :require_login, only: [:index, :show]
+  before_filter :parse_ingredients, only: [:create,:update]
+  skip_load_and_authorize_resource only: [:create,:update]
+
+  check_authorization
 
   def create
     @recipe = Recipe.new(params[:recipe])
+    authorize! :create, @recipe
 
     if @recipe.save
       flash[:success] = "Recipe created!"
@@ -27,6 +32,7 @@ class RecipesController < ApplicationController
 
   def update
     @recipe  = Recipe.find(params[:id]) 
+    authorize! :update, @recipe
 
     if @recipe.update_attributes(params[:recipe])
       flash[:success] = "Recipe updated!"

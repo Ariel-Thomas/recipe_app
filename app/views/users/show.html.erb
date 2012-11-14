@@ -1,11 +1,17 @@
 <% provide(:title, "Sign Up") %>
 <h1><%= @user.username %>'s Profile</h1>
 
-<h3>Recipes</h3>
-<div id="recipes_list"><%= render 'recipes/list' %><div>
+<section style="position:relative">
+  <div class="pull-left" style="width:50%;position:relative">
+    <h3>User Recipes (<%= @recipes.count %>)</h3>
+    <div id="recipes_list"><%= render 'recipes/list' %><div>
+  </div>
+</section>
 
-<% if (@user == current_user) %>
-  <span>
-    <%= link_to "edit", edit_user_path(@user) %>
-  </span>
-<% end %>
+<section class="clear-both">
+  <% if can? :update, @user %>
+    <span>
+      <%= link_to "edit", edit_user_path(@user) %>
+    </span>
+  <% end %>
+</section>
