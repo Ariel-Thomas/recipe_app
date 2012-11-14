@@ -73,8 +73,31 @@ Feature: User authentication
     And I should see a success message
     And the user should be deleted
 
-  Scenario: Profile page shows submitted recipes
+  Scenario: Profile page shows submitted
     Given a user exists in the database
     And a recipe exists in the database created by that user
     When I visit that user's profile page
     Then I should see the recipe
+
+  Scenario: User's edit page is restricted from other users
+    Given a user exists in the database
+    When I visit that user's edit page
+    Then I am redirected to the login page
+
+  Scenario: User's create action is restricted from other users
+    Given a user exists in the database
+    When I send an update request
+    Then I am redirected
+
+  Scenario: User's destroy action is restricted from other users
+    Given a user exists in the database
+    When I send a destroy request
+    Then I am redirected
+
+  Scenario: User is redirected after login
+    Given a user exists in the database
+    And I visit that user's edit page
+    And I am redirected to the login page
+    When I enter valid sign in information
+    And click the sign in button
+    Then I should see my edit page
