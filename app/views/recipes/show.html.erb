@@ -1,7 +1,11 @@
 <% provide(:title, @recipe.name) %>
 <h1><%= @recipe.name %></h1>
-<% if (@recipe.user) %>
-  Submitted by <%= link_to @recipe.user.username, @recipe.user %>
+<% if (@recipe.author) %>
+   <% if (@recipe.user) %> 
+    Submitted by <%= link_to @recipe.author, @recipe.user %>
+  <% else %>
+    Submitted by <%= @recipe.author %>
+  <% end %>
 <% end %>
 
 <br>

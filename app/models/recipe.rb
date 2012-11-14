@@ -1,5 +1,7 @@
 class Recipe < ActiveRecord::Base
-  attr_accessible :name, :description, :ingredient_entries, :ingredients, :user, :user_id
+  before_save :update_author
+
+  attr_accessible :name, :description, :ingredient_entries, :ingredients, :user, :user_id, :author
 
   belongs_to :user
   has_many :ingredient_entries, dependent: :destroy
@@ -13,7 +15,7 @@ class Recipe < ActiveRecord::Base
   validates :description, presence: true
   validates :ingredient_entries, presence: true
 
-  scoped_search on: [:name, :description]
+  scoped_search on: [:name, :description, :author]
 
   def ingredients_text
     ingredient_entries.reject{ |entry| entry.ingredient.nil? ||entry.ingredient.type == 'Result' }.join("\n")
@@ -31,7 +33,6 @@ class Recipe < ActiveRecord::Base
   def get_result_from_ingredient_entries(direction)
     results_array.select{ |entry| entry.ingredient.direction == direction }.first
   end
-
 
   def self.parse_and_create_ingredients(text)
     text.gsub(/(\A\s*$\n)|(\s*$)/,'').split(/$[^\z]/).map! do |entry|
@@ -51,4 +52,8 @@ class Recipe < ActiveRecord::Base
     end
   end
 
+  private
+    def update_author
+      self.author = user.username
+    end
 end
