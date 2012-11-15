@@ -41,59 +41,6 @@ Feature: User authentication
     Then I should see I am not signed in
     And I should see a success message
 
-  Scenario: Edit User with invalid information
-    Given a user exists in the database
-    And I am logged in
-    And I visit my user page
-    When I click the edit link
-    And I input invalid password changes
-    And I click the update user button
-    Then I should see the edit user page
-    And I should see an error message
-
-  Scenario: Edit User with valid information
-    Given a user exists in the database
-    And I am logged in
-    And I visit my user page
-    When I click the edit link
-    And I input valid password changes
-    And I click the update user button
-    Then I should see the user page
-    And I should see a success message
-    And I should be able to log back in with the new password
-
-  @javascript
-  Scenario: User destroys self
-    Given a user exists in the database
-    And I am logged in
-    And I visit my user page
-    When I click the edit link
-    And I click the delete link
-    Then I should see the recipes index
-    And I should see a success message
-    And the user should be deleted
-
-  Scenario: Profile page shows submitted
-    Given a user exists in the database
-    And a recipe exists in the database created by that user
-    When I visit that user's profile page
-    Then I should see the recipe
-
-  Scenario: User's edit page is restricted from other users
-    Given a user exists in the database
-    When I visit that user's edit page
-    Then I am redirected to the login page
-
-  Scenario: User's create action is restricted from other users
-    Given a user exists in the database
-    When I send an update request
-    Then I am redirected
-
-  Scenario: User's destroy action is restricted from other users
-    Given a user exists in the database
-    When I send a destroy request
-    Then I am redirected
-
   Scenario: User is redirected after login
     Given a user exists in the database
     And I visit that user's edit page

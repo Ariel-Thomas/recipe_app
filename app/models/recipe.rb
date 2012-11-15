@@ -54,6 +54,6 @@ class Recipe < ActiveRecord::Base
 
   private
     def update_author
-      self.author = user.username
+      self.author = user.try(:username) || "unknown user"
     end
 end
