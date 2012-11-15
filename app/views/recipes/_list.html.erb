@@ -7,7 +7,7 @@
       <%= recipe.description %>
     </section>
     <section>
-      <% if recipe.user == current_user %>
+      <% if can? :destroy, recipe %>
         <%= link_to "delete", recipe, method: :delete, data: { confirm: "You sure?" } %>
       <% end %>
     </section>

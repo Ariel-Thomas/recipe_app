@@ -12,6 +12,7 @@ gem 'bootstrap-sass', '2.0.0'
 gem 'bcrypt-ruby', '3.0.1'
 gem 'scoped_search'
 gem 'sorcery'
+gem 'cancan'
 
 gem 'foreman'
 gem 'will_paginate', '3.0.3'

@@ -129,6 +129,27 @@ When /^I visit that user's profile page$/ do
   visit user_path(@user)
 end
 
+When /^I visit that user's edit page$/ do
+  visit edit_user_path(@user)
+end
 
+Then /^I am redirected to the login page$/ do
+  page.should have_selector('h1', text: "Sign In")
+end
 
+Then /^I am redirected$/ do
+  page.should_not have_content("User");
+  page.should_not have_content("Recipe");
+end
 
+When /^I send an update request$/ do
+  put user_path(@user)
+end
+
+When /^I send a destroy request$/ do
+  delete user_path(@user)
+end
+
+Then /^I should see my edit page$/ do
+  page.should have_selector('h1', text: "Edit TestUser's Profile")
+end

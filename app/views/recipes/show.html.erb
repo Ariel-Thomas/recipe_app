@@ -18,10 +18,12 @@
 <br>
 
 <section class="clear-both">    
-  <% if @recipe.user == current_user %>
+  <% if can? :update, @recipe %>
     <span>
       <%= link_to "edit", edit_recipe_path(@recipe) %>
     </span>
+  <% end %>
+  <% if can? :destroy, @recipe %>
     <span>
       <%= link_to "delete", @recipe, method: :delete, data: { confirm: "You sure?" } %>
     </span>
