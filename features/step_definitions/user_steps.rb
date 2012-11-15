@@ -153,3 +153,11 @@ end
 Then /^I should see my edit page$/ do
   page.should have_selector('h1', text: "Edit TestUser's Profile")
 end
+
+When /^I delete the user$/ do
+  @user.destroy
+end
+
+Then /^I should see the deleted user's username$/ do
+  page.should have_content "TestUser"
+end
