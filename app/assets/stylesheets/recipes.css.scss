@@ -39,10 +39,12 @@ textarea {
 }
 
 .left-col{
-  width:400px;float:left
+  float:left;
+  width:50%;
 }
 .right-col{
-  float:left; width:500px
+  float:right;
+  width:50%;
 }
 .add-button{
   float:left;padding: 10px
@@ -165,4 +167,23 @@ textarea {
 
 .unfavorite > form > div > input {
   background: transparent url(favorited.png) no-repeat center top;
+}
+
+.recipe-list-element {
+  margin-right: 10px;
+  padding: 10px;
+  background-color: rgba(255, 255, 255, 0.3);
+  border: 1px dashed white;
+}
+
+.recipe-list-element > .recipe-list-title > a {
+  color: #AD1D28;
+}
+
+.recipe-list-element > section > a {
+  color: lightgray;
+}
+
+.byline > a {
+  color: white;
 }

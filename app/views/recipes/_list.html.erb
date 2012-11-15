@@ -1,18 +1,31 @@
-<% @recipes.each do |recipe| %>
-  <div>
-    <section>
+<% recipes.each do |recipe| %>
+  <div class="recipe-list-element">
+    <section class="recipe-list-title">
       <%= link_to recipe.name, recipe %>
     </section>
     <section>
       <%= recipe.description %>
     </section>
+    <div class="byline">
+      <%= render partial: "recipes/byline", locals: { recipe: recipe } %> 
+    </div>
     <section>
-      <% if can? :destroy, recipe %>
-        <%= link_to "delete", recipe, method: :delete, data: { confirm: "You sure?" } %>
+      <% favorites ||= false %>
+
+      <% if favorites %>
+        <% favorite = recipe.favorites.find_by_user_id(@user) %>
+        <% if can? :destroy, favorite %>
+          <%= link_to "unfavorite", favorite, method: :delete, data: { confirm: "You sure?" } %>
+        <% end %>
+      <% else %>
+        <% if can? :destory, recipe %>
+          <%= link_to "delete", recipe, method: :delete, data: { confirm: "You sure?" } %>
+        <% end %>
       <% end %>
     </section>
   </div>
-  <hr>
+
+  <br>
 <% end %>
 
-<%= will_paginate @recipes %>
+<%= will_paginate recipes %>

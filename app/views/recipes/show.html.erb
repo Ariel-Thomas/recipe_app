@@ -1,27 +1,11 @@
 <% provide(:title, @recipe.name) %>
 <h1><%= @recipe.name %></h1>
 <div class="favorites">
-  <% if logged_in? %>
-    <% if @favorite.present? %>
-      <span class="unfavorite">
-        <%= button_to "", favorite_path(@favorite), method: :delete %>
-      </span>
-    <% else %>
-      <span class="favorite">
-        <%= button_to "", controller: "favorites", action: "create", "user_id" => current_user.id, "recipe_id" => @recipe.id %>
-      </span>
-    <% end %>
-  <% end %>
+  <%= render "favorites/form" %>
 </div>
 
 <div class="byline clear-both">
-  <% if @recipe.author.present? %>
-     <% if @recipe.user.present? %> 
-      Submitted by <%= link_to @recipe.author, @recipe.user %>
-    <% else %>
-      Submitted by <%= @recipe.author %>
-    <% end %>
-  <% end %>
+  <%= render partial: "recipes/byline", locals: {recipe: @recipe } %> 
 <div>
 
 <br>

@@ -27,5 +27,10 @@ class Ability
     can :manage, Direction do |direction|
       direction.try(:recipe).try(:user) == user
     end
+    
+    can :create, Favorite
+    can :destroy, Favorite do |favorite|
+      favorite.try(:user) == user
+    end
   end
 end
