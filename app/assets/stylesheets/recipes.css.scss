@@ -158,3 +158,11 @@ textarea {
   -ms-transform: rotate(90deg);
   transform: rotate(90deg);
 }
+
+.favorite > form > div > input {
+  background: transparent url(unfavorited.png) no-repeat center top;
+}
+
+.unfavorite > form > div > input {
+  background: transparent url(favorited.png) no-repeat center top;
+}

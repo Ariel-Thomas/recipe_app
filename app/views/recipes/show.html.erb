@@ -1,12 +1,28 @@
 <% provide(:title, @recipe.name) %>
 <h1><%= @recipe.name %></h1>
-<% if (@recipe.author) %>
-   <% if (@recipe.user) %> 
-    Submitted by <%= link_to @recipe.author, @recipe.user %>
-  <% else %>
-    Submitted by <%= @recipe.author %>
+<div class="favorites">
+  <% if logged_in? %>
+    <% if @favorite.present? %>
+      <span class="unfavorite">
+        <%= button_to "", favorite_path(@favorite), method: :delete %>
+      </span>
+    <% else %>
+      <span class="favorite">
+        <%= button_to "", controller: "favorites", action: "create", "user_id" => current_user.id, "recipe_id" => @recipe.id %>
+      </span>
+    <% end %>
   <% end %>
-<% end %>
+</div>
+
+<div class="byline clear-both">
+  <% if @recipe.author.present? %>
+     <% if @recipe.user.present? %> 
+      Submitted by <%= link_to @recipe.author, @recipe.user %>
+    <% else %>
+      Submitted by <%= @recipe.author %>
+    <% end %>
+  <% end %>
+<div>
 
 <br>
 

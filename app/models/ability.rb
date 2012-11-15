@@ -10,7 +10,7 @@ class Ability
 
     #Admin can manage everything
     can :manage, :all do 
-      user.admin
+      user.admin?
     end
 
     #Users can manage their pages
