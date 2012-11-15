@@ -1,6 +1,8 @@
 class UsersController < AuthorizationController
   skip_before_filter :require_login, only: [:create, :new, :show]
 
+  require 'will_paginate/array'
+
   def create
     @user = User.new(params[:user])
     if @user.save
@@ -16,10 +18,10 @@ class UsersController < AuthorizationController
     @user = User.new
   end
 
-
   def show
     @user = User.find(params[:id])
     @recipes = Recipe.paginate(:page => params[:page] || 1, :per_page => 10).find_all_by_user_id(@user.id)
+    @favorites = @user.favorites.map{ |favorite| favorite.recipe }.paginate(:page => params[:page] || 1, :per_page => 10)
   end
 
   def update

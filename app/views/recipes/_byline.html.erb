@@ -1,0 +1,7 @@
+<% if recipe.author.present? %>
+   <% if recipe.user.present? %> 
+    Submitted by <%= link_to recipe.author, recipe.user %>
+  <% else %>
+    Submitted by <%= recipe.author %>
+  <% end %>
+<% end %>

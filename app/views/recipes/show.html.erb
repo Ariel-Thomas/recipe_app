@@ -1,12 +1,12 @@
 <% provide(:title, @recipe.name) %>
 <h1><%= @recipe.name %></h1>
-<% if (@recipe.author) %>
-   <% if (@recipe.user) %> 
-    Submitted by <%= link_to @recipe.author, @recipe.user %>
-  <% else %>
-    Submitted by <%= @recipe.author %>
-  <% end %>
-<% end %>
+<div class="favorites">
+  <%= render "favorites/form" %>
+</div>
+
+<div class="byline clear-both">
+  <%= render partial: "recipes/byline", locals: {recipe: @recipe } %> 
+<div>
 
 <br>
 
