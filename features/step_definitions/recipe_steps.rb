@@ -1,4 +1,5 @@
 Given /^I visit the new recipe page$/ do
+  @num_recipes_before_create = Recipe.count
   visit new_recipe_path
 end
 
@@ -31,7 +32,7 @@ Then /^I should see ingredients properly formatted$/ do
 end
 
 Then /^I should see a new recipe created$/ do
-  Recipe.count.should eq(1)
+  Recipe.count.should eq(@num_recipes_before_create + 1)
 end
 
 Then /^I should see a success message$/ do
@@ -39,7 +40,8 @@ Then /^I should see a success message$/ do
 end
 
 Given /^a recipe exists in the database$/ do
-  Recipe.all.map!{ |recipe| recipe.destroy }
+  #Recipe.all.map!{ |recipe| recipe.destroy }
+  @num_recipes_before_create = Recipe.count
 
   @recipe = Recipe.create!(name: "Cookies", description: "Delicious", ingredient_entries: Recipe.parse_and_create_ingredients("1 C Sugar\n1 C Flour\n2 T Butter"))
 end
@@ -61,7 +63,7 @@ When /^I click the delete link$/ do
 end
 
 Then /^I should see the recipe removed$/ do
-  Recipe.count.should eq(0)
+  Recipe.count.should eq(@num_recipes_before_create)
 end
 
 When /^I click the recipe's link$/ do
@@ -128,6 +130,8 @@ Then /^I should still be on the recipe's show page$/ do
 end
 
 Given /^(\d+) recipes exist in the database$/ do |num_recipes|
+  @num_recipes_before_create = Recipe.count
+
   num_recipes.to_i.times do |index|
     @recipe = Recipe.create!(name: "Recipe" + index.to_s, description: "Delicious", ingredient_entries: Recipe.parse_and_create_ingredients("2 C Nothing"))
   end

@@ -31,6 +31,8 @@ Then /^I should not see the sign up page$/ do
 end
 
 Given /^a user exists in the database$/ do
+  @num_users_before_create = User.count
+
   @user = User.create!(username: "TestUser", email: "Test@user.com", password: "derp", password_confirmation: "derp");
 end
 
@@ -119,11 +121,14 @@ Then /^I should be able to log back in with the new password$/ do
 end
 
 Then /^the user should be deleted$/ do
-  User.count.should eq(0)
+  User.count.should eq(@num_users_before_create)
 end
 
 Given /^a recipe exists in the database created by that user$/ do
-  @recipe = Recipe.create!(name: "Cookies", description: "Delicious",user: @user, ingredient_entries: Recipe.parse_and_create_ingredients("1 C Sugar\n1 C Flour\n2 T Butter"))end
+  @num_recipes_before_create = Recipe.count
+
+  @recipe = Recipe.create!(name: "Cookies", description: "Delicious",user: @user, ingredient_entries: Recipe.parse_and_create_ingredients("1 C Sugar\n1 C Flour\n2 T Butter"))
+end
 
 When /^I visit that user's profile page$/ do
   visit user_path(@user)
@@ -160,4 +165,23 @@ end
 
 Then /^I should see the deleted user's username$/ do
   page.should have_content "TestUser"
+end
+
+Given /^an admin exists in the database$/ do
+  @admin = User.create!(username: "admin", email: "admin@user.com", password: "admin", password_confirmation: "admin", admin: true);
+end
+
+Given /^I am logged in as an admin$/ do
+  visit new_session_path
+  fill_in "Username",               with: "admin" 
+  fill_in "Password",               with: "admin"
+  click_button "Sign In"
+end
+
+When /^I input valid email changes$/ do
+  fill_in "Email",                  with: "changed@user.com"
+end
+
+Then /^the email should be changed$/ do
+  User.find(@user.id).email.should eq("changed@user.com")
 end
