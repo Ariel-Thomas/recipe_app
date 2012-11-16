@@ -29,6 +29,7 @@ recipe = Recipe.create!(
   name: "Cookies",
   description: "delicious cookies",
   user: demo_user,
+  picture: File.open("app/assets/images/cookies.jpg"),
   ingredient_entries: Recipe.parse_and_create_ingredients("1 C Sugar\n1 C Flour\n2 T Butter")
   )
 
@@ -48,6 +49,7 @@ recipe = Recipe.create!(
   name: "Tugboat Turnips",
   description: "Have been making this tasty side since I saw Paula make it many years ago. Is always requested for family gatherings, especially Thanksgiving. Didn't change a thing.",
   user: demo_user,
+  picture: File.open("app/assets/images/tugboat_turnips.jpg"),
   ingredient_entries: Recipe.parse_and_create_ingredients("2 large rutabagas, or turnips\n6 large carrots\n1 cup butter\n1 cup light brown sugar\n1 teaspoon salt")
   )
 
@@ -69,6 +71,7 @@ recipe = Recipe.create!(
   name: "Cake",
   description: "Delicious Cake",
   user: demo_user,
+  picture: File.open("app/assets/images/cake.jpg"),
   ingredient_entries: Recipe.parse_and_create_ingredients("2 T Chocolate\n2 C Water\n5 C Awesomesauce\n4 C Flour\n2 T Butter")
   )
 

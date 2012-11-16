@@ -1,5 +1,10 @@
 <% recipes.each do |recipe| %>
   <div class="recipe-list-element">
+    <section class="pull-right picture-border">
+      <% if recipe.has_picture? %>
+        <%= image_tag recipe.picture.url(:thumb) %>
+      <% end %>
+    </section>
     <section class="recipe-list-title">
       <%= link_to recipe.name, recipe %>
     </section>

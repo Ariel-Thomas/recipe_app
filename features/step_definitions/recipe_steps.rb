@@ -143,18 +143,26 @@ Then /^I should not see the last recipe$/ do
 end
 
 
-When /^I click on the attach image button$/ do
-  pending # express the regexp above with the code you wish you had
+When /^I attach a valid picture$/ do
+  attach_file("recipe_picture", File.expand_path("app/assets/images/rails.png"))
 end
 
-When /^I enter a valid picture$/ do
-  pending # express the regexp above with the code you wish you had
-end
-
-Then /^I should see that picture$/ do
-  pending # express the regexp above with the code you wish you had
+Then /^I should see the picture$/ do
+  page.should have_selector('img', alt: 'Rails')
 end
 
 Given /^a picture is attached to that recipe$/ do
-  pending # express the regexp above with the code you wish you had
+  @recipe.update_attributes(picture: File.open("app/assets/images/rails.png"))
 end
+
+When /^I attach an invalid picture$/ do
+  begin
+    attach_file("recipe_picture", File.expand_path("app/assets/images/invalid"))
+  rescue
+  end
+end
+
+Then /^I should not see the picture$/ do
+  page.should_not have_selector('img', alt: 'Invalid')
+end
+

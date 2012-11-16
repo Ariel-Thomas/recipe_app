@@ -38,6 +38,10 @@ class Recipe < ActiveRecord::Base
     results_array.select{ |entry| entry.ingredient.direction == direction }.first
   end
 
+  def has_picture?
+    !picture.to_s.include?('missing.png')
+  end
+
   def self.parse_and_create_ingredients(text)
     text.gsub(/(\A\s*$\n)|(\s*$)/,'').split(/$[^\z]/).map! do |entry|
       amount = entry.slice!(/^\d+ \w+ /)

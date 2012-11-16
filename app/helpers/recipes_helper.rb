@@ -1,4 +1,5 @@
 module RecipesHelper
+
   def make_directions_layout(recipe)
     directions_layout = DisplayLayout.new([[],[]])
 
