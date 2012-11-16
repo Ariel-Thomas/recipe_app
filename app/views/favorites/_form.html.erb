@@ -1,0 +1,11 @@
+<% if logged_in? %>
+  <% if @favorite.present? %>
+    <span class="unfavorite">
+      <%= button_to "", favorite_path(@favorite),  method: :delete %>
+    </span>
+  <% else %>
+    <span class="favorite">
+      <%= button_to "", controller: "favorites", action: "create", "user_id" => current_user.id, "recipe_id" => @recipe.id%>
+    </span>
+  <% end %>
+<% end %>

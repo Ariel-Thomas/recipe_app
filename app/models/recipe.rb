@@ -13,6 +13,7 @@ class Recipe < ActiveRecord::Base
   accepts_nested_attributes_for :ingredients
   has_many :directions, dependent: :destroy
   accepts_nested_attributes_for :directions, :allow_destroy => true
+  has_many :favorites
 
   validates :name, presence: true
   validates :description, presence: true
