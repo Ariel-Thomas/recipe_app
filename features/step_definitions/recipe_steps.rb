@@ -141,3 +141,20 @@ end
 Then /^I should not see the last recipe$/ do
   page.should_not have_content(@recipe.name)
 end
+
+
+When /^I click on the attach image button$/ do
+  pending # express the regexp above with the code you wish you had
+end
+
+When /^I enter a valid picture$/ do
+  pending # express the regexp above with the code you wish you had
+end
+
+Then /^I should see that picture$/ do
+  pending # express the regexp above with the code you wish you had
+end
+
+Given /^a picture is attached to that recipe$/ do
+  pending # express the regexp above with the code you wish you had
+end

@@ -18,6 +18,8 @@ gem 'foreman'
 gem 'will_paginate', '3.0.3'
 gem 'bootstrap-will_paginate', '0.0.6'
 
+gem 'paperclip'
+
 group :development, :test do
   gem 'rspec-rails', '2.11.0'
   gem "awesome_print"

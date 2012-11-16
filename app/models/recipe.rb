@@ -3,6 +3,9 @@ class Recipe < ActiveRecord::Base
 
   attr_accessible :name, :description, :ingredient_entries, :ingredients, :user, :user_id, :author
 
+  attr_accessible :picture
+  has_attached_file :picture, :styles => { :medium => "300x300>", :thumb => "100x100>" }
+
   belongs_to :user
   has_many :ingredient_entries, dependent: :destroy
   accepts_nested_attributes_for :ingredient_entries, :allow_destroy => true
