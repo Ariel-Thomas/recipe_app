@@ -1,6 +1,13 @@
 <% provide(:title, "Sign Up") %>
 <h1><%= @user.username %>'s Profile</h1>
 
+<section>
+  <% if !@user.about_me.to_s.empty? %>
+    <h3>About Me</h3>
+    <p><%= @user.about_me %></p>
+  <% end %>
+</section>
+
 <section style="position:relative">
   <div class="pull-left" style="width:50%;position:relative">
     <h3>User Recipes (<%= @recipes.count %>)</h3>

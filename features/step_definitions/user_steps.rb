@@ -185,3 +185,19 @@ end
 Then /^the email should be changed$/ do
   User.find(@user.id).email.should eq("changed@user.com")
 end
+
+Given /^that user has a valid about me$/ do
+  @user.update_attributes!(about_me: "I am awesome.", password: "derp", password_confirmation: "derp")
+end
+
+Then /^I should see that user's about me text$/ do
+  page.should have_content @user.about_me.to_s
+end
+
+When /^input valid about me text$/ do
+  fill_in "About me",         with: "I was awesome."
+end
+
+Then /^I should see my new about me text$/ do
+  page.should have_content "I was awesome."
+end

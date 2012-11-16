@@ -12,6 +12,7 @@ admin = User.create(
   email: "admin@derp.com",
   password: "admin",
   password_confirmation: "admin",
+  about_me: "I am an admin",
   admin: true
   )
 
@@ -21,7 +22,8 @@ user = User.create(
   username: "Herp",
   email: "herp@derp.com",
   password: "derp",
-  password_confirmation: "derp"
+  password_confirmation: "derp",
+  about_me: "I am a user and I like to have fun."
   )
 
 #Cookies
