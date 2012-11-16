@@ -9,7 +9,7 @@
 #Admin
 admin = User.create!(
   username: "admin",
-  email: "admin@derp.com",
+  email: "admin@example.com",
   password: "admin",
   password_confirmation: "admin",
   admin: true
@@ -19,7 +19,7 @@ admin = User.create!(
 #User
 demo_user = User.create!(
   username: "Herp",
-  email: "herp@derp.com",
+  email: "herp@example.com",
   password: "derp",
   password_confirmation: "derp"
   )
@@ -88,7 +88,7 @@ recipe.add_result_for direction
 50.times do |index|
   user = User.create!(
   username: "User" + index.to_s,
-  email: "user" + index.to_s + "@derp.com",
+  email: "user" + index.to_s + "@example.com",
   password: "derp",
   password_confirmation: "derp"
   )
