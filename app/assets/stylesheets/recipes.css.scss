@@ -111,13 +111,6 @@ textarea {
   position: relative;
 }
 
-.directions-present.active-tab{
-  background:gainsboro;
-}
-
-.directions-present.active-tab:hover{
-  background:white;
-}
 
 .directions-col{
   float: left;
@@ -142,11 +135,23 @@ textarea {
   border: 5px solid black;
   border-radius: 20px;
   position: relative;
+  cursor: pointer; cursor: hand;
 }
 
-.directions-present:hover{
+.inactive-tab{
+  background:white;
+}
+
+.active-tab{
   background:gainsboro;
-  cursor: pointer; cursor: hand;
+}
+
+.hover-active-tab{
+  background:white;
+}
+
+.hover-inactive-tab{
+  background:gainsboro;
 }
 
 .clear-both{
