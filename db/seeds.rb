@@ -20,6 +20,7 @@ admin = User.create!(
 demo_user = User.create!(
   username: "Herp",
   email: "herp@derp.com",
+  avatar_url: "http://goonlol.com/images/c/c8/Icon_Jax.jpg",
   password: "derp",
   password_confirmation: "derp"
   )

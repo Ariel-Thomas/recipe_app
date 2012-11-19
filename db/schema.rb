@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121116162757) do
+ActiveRecord::Schema.define(:version => 20121119161535) do
 
   create_table "directions", :force => true do |t|
     t.text     "text"
@@ -69,6 +69,7 @@ ActiveRecord::Schema.define(:version => 20121116162757) do
     t.string   "remember_me_token"
     t.datetime "remember_me_token_expires_at"
     t.boolean  "admin"
+    t.string   "avatar_url"
   end
 
   add_index "users", ["remember_me_token"], :name => "index_users_on_remember_me_token"
