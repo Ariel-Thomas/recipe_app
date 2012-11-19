@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   authenticates_with_sorcery!
   
-  attr_accessible :username, :email, :password, :password_confirmation, :admin
+  attr_accessible :username, :email, :password, :password_confirmation, :admin, :about_me
 
   validates_presence_of :username
   validates_uniqueness_of :username
