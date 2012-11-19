@@ -1,4 +1,4 @@
-<% @recipes.each do |recipe| %>
+<% recipes.each do |recipe| %>
   <div class="recipe-list-element">
     <section class="pull-right picture-border">
       <% if recipe.has_picture? %>
@@ -33,4 +33,4 @@
   <br>
 <% end %>
 
-<%= will_paginate @recipes %>
+<%= will_paginate recipes %>
