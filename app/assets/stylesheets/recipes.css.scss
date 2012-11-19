@@ -161,12 +161,26 @@ textarea {
   transform: rotate(90deg);
 }
 
+.favorites{
+  margin-left:20px; 
+}
+
 .favorite > form > div > input {
   background: transparent url(unfavorited.png) no-repeat center top;
+
+  margin-left:20px;
+
+  width:20px;
+  height:25px;
 }
 
 .unfavorite > form > div > input {
   background: transparent url(favorited.png) no-repeat center top;
+
+  margin-left:20px;
+
+  width:20px;
+  height:25px;
 }
 
 .recipe-list-element {
@@ -185,10 +199,14 @@ textarea {
   color: lightgray;
 }
 
-.byline > a {
+.byline > strong > a {
   color: white;
 }
 
 .picture-border > img {
   border: 1px solid white
+}
+
+.right-of-picture {
+  margin-left: 20px;
 }

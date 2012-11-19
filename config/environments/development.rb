@@ -36,4 +36,5 @@ RecipeApp::Application.configure do
   config.assets.debug = true
 
   Paperclip.options[:command_path] = "/usr/bin/"
+
 end

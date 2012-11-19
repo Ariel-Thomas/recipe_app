@@ -1,9 +1,16 @@
 <% provide(:title, @recipe.name) %>
-<h1><%= @recipe.name %></h1>
+<section class="clear-both">
+  <div class="pull-left">
+    <h1><%= @recipe.name %></h1>
+  </div>
 
-<div class="favorites">
-  <%= render "favorites/form" %>
-</div>
+  <div class="pull-left">
+    <span class="favorites">
+      <br>
+      <%= render "favorites/form" %>
+    </span>
+  </div>
+</section>
 
 <div class="byline clear-both">
   <%= render partial: "recipes/byline", locals: {recipe: @recipe } %> 
@@ -12,18 +19,24 @@
 <br>
 
 <section class="clear-both">
-  <div class="pull-right picture-border">
-    <% if @recipe.has_picture? %>
-      <%= image_tag @recipe.picture.url(:medium) %>
-    <% end %>
+  <div class="left-col">
+    <div class="picture-border">
+      <% if @recipe.has_picture? %>
+        <%= image_tag @recipe.picture.url(:medium) %>
+      <% end %>
+    </div>
   </div>
 
-  <%= @recipe.description %>
+  <div class="right-col">
+    <%= @recipe.description %>
+  </div>
 </section>
+
+<br class="clear-both">
 
 <br>
 
-<section id="formatted-directions">
+<section id="formatted-directions1">
   <%= render "directions/layout" %>
 </section>
 <br>
