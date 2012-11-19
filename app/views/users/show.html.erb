@@ -2,7 +2,7 @@
 <h1><%= @user.username %>'s Profile</h1>
 
 <section>
-  <% if !@user.about_me.to_s.empty? %>
+  <% if @user.about_me.present? %>
     <h3>About Me</h3>
     <p><%= @user.about_me %></p>
   <% end %>
