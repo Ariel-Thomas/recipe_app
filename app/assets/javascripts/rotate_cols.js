@@ -61,16 +61,21 @@ function clearText(){
 
 function toggleActive(element){
   $element = $(element);
+  $element.removeClass('hover-active-tab');
+  $element.removeClass('hover-inactive-tab');
 
   if ($element.hasClass('active-tab')){
     $element.removeClass('active-tab');
+    $element.addClass('inactive-tab');
   }
   else{
+    $('.active-tab').addClass('inactive-tab');
     $('.active-tab').removeClass('active-tab');
+    $element.removeClass('inactive-tab');
     $element.addClass('active-tab'); 
   }
- 
-  $element.stop();
+
+  DirectionsHover();
 }
 
 function showText(index, text, element){
@@ -93,4 +98,3 @@ function showText(index, text, element){
   $('.center-text').css({'margin-top':  - $('.center-text').height() / 2 - 20})
   rotate();
 }
-

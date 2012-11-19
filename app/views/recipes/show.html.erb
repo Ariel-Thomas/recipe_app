@@ -1,22 +1,42 @@
 <% provide(:title, @recipe.name) %>
-<h1><%= @recipe.name %></h1>
-<% if (@recipe.author) %>
-   <% if (@recipe.user) %> 
-    Submitted by <%= link_to @recipe.author, @recipe.user %>
-  <% else %>
-    Submitted by <%= @recipe.author %>
-  <% end %>
-<% end %>
+<section class="clear-both">
+  <div class="pull-left">
+    <h1><%= @recipe.name %></h1>
+  </div>
+
+  <div class="pull-left">
+    <span class="favorites">
+      <br>
+      <%= render "favorites/form" %>
+    </span>
+  </div>
+</section>
+
+<div class="byline clear-both">
+  <%= render partial: "recipes/byline", locals: {recipe: @recipe } %> 
+<div>
 
 <br>
 
 <section class="clear-both">
-  <%= @recipe.description %>
+  <div class="left-col">
+    <div class="picture-border">
+      <% if @recipe.has_picture? %>
+        <%= image_tag @recipe.picture.url(:medium) %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="right-col">
+    <%= @recipe.description %>
+  </div>
 </section>
+
+<br class="clear-both">
 
 <br>
 
-<section id="formatted-directions">
+<section id="formatted-directions1">
   <%= render "directions/layout" %>
 </section>
 <br>
