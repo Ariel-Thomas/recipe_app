@@ -39,10 +39,12 @@ textarea {
 }
 
 .left-col{
-  width:400px;float:left
+  float:left;
+  width:50%;
 }
 .right-col{
-  float:left; width:500px
+  float:right;
+  width:50%;
 }
 .add-button{
   float:left;padding: 10px
@@ -157,4 +159,58 @@ textarea {
   -o-transform: rotate(90deg);
   -ms-transform: rotate(90deg);
   transform: rotate(90deg);
+}
+
+.favorites{
+  margin-left:20px; 
+}
+
+.favorite > form > div > input {
+  background: transparent url(unfavorited.png) no-repeat center top;
+
+  margin-left:20px;
+
+  width:20px;
+  height:25px;
+}
+
+.unfavorite > form > div > input {
+  background: transparent url(favorited.png) no-repeat center top;
+
+  margin-left:20px;
+
+  width:20px;
+  height:25px;
+}
+
+.recipe-list-element {
+  margin-right: 10px;
+  padding: 10px;
+  background-color: rgba(255, 255, 255, 0.3);
+  border: 1px dashed white;
+  min-height: 100px;
+}
+
+.recipe-list-element > .recipe-list-title > a {
+  color: #AD1D28;
+}
+
+.recipe-list-element > section > a {
+  color: lightgray;
+}
+
+.byline > strong > a {
+  color: white;
+}
+
+.picture-border > img {
+  border: 1px solid white
+}
+
+.avatar {
+  border: 1px solid white
+}
+
+.right-of-picture {
+  margin-left: 20px;
 }

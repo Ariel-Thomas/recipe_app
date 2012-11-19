@@ -7,7 +7,7 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 #Admin
-admin = User.create(
+admin = User.create!(
   username: "admin",
   email: "admin@derp.com",
   password: "admin",
@@ -17,18 +17,20 @@ admin = User.create(
 
 
 #User
-user = User.create(
+demo_user = User.create!(
   username: "Herp",
   email: "herp@derp.com",
+  avatar_url: "http://goonlol.com/images/c/c8/Icon_Jax.jpg",
   password: "derp",
   password_confirmation: "derp"
   )
 
 #Cookies
-recipe = Recipe.create(
+recipe = Recipe.create!(
   name: "Cookies",
   description: "delicious cookies",
-  user: user,
+  user: demo_user,
+  picture: File.open("app/assets/images/cookies.jpg"),
   ingredient_entries: Recipe.parse_and_create_ingredients("1 C Sugar\n1 C Flour\n2 T Butter")
   )
 
@@ -44,10 +46,11 @@ recipe.add_result_for direction
 
 #Tugboat turnips
 
-recipe = Recipe.create(
+recipe = Recipe.create!(
   name: "Tugboat Turnips",
   description: "Have been making this tasty side since I saw Paula make it many years ago. Is always requested for family gatherings, especially Thanksgiving. Didn't change a thing.",
-  user: user,
+  user: demo_user,
+  picture: File.open("app/assets/images/tugboat_turnips.jpg"),
   ingredient_entries: Recipe.parse_and_create_ingredients("2 large rutabagas, or turnips\n6 large carrots\n1 cup butter\n1 cup light brown sugar\n1 teaspoon salt")
   )
 
@@ -65,10 +68,11 @@ recipe.add_result_for direction
 
 #Cake
 
-recipe = Recipe.create(
+recipe = Recipe.create!(
   name: "Cake",
   description: "Delicious Cake",
-  user: user,
+  user: demo_user,
+  picture: File.open("app/assets/images/cake.jpg"),
   ingredient_entries: Recipe.parse_and_create_ingredients("2 T Chocolate\n2 C Water\n5 C Awesomesauce\n4 C Flour\n2 T Butter")
   )
 
@@ -86,17 +90,19 @@ recipe.add_result_for direction
 
 #random recipes
 50.times do |index|
-  user = User.create(
+  user = User.create!(
   username: "User" + index.to_s,
   email: "user" + index.to_s + "@derp.com",
   password: "derp",
   password_confirmation: "derp"
   )
 
-  recipe = Recipe.create(
+  recipe = Recipe.create!(
     name: "Recipe" + index.to_s,
     description: "Random Description",
     user: user,
     ingredient_entries: Recipe.parse_and_create_ingredients("2 C Nothing")
     )
+
+  demo_user.favorites.create!(recipe: recipe)
 end

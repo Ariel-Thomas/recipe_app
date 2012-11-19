@@ -3,6 +3,9 @@ class Recipe < ActiveRecord::Base
 
   attr_accessible :name, :description, :ingredient_entries, :ingredients, :user, :user_id, :author
 
+  attr_accessible :picture
+  has_attached_file :picture, :styles => { :medium => "300x300>", :thumb => "100x100>" }
+
   belongs_to :user
   has_many :ingredient_entries, dependent: :destroy
   accepts_nested_attributes_for :ingredient_entries, :allow_destroy => true
@@ -10,6 +13,7 @@ class Recipe < ActiveRecord::Base
   accepts_nested_attributes_for :ingredients
   has_many :directions, dependent: :destroy
   accepts_nested_attributes_for :directions, :allow_destroy => true
+  has_many :favorites
 
   validates :name, presence: true
   validates :description, presence: true
@@ -32,6 +36,10 @@ class Recipe < ActiveRecord::Base
 
   def get_result_from_ingredient_entries(direction)
     results_array.select{ |entry| entry.ingredient.direction == direction }.first
+  end
+
+  def has_picture?
+    !picture.to_s.include?('missing.png')
   end
 
   def self.parse_and_create_ingredients(text)

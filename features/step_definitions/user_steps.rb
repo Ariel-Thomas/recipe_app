@@ -185,3 +185,28 @@ end
 Then /^the email should be changed$/ do
   User.find(@user.id).email.should eq("changed@user.com")
 end
+
+Then /^I should see an avatar$/ do
+  page.should have_selector('img',class: 'avatar')
+end
+
+Given /^that user has an email linked to a valid gravatar account$/ do
+  @user.update_attributes(email: "Ariel.Thomas@gmail.com")
+end
+
+Then /^I should see that gravatar$/ do
+  gravatar_id = Digest::MD5.hexdigest(@user.email.downcase)
+  page.should have_selector("img", src: "http://gravatar.com/avatar/#{gravatar_id}.png?s=80")
+end
+
+Given /^that user has a link to an image$/ do
+  @user.update_attributes(avatar_url: "http://goonlol.com/images/c/c8/Icon_Jax.jpg")
+end
+
+Then /^I should see the image$/ do
+  page.should have_selector("img", src: "http://goonlol.com/images/c/c8/Icon_Jax.jpg")
+end
+
+When /^I input valid avatar information$/ do
+  fill_in "Avatar",               with: "http://goonlol.com/images/c/c8/Icon_Jax.jpg" 
+end

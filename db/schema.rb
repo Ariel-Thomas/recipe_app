@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121115155622) do
+ActiveRecord::Schema.define(:version => 20121119161535) do
 
   create_table "directions", :force => true do |t|
     t.text     "text"
@@ -20,6 +20,13 @@ ActiveRecord::Schema.define(:version => 20121115155622) do
     t.integer  "recipe_id"
     t.string   "title"
     t.integer  "result_id"
+  end
+
+  create_table "favorites", :force => true do |t|
+    t.integer  "recipe_id"
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "ingredient_entries", :force => true do |t|
@@ -42,10 +49,14 @@ ActiveRecord::Schema.define(:version => 20121115155622) do
   create_table "recipes", :force => true do |t|
     t.string   "name"
     t.text     "description"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
     t.integer  "user_id"
     t.string   "author"
+    t.string   "picture_file_name"
+    t.string   "picture_content_type"
+    t.integer  "picture_file_size"
+    t.datetime "picture_updated_at"
   end
 
   create_table "users", :force => true do |t|
@@ -58,6 +69,7 @@ ActiveRecord::Schema.define(:version => 20121115155622) do
     t.string   "remember_me_token"
     t.datetime "remember_me_token_expires_at"
     t.boolean  "admin"
+    t.string   "avatar_url"
   end
 
   add_index "users", ["remember_me_token"], :name => "index_users_on_remember_me_token"
