@@ -3,7 +3,7 @@ RecipeApp::Application.routes.draw do
   get "logout" => "sessions#destroy", :as => "logout"
   resources :sessions, only: [:new, :create, :destroy]
 
-  resources :users
+  resources :users 
 
   root to: 'recipes#index'
 
@@ -11,6 +11,7 @@ RecipeApp::Application.routes.draw do
     resources :directions, only: [:index, :create, :update, :destroy]
   end
 
+  resources :favorites, only: [:create, :destroy]
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

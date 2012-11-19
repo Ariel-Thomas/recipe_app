@@ -1,10 +1,19 @@
-<% provide(:title, "Sign Up") %>
+<% provide(:title, @user.username ) %>
 <h1><%= @user.username %>'s Profile</h1>
 
-<section style="position:relative">
-  <div class="pull-left" style="width:50%;position:relative">
-    <h3>User Recipes (<%= @recipes.count %>)</h3>
-    <div id="recipes_list"><%= render 'recipes/list' %><div>
+<section>
+  <div class="left-col">
+    <h3>User Recipes (<%= @user.recipes.count %>)</h3>
+    <div id="recipes_list">
+      <%= render 'recipes/list', recipes: @recipes %>
+    </div>
+  </div>
+
+  <div class="right-col">
+    <h3>User Favorites (<%= @user.favorites.count %>)</h3>
+    <div id="recipes_list">
+      <%= render 'recipes/list', recipes: @favorites,favorites: true %>
+    </div>
   </div>
 </section>
 

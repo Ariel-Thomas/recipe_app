@@ -28,6 +28,7 @@ class RecipesController < AuthorizationController
 
   def show
     @recipe = Recipe.find(params[:id])
+    @favorite = @recipe.favorites.find_by_user_id(current_user)
   end
 
   def update
