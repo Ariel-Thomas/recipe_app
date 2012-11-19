@@ -21,7 +21,7 @@
         </div>
       <% else %>
         <div class="directions-text" style="z-index:<%= 50 - 2 * index %>;">
-          <div class="directions-present" style="width:<%= display_block.display_width %>px;" onclick="toggleActive(this); showText(<%= index %>,'<%= display_block.text %>', this);">
+          <div class="directions-present inactive-tab" style="width:<%= display_block.display_width %>px;" onclick="toggleActive(this); showText(<%= index %>,'<%= display_block.text %>', this);">
             <%= display_block.title %>
           </div>
         </div>

@@ -18,3 +18,27 @@ $(function() {
   $('body').keydown(findErrors);
   $('body').keyup(findErrors);
 });
+
+$(function() {
+  DirectionsHover();
+});
+
+function DirectionsHover(){
+  $('.inactive-tab').unbind('mouseenter mouseleave');
+  $('.inactive-tab').hover(
+  function(){
+    $(this).addClass('hover-inactive-tab');
+  },
+  function(){
+    $(this).removeClass('hover-inactive-tab');
+  });
+
+  $('.active-tab').unbind('mouseenter mouseleave');
+  $('.active-tab').hover(
+  function(){
+    $(this).addClass('hover-active-tab');
+  },
+  function(){
+    $(this).removeClass('hover-active-tab');
+  });
+}
