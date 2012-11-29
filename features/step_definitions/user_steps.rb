@@ -147,11 +147,11 @@ Then /^I am redirected$/ do
   page.should_not have_content("Recipe");
 end
 
-When /^I send an update request$/ do
+When /^I send that user an update request$/ do
   put user_path(@user)
 end
 
-When /^I send a destroy request$/ do
+When /^I send that user a destroy request$/ do
   delete user_path(@user)
 end
 
@@ -159,7 +159,7 @@ Then /^I should see my edit page$/ do
   page.should have_selector('h1', text: "Edit TestUser's Profile")
 end
 
-When /^I delete the user$/ do
+When /^I delete that user$/ do
   @user.destroy
 end
 
@@ -182,7 +182,7 @@ When /^I input valid email changes$/ do
   fill_in "Email",                  with: "changed@user.com"
 end
 
-Then /^the email should be changed$/ do
+Then /^that user's email should be changed$/ do
   User.find(@user.id).email.should eq("changed@user.com")
 end
 

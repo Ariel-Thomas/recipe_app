@@ -4,7 +4,7 @@ Feature: User actions
     Given a user exists in the database
     And a recipe exists in the database created by that user
     When I visit that user's profile page
-    Then I should see the recipe
+    Then I should see that recipe
 
   Scenario: Edit User with invalid information
     Given a user exists in the database
@@ -34,7 +34,7 @@ Feature: User actions
 
   Scenario: User's update action is restricted from other users
     Given a user exists in the database
-    When I send an update request
+    When I send that user an update request
     Then I am redirected
 
   @javascript
@@ -50,5 +50,5 @@ Feature: User actions
 
   Scenario: User's destroy action is restricted from other users
     Given a user exists in the database
-    When I send a destroy request
+    When I send that user a destroy request
     Then I am redirected

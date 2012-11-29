@@ -4,8 +4,8 @@ Feature: Directions manipulation
   Scenario: See a direction
     Given a recipe exists in the database
     And that recipe has a direction
-    And I visit the recipe's show page
-    Then I should see the direction
+    And I visit that recipe's show page
+    Then I should see that direction
 
   @javascript
   Scenario: Destroy a direction
@@ -13,7 +13,7 @@ Feature: Directions manipulation
     And a recipe exists in the database created by that user
     And I am logged in
     And that recipe has a direction
-    And I visit the recipe's edit page
+    And I visit that recipe's edit page
     And I click the next button
     When I click the delete button next to the direction
     Then I should see the direction has been removed
@@ -23,7 +23,7 @@ Feature: Directions manipulation
     Given a user exists in the database
     And a recipe exists in the database created by that user
     And I am logged in
-    When I visit the recipe's edit page
+    When I visit that recipe's edit page
     And I click the next button
     And I click the add new direction button
     And I input invalid direction information
@@ -37,7 +37,7 @@ Feature: Directions manipulation
     Given a user exists in the database
     And a recipe exists in the database created by that user
     And I am logged in
-    When I visit the recipe's edit page
+    When I visit that recipe's edit page
     And I click the next button
     And I click the add new direction button
     And I enter valid recipe directions
@@ -52,10 +52,10 @@ Feature: Directions manipulation
     And a recipe exists in the database created by that user
     And I am logged in
     And that recipe has a direction
-    When I visit the recipe's edit page
+    When I visit that recipe's edit page
     And I click the next button
     And I click the add new direction button
-    Then I should not see ingredients already used
+    Then I should not see ingredients already used by that recipe
 
   @javascript
   Scenario: The product of directions should be available to use as ingredients
@@ -63,7 +63,7 @@ Feature: Directions manipulation
     And a recipe exists in the database created by that user
     And I am logged in
     And that recipe has a direction
-    When I visit the recipe's edit page
+    When I visit that recipe's edit page
     And I click the next button
     And I click the add new direction button
-    Then I should see the direction available for use as an ingredient
+    Then I should see that direction available for use as an ingredient

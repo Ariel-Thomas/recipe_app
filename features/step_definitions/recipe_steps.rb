@@ -50,7 +50,7 @@ Given /^I visit the index page$/ do
   visit recipes_path
 end
 
-Then /^I should see the recipe$/ do
+Then /^I should see that recipe$/ do
   page.should have_content(@recipe.name)
 end
 
@@ -74,7 +74,7 @@ Then /^I should see the recipe's page$/ do
   page.should have_selector('h1', text: "Cookies")
 end
 
-Given /^I visit the recipe's edit page$/ do
+Given /^I visit that recipe's edit page$/ do
   visit edit_recipe_path(@recipe)
 end
 
@@ -94,11 +94,11 @@ Then /^I should see the description has changed$/ do
   page.should have_content("Something silly")
 end
 
-When /^I visit the recipe's show page$/ do
+When /^I visit that recipe's show page$/ do
   visit recipe_path(@recipe)
 end
 
-Then /^I should see the recipe's information$/ do
+Then /^I should see that recipe's information$/ do
   page.should have_content(@recipe.name)
   page.should have_content(@recipe.description)
   @recipe.ingredient_entries.each{ |entry| page.should have_selector('li', text: entry.to_s) if (entry.direction.present?) }
@@ -113,7 +113,7 @@ Then /^I should see the recipe's edit page$/ do
   page.should have_selector('h1', text: "Edit Recipe")
 end
 
-When /^I enter the recipe name in the search$/ do
+When /^I enter that recipe's name in the search$/ do
   fill_in "Search",     with: @recipe.name
 end
 
@@ -138,7 +138,7 @@ Given /^(\d+) recipes exist in the database$/ do |num_recipes|
 
 end
 
-Then /^I should not see the last recipe$/ do
+Then /^I should not see that last recipe$/ do
   page.should_not have_content(@recipe.name)
 end
 

@@ -4,7 +4,7 @@ Feature: Show an index of current recipes
   Scenario: See a list of recipes
     Given a recipe exists in the database
     And I visit the index page
-    Then I should see the recipe
+    Then I should see that recipe
 
   @javascript
   Scenario: View a particular recipe
@@ -33,14 +33,14 @@ Feature: Show an index of current recipes
   Scenario: Search for a recipe
     Given a recipe exists in the database
     And I visit the index page
-    When I enter the recipe name in the search
+    When I enter that recipe's name in the search
     And I click the search button
-    Then I should see the recipe
+    Then I should see that recipe
 
   @javascript
   Scenario: Paginate results
     Given 11 recipes exist in the database
     And I visit the index page
-    Then I should not see the last recipe
+    Then I should not see that last recipe
 
     

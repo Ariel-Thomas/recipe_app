@@ -1,4 +1,4 @@
-Given /^that user has favorited the recipe$/ do
+Given /^that user has favorited that recipe$/ do
   @user.favorites.create(user: @user, recipe: @recipe)
 end
 
@@ -10,11 +10,11 @@ When /^I click the unfavorite button$/ do
   find(".unfavorite > form > div > input").click
 end
 
-Then /^I should have the recipe favorited$/ do
+Then /^I should have that recipe favorited$/ do
   @user.favorites.find_by_id(@recipe).try(:recipe_id).should eq(@recipe.id)
 end
 
-Then /^I should no longer have the recipe favorited$/ do
+Then /^I should no longer have that recipe favorited$/ do
   @user.favorites.find_by_id(@recipe).try(:recipe_id).should_not eq(@recipe.id)
 end
 

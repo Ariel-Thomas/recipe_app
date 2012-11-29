@@ -10,7 +10,7 @@ Feature: As an admin, I can manage any other users and their pages.
     And I input valid email changes
     And I click the update user button
     Then I should see the user page
-    And the email should be changed
+    And that user's email should be changed
 
   Scenario: Admin delete user
     Given an admin exists in the database
@@ -24,7 +24,7 @@ Feature: As an admin, I can manage any other users and their pages.
     Given an admin exists in the database
     And I am logged in as an admin
     And a recipe exists in the database
-    And I visit the recipe's edit page
+    And I visit that recipe's edit page
     When I change the description
     And I click the next button
     And I click the done button

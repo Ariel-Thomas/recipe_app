@@ -81,6 +81,8 @@ module RecipesHelper
 
 
   class DisplayLayout < Array
+
+
     def find_by_direction(direction)
       self.flatten.select{ |n| n.class == DisplayBlock && n.direction.present? && n.direction == direction }.first
     end
