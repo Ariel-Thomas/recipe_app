@@ -46,6 +46,14 @@ Given /^a recipe exists in the database$/ do
   @recipe = Recipe.create!(name: "Cookies", description: "Delicious", ingredient_entries: Recipe.parse_and_create_ingredients("1 C Sugar\n1 C Flour\n2 T Butter"))
 end
 
+Given /^a different recipe exists in the database$/ do
+  @another_recipe = Recipe.create!(name: "Cake", description: "Cake-like", ingredient_entries: Recipe.parse_and_create_ingredients("1 C Chocolate\n1 C Flour"))
+end
+
+Then /^I should not see that other recipe$/ do
+  page.should_not have_content(@another_recipe.name)
+end
+
 Given /^I visit the index page$/ do
   visit recipes_path
 end
@@ -115,6 +123,18 @@ end
 
 When /^I enter that recipe's name in the search$/ do
   fill_in "Search",     with: @recipe.name
+end
+
+When /^I enter that recipe's description in the search$/ do
+  fill_in "Search",     with: @recipe.description
+end
+
+When /^I enter that recipe's author in the search$/ do
+  fill_in "Search",     with: @recipe.author
+end
+
+When /^I enter that recipe's first ingredient in the search$/ do
+  fill_in "Search",     with: @recipe.ingredients.first.name
 end
 
 When /^I click the search button$/ do

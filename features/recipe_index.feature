@@ -30,14 +30,6 @@ Feature: Show an index of current recipes
     And I should see a success message
 
   @javascript
-  Scenario: Search for a recipe
-    Given a recipe exists in the database
-    And I visit the index page
-    When I enter that recipe's name in the search
-    And I click the search button
-    Then I should see that recipe
-
-  @javascript
   Scenario: Paginate results
     Given 11 recipes exist in the database
     And I visit the index page
