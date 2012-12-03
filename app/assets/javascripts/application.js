@@ -32,13 +32,4 @@ function DirectionsHover(){
   function(){
     $(this).removeClass('hover-inactive-tab');
   });
-
-  $('.active-tab').unbind('mouseenter mouseleave');
-  $('.active-tab').hover(
-  function(){
-    $(this).addClass('hover-active-tab');
-  },
-  function(){
-    $(this).removeClass('hover-active-tab');
-  });
 }
