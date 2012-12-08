@@ -16,6 +16,10 @@
 
     <%= f.label :password_confirmation %>
     <%= f.password_field :password_confirmation %>
+
+    <%= image_tag avatar_url(@user) %>
+    <%= f.label :avatar_url %>
+    <%= f.password_field :avatar_url %>
   </section>
 
   <%= f.submit class: "btn btn-large btn-primary" %>

@@ -1,5 +1,5 @@
 <% recipes.each do |recipe| %>
-  <div class="recipe-list-element">
+  <div class="recipe-list-element" onclick="location.href='<%= root_url.chop + recipe_path(recipe) %>';">
     <section class="pull-right picture-border">
       <% if recipe.has_picture? %>
         <%= image_tag recipe.picture.url(:thumb) %>

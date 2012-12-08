@@ -1,6 +1,9 @@
 <% provide(:title, @user.username ) %>
 <h1><%= @user.username %>'s Profile</h1>
 
+<%= image_tag avatar_url(@user), class: 'avatar' %>
+
+
 <section>
   <% if @user.about_me.present? %>
     <h3>About Me</h3>
