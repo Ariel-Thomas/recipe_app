@@ -1,1 +1,1 @@
-$("#recipes_list").html("<%= escape_javascript(render('recipes/list'))%>");
+$("#recipes_list").html("<%= escape_javascript(render 'recipes/list', recipes: @recipes) %>");

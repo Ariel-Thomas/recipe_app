@@ -18,3 +18,18 @@ $(function() {
   $('body').keydown(findErrors);
   $('body').keyup(findErrors);
 });
+
+$(function() {
+  DirectionsHover();
+});
+
+function DirectionsHover(){
+  $('.inactive-tab').unbind('mouseenter mouseleave');
+  $('.inactive-tab').hover(
+  function(){
+    $(this).addClass('hover-inactive-tab');
+  },
+  function(){
+    $(this).removeClass('hover-inactive-tab');
+  });
+}

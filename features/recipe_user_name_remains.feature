@@ -4,6 +4,6 @@ Feature: As a user, I can see the recipe creator's username even if the account 
   Scenario: Removed user's usernames remain
     Given a user exists in the database
     And a recipe exists in the database created by that user
-    When I delete the user
-    And I visit the recipe's show page
+    When I delete that user
+    And I visit that recipe's show page
     Then I should see the deleted user's username

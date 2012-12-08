@@ -19,7 +19,8 @@ class Recipe < ActiveRecord::Base
   validates :description, presence: true
   validates :ingredient_entries, presence: true
 
-  scoped_search on: [:name, :description, :author]
+  scoped_search on: [:name, :description, :author ]
+  scoped_search in: :ingredients, on: :name
 
   def ingredients_text
     ingredient_entries.reject{ |entry| entry.ingredient.nil? ||entry.ingredient.type == 'Result' }.join("\n")

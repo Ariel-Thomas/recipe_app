@@ -5,6 +5,13 @@
 
 
 <section>
+  <% if @user.about_me.present? %>
+    <h3>About Me</h3>
+    <p><%= @user.about_me %></p>
+  <% end %>
+</section>
+
+<section style="position:relative">
   <div class="left-col">
     <h3>User Recipes (<%= @user.recipes.count %>)</h3>
     <div id="recipes_list">

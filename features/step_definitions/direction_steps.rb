@@ -34,7 +34,7 @@ When /^I click the add direction button$/ do
   click_button "Add Direction"
 end
 
-Then /^I should not see ingredients already used$/ do
+Then /^I should not see ingredients already used by that recipe$/ do
   page.should have_content(@recipe.directions.find(@direction).text)
 
   @recipe.ingredient_entries.each do |entry|
@@ -46,15 +46,15 @@ Then /^I should not see ingredients already used$/ do
   end
 end
 
-Then /^I should see the direction$/ do
+Then /^I should see that direction$/ do
   page.should have_content(@direction.title)
 end
 
-Then /^I should see the direction available for use as an ingredient$/ do
+Then /^I should see that direction available for use as an ingredient$/ do
   page.should have_selector('label', text: @direction.result.to_s)
 end
 
-Then /^I should not see the direction text$/ do
+Then /^I should not see that direction's text$/ do
   page.should_not have_selector('div', text: @direction.text)
 end
 
@@ -62,7 +62,7 @@ When /^I click the direction title$/ do
   find(".directions-present").click
 end
 
-Then /^I should see the direction text$/ do
+Then /^I should see that direction's text$/ do
   page.should have_content(@direction.text)
 end
 

@@ -69,6 +69,7 @@ ActiveRecord::Schema.define(:version => 20121119161535) do
     t.string   "remember_me_token"
     t.datetime "remember_me_token_expires_at"
     t.boolean  "admin"
+    t.text     "about_me"
     t.string   "avatar_url"
   end
 

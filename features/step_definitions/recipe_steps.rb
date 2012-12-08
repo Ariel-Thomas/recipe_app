@@ -46,11 +46,19 @@ Given /^a recipe exists in the database$/ do
   @recipe = Recipe.create!(name: "Cookies", description: "Delicious", ingredient_entries: Recipe.parse_and_create_ingredients("1 C Sugar\n1 C Flour\n2 T Butter"))
 end
 
+Given /^a different recipe exists in the database$/ do
+  @another_recipe = Recipe.create!(name: "Cake", description: "Cake-like", ingredient_entries: Recipe.parse_and_create_ingredients("1 C Chocolate\n1 C Flour"))
+end
+
+Then /^I should not see that other recipe$/ do
+  page.should_not have_content(@another_recipe.name)
+end
+
 Given /^I visit the index page$/ do
   visit recipes_path
 end
 
-Then /^I should see the recipe$/ do
+Then /^I should see that recipe$/ do
   page.should have_content(@recipe.name)
 end
 
@@ -74,7 +82,7 @@ Then /^I should see the recipe's page$/ do
   page.should have_selector('h1', text: "Cookies")
 end
 
-Given /^I visit the recipe's edit page$/ do
+Given /^I visit that recipe's edit page$/ do
   visit edit_recipe_path(@recipe)
 end
 
@@ -94,11 +102,11 @@ Then /^I should see the description has changed$/ do
   page.should have_content("Something silly")
 end
 
-When /^I visit the recipe's show page$/ do
+When /^I visit that recipe's show page$/ do
   visit recipe_path(@recipe)
 end
 
-Then /^I should see the recipe's information$/ do
+Then /^I should see that recipe's information$/ do
   page.should have_content(@recipe.name)
   page.should have_content(@recipe.description)
   @recipe.ingredient_entries.each{ |entry| page.should have_selector('li', text: entry.to_s) if (entry.direction.present?) }
@@ -113,8 +121,20 @@ Then /^I should see the recipe's edit page$/ do
   page.should have_selector('h1', text: "Edit Recipe")
 end
 
-When /^I enter the recipe name in the search$/ do
+When /^I enter that recipe's name in the search$/ do
   fill_in "Search",     with: @recipe.name
+end
+
+When /^I enter that recipe's description in the search$/ do
+  fill_in "Search",     with: @recipe.description
+end
+
+When /^I enter that recipe's author in the search$/ do
+  fill_in "Search",     with: @recipe.author
+end
+
+When /^I enter that recipe's first ingredient in the search$/ do
+  fill_in "Search",     with: @recipe.ingredients.first.name
 end
 
 When /^I click the search button$/ do
@@ -138,7 +158,7 @@ Given /^(\d+) recipes exist in the database$/ do |num_recipes|
 
 end
 
-Then /^I should not see the last recipe$/ do
+Then /^I should not see that last recipe$/ do
   page.should_not have_content(@recipe.name)
 end
 

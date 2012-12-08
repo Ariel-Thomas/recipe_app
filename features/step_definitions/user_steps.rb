@@ -3,11 +3,11 @@ Given /^I visit the sign up page$/ do
 end
 
 When /^I enter invalid sign up information$/ do
-  fill_in "Username",         with: "Empty String"  
+  fill_in "Username",         with: "Empty String"
 end
 
 When /^I enter valid sign up information$/ do
-  fill_in "Username",               with: "TestUser" 
+  fill_in "Username",               with: "TestUser"
   fill_in "Email",                  with: "Test@user.com"
   fill_in "Password",               with: "derp"
   fill_in "Password confirmation",  with: "derp"
@@ -41,12 +41,12 @@ Given /^I visit the sign in page$/ do
 end
 
 When /^I enter invalid sign in information$/ do
-  fill_in "Username",               with: "TestUser" 
+  fill_in "Username",               with: "TestUser"
   fill_in "Password",               with: ""
 end
 
 When /^I enter valid sign in information$/ do
-  fill_in "Username",               with: "TestUser" 
+  fill_in "Username",               with: "TestUser"
   fill_in "Password",               with: "derp"
 end
 
@@ -77,7 +77,7 @@ end
 
 Given /^I am logged in$/ do
   visit new_session_path
-  fill_in "Username",               with: "TestUser" 
+  fill_in "Username",               with: "TestUser"
   fill_in "Password",               with: "derp"
   click_button "Sign In"
 end
@@ -115,7 +115,7 @@ end
 Then /^I should be able to log back in with the new password$/ do
   click_link "Sign Out"
   click_link "Sign In"
-  fill_in "Username",               with: "TestUser" 
+  fill_in "Username",               with: "TestUser"
   fill_in "Password",               with: "herp"
   click_button "Sign In"
 end
@@ -147,11 +147,11 @@ Then /^I am redirected$/ do
   page.should_not have_content("Recipe");
 end
 
-When /^I send an update request$/ do
+When /^I send that user an update request$/ do
   put user_path(@user)
 end
 
-When /^I send a destroy request$/ do
+When /^I send that user a destroy request$/ do
   delete user_path(@user)
 end
 
@@ -159,7 +159,7 @@ Then /^I should see my edit page$/ do
   page.should have_selector('h1', text: "Edit TestUser's Profile")
 end
 
-When /^I delete the user$/ do
+When /^I delete that user$/ do
   @user.destroy
 end
 
@@ -173,7 +173,7 @@ end
 
 Given /^I am logged in as an admin$/ do
   visit new_session_path
-  fill_in "Username",               with: "admin" 
+  fill_in "Username",               with: "admin"
   fill_in "Password",               with: "admin"
   click_button "Sign In"
 end
@@ -182,7 +182,7 @@ When /^I input valid email changes$/ do
   fill_in "Email",                  with: "changed@user.com"
 end
 
-Then /^the email should be changed$/ do
+Then /^that user's email should be changed$/ do
   User.find(@user.id).email.should eq("changed@user.com")
 end
 
@@ -208,5 +208,21 @@ Then /^I should see the image$/ do
 end
 
 When /^I input valid avatar information$/ do
-  fill_in "Avatar",               with: "http://goonlol.com/images/c/c8/Icon_Jax.jpg" 
+  fill_in "Avatar",               with: "http://goonlol.com/images/c/c8/Icon_Jax.jpg"
+end
+
+Given /^that user has a valid about me$/ do
+  @user.update_attributes!(about_me: "I am awesome.", password: "derp", password_confirmation: "derp")
+end
+
+Then /^I should see that user's about me text$/ do
+  page.should have_content @user.about_me.to_s
+end
+
+When /^input valid about me text$/ do
+  fill_in "About me",         with: "I was awesome."
+end
+
+Then /^I should see my new about me text$/ do
+  page.should have_content "I was awesome."
 end
