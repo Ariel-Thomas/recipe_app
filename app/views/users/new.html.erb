@@ -17,9 +17,9 @@
     <%= f.label :password_confirmation %>
     <%= f.password_field :password_confirmation %>
 
-    <%= image_tag avatar_url(@user) %>
+    <p><%= image_tag avatar_url(@user), :height => 90, :width => 90 %></p>
     <%= f.label :avatar_url %>
-    <%= f.password_field :avatar_url %>
+    <%= f.text_field :avatar_url %>
   </section>
 
   <%= f.submit class: "btn btn-large btn-primary" %>
