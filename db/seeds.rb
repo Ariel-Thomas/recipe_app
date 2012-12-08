@@ -7,6 +7,7 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 #Admin
+print "Seeding Admins..."
 admin = User.create!(
   username: "admin",
   email: "admin@example.com",
@@ -15,9 +16,11 @@ admin = User.create!(
   about_me: "I am an admin",
   admin: true
   )
+puts "Done."
 
 
 #User
+print "Seeding Users..."
 demo_user = User.create!(
   username: "Herp",
   email: "herp@example.com",
@@ -25,7 +28,9 @@ demo_user = User.create!(
   password_confirmation: "derp",
   about_me: "I am a user and I like to have fun."
   )
+puts "Done."
 
+print "Seeding pre-defined Recipes..."
 #Cookies
 recipe = Recipe.create!(
   name: "Cookies",
@@ -89,7 +94,10 @@ recipe.add_result_for direction
 direction = recipe.directions.create!(title: "Bake at 350 for 30 min", text: "Put it all in a square baking dish and bake at 350F for 30 minutes.", ingredient_entries: Array([recipe.ingredient_entries[6], recipe.ingredient_entries[7]]))
 recipe.add_result_for direction
 
+puts "Done."
+
 #random recipes
+print "Seeding random Recipes..."
 50.times do |index|
   user = User.create!(
   username: "User" + index.to_s,
@@ -107,3 +115,6 @@ recipe.add_result_for direction
 
   demo_user.favorites.create!(recipe: recipe)
 end
+puts "Done."
+
+puts "Finished seeding."
