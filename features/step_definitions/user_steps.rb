@@ -3,11 +3,11 @@ Given /^I visit the sign up page$/ do
 end
 
 When /^I enter invalid sign up information$/ do
-  fill_in "Username",         with: "Empty String"  
+  fill_in "Username",         with: "Empty String"
 end
 
 When /^I enter valid sign up information$/ do
-  fill_in "Username",               with: "TestUser" 
+  fill_in "Username",               with: "TestUser"
   fill_in "Email",                  with: "Test@user.com"
   fill_in "Password",               with: "derp"
   fill_in "Password confirmation",  with: "derp"
@@ -41,12 +41,12 @@ Given /^I visit the sign in page$/ do
 end
 
 When /^I enter invalid sign in information$/ do
-  fill_in "Username",               with: "TestUser" 
+  fill_in "Username",               with: "TestUser"
   fill_in "Password",               with: ""
 end
 
 When /^I enter valid sign in information$/ do
-  fill_in "Username",               with: "TestUser" 
+  fill_in "Username",               with: "TestUser"
   fill_in "Password",               with: "derp"
 end
 
@@ -77,7 +77,7 @@ end
 
 Given /^I am logged in$/ do
   visit new_session_path
-  fill_in "Username",               with: "TestUser" 
+  fill_in "Username",               with: "TestUser"
   fill_in "Password",               with: "derp"
   click_button "Sign In"
 end
@@ -115,7 +115,7 @@ end
 Then /^I should be able to log back in with the new password$/ do
   click_link "Sign Out"
   click_link "Sign In"
-  fill_in "Username",               with: "TestUser" 
+  fill_in "Username",               with: "TestUser"
   fill_in "Password",               with: "herp"
   click_button "Sign In"
 end
@@ -173,7 +173,7 @@ end
 
 Given /^I am logged in as an admin$/ do
   visit new_session_path
-  fill_in "Username",               with: "admin" 
+  fill_in "Username",               with: "admin"
   fill_in "Password",               with: "admin"
   click_button "Sign In"
 end
@@ -184,6 +184,31 @@ end
 
 Then /^that user's email should be changed$/ do
   User.find(@user.id).email.should eq("changed@user.com")
+end
+
+Then /^I should see an avatar$/ do
+  page.should have_selector('img',class: 'avatar')
+end
+
+Given /^that user has an email linked to a valid gravatar account$/ do
+  @user.update_attributes(email: "Ariel.Thomas@gmail.com")
+end
+
+Then /^I should see that gravatar$/ do
+  gravatar_id = Digest::MD5.hexdigest(@user.email.downcase)
+  page.should have_selector("img", src: "http://gravatar.com/avatar/#{gravatar_id}.png?s=80")
+end
+
+Given /^that user has a link to an image$/ do
+  @user.update_attributes(avatar_url: "http://goonlol.com/images/c/c8/Icon_Jax.jpg")
+end
+
+Then /^I should see the image$/ do
+  page.should have_selector("img", src: "http://goonlol.com/images/c/c8/Icon_Jax.jpg")
+end
+
+When /^I input valid avatar information$/ do
+  fill_in "Avatar",               with: "http://goonlol.com/images/c/c8/Icon_Jax.jpg"
 end
 
 Given /^that user has a valid about me$/ do

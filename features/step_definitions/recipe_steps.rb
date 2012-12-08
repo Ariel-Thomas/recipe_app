@@ -186,3 +186,6 @@ Then /^I should not see the picture$/ do
   page.should_not have_selector('img', alt: 'Invalid')
 end
 
+When /^I click the recipe's div$/ do
+  find(".recipe-list-element").click
+end

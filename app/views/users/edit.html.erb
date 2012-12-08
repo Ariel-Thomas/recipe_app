@@ -13,6 +13,11 @@
 
     <%= f.label :password_confirmation %>
     <%= f.password_field :password_confirmation %>
+
+    <br><br>
+    <%= image_tag avatar_url(@user) %>
+    <%= f.label :avatar_url %>
+    <%= f.text_field :avatar_url %>
   </section>
 
   <section>
