@@ -11,3 +11,11 @@
  *= require_self
  *= require_tree .
  */
+
+header {
+  h2 {
+    a:hover {
+      text-decoration: none;
+    }
+  }
+}
