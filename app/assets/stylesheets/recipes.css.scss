@@ -197,8 +197,19 @@ textarea {
   cursor: pointer; cursor: hand;
 }
 
+.recipe-list-element:hover {
+  padding: 10px;
+  border: 1px solid white;
+}
+
+.recipe-list-element:active {
+  padding: 8px;
+  border: 3px solid #E8D069;
+}
+
 .recipe-list-element > .recipe-list-title > a {
   color: #AD1D28;
+  text-decoration: none;
 }
 
 .recipe-list-element > section > a {
