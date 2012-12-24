@@ -2,7 +2,7 @@
 # The default is nothing which will include only core features (password encryption, login/logout).
 # Available submodules are: :user_activation, :http_basic_auth, :remember_me,
 # :reset_password, :session_timeout, :brute_force_protection, :activity_logging, :external
-Rails.application.config.sorcery.submodules = [:remember_me, :http_basic_auth]
+Rails.application.config.sorcery.submodules = [:remember_me, :http_basic_auth, :external]
 
 # Here you can configure each submodule's features.
 Rails.application.config.sorcery.configure do |config|
@@ -80,6 +80,8 @@ Rails.application.config.sorcery.configure do |config|
   # config.ca_file =
 
 
+  config.external_providers = [:facebook]
+
   # Twitter wil not accept any requests nor redirect uri containing localhost,
   # make sure you use 0.0.0.0:3000 to access your app in development
   #
@@ -87,12 +89,14 @@ Rails.application.config.sorcery.configure do |config|
   # config.twitter.secret = ""
   # config.twitter.callback_url = "http://0.0.0.0:3000/oauth/callback?provider=twitter"
   # config.twitter.user_info_mapping = {:email => "screen_name"}
-  #
-  # config.facebook.key = ""
-  # config.facebook.secret = ""
-  # config.facebook.callback_url = "http://0.0.0.0:3000/oauth/callback?provider=facebook"
-  # config.facebook.user_info_mapping = {:email => "name"}
-  #
+  
+  config.facebook.key = ENV["FACEBOOK_KEY"]
+  config.facebook.secret = ENV["FACEBOOK_SECRET"]
+  config.facebook.callback_url = "http://0.0.0.0:3000/oauth/callback?provider=facebook"
+  config.facebook.user_info_mapping = {:email => "email",:username => "name"} #etc
+  config.facebook.scope = "email,offline_access" #etc
+  config.facebook.display = "popup"
+  
   # config.github.key = ""
   # config.github.secret = ""
   # config.github.callback_url = "http://0.0.0.0:3000/oauth/callback?provider=github"
@@ -370,8 +374,8 @@ Rails.application.config.sorcery.configure do |config|
     # -- external --
     # Class which holds the various external provider data for this user.
     # Default: `nil`
-    #
-    # user.authentications_class =
+    #   
+    user.authentications_class = Authentication
 
 
     # User's identifier in authentications class.

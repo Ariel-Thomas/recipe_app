@@ -1,6 +1,5 @@
 @http://www.pivotaltracker.com/story/show/39630395
 Feature: As a user, I can favorite recipes I like and have them show in my profile
-
   Scenario: Favorites on profile page
     Given a user exists in the database
     And a recipe exists in the database

@@ -1,18 +1,18 @@
 @http://www.pivotaltracker.com/story/show/39693763
 Feature: As a user, I can attach a picture to my profile and have it display in my profile page.
-  
+
   Scenario: User profile has avatar
     Given a user exists in the database
     When I visit that user's profile page
     Then I should see an avatar
 
-  Scenario: User profile shows gravatar image 
+  Scenario: User profile shows gravatar image
     Given a user exists in the database
     And that user has an email linked to a valid gravatar account
     When I visit that user's profile page
     Then I should see that gravatar
 
-  Scenario: User profile shows alternate image 
+  Scenario: User profile shows alternate image
     Given a user exists in the database
     And that user has a link to an image
     When I visit that user's profile page

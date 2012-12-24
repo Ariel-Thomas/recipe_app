@@ -21,6 +21,8 @@
   <% end %>
 </section>
 
+<%= link_to image_tag('fb-login-button.png'), auth_at_provider_path(:provider => :facebook), id: "facebook-login" %>
+
 <hr class="clear-both">
 
 <h4>Not registered? <%= link_to "Sign up now!",  new_user_path %></h4>

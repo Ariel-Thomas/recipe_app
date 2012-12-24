@@ -1,6 +1,5 @@
 @http://www.pivotaltracker.com/story/show/39625045
 Feature: As an admin, I can manage any other users and their pages.
-
   Scenario: Admin edit user
     Given an admin exists in the database
     And I am logged in as an admin
@@ -10,7 +9,7 @@ Feature: As an admin, I can manage any other users and their pages.
     And I input valid email changes
     And I click the update user button
     Then I should see the user page
-    And that user's email should be changed
+    And the user's email should be changed
 
   Scenario: Admin delete user
     Given an admin exists in the database

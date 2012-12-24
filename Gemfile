@@ -11,6 +11,7 @@ gem 'thin', '1.4.1'
 gem 'bootstrap-sass', '2.0.0'
 gem 'bcrypt-ruby', '3.0.1'
 gem 'scoped_search'
+
 gem 'sorcery'
 gem 'cancan'
 
@@ -24,6 +25,7 @@ gem 'aws-sdk'
 group :development, :test do
   gem 'rspec-rails', '2.11.0'
   gem "awesome_print"
+  gem 'dotenv'
 end
 
 group :development do

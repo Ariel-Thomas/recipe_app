@@ -1,6 +1,5 @@
 @http://www.pivotaltracker.com/story/show/39693617
 Feature: As a user, I can attach a picture to a recipe and have it display in the show, index and profile views.
-
   Scenario: Attempt to attach an invalid picture
     Given a user exists in the database
     And a recipe exists in the database created by that user

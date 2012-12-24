@@ -182,7 +182,7 @@ When /^I input valid email changes$/ do
   fill_in "Email",                  with: "changed@user.com"
 end
 
-Then /^that user's email should be changed$/ do
+Then /^the user's email should be changed$/ do
   User.find(@user.id).email.should eq("changed@user.com")
 end
 

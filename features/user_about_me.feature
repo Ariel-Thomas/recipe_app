@@ -1,6 +1,5 @@
 @http://www.pivotaltracker.com/story/show/39637311
 Feature: As a user, I can write about myself on my profile page
-
   Scenario: Profile page shows about me
     Given a user exists in the database
     And that user has a valid about me

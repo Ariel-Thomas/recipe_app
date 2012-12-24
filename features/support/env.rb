@@ -25,7 +25,9 @@ Capybara.default_driver = :webkit
 Capybara.javascript_driver = :webkit
 
 Capybara.default_wait_time = 2 #default: 2
-#Capybara.server_port = 8888 + ENV['TEST_ENV_NUMBER'].to_i
+
+Capybara.server_port = 3001
+#Capybara.app_host = "0.0.0.0:3001"
 
 # By default, any exception happening in your Rails application will bubble up
 # to Cucumber so that your scenario will fail. This is a different from how 
