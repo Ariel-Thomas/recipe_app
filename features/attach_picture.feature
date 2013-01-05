@@ -4,7 +4,7 @@ Feature: As a user, I can attach a picture to a recipe and have it display in th
     Given a user exists in the database
     And a recipe exists in the database created by that user
     And I am logged in
-    And I visit that recipe's edit page
+    And I visit the recipe's edit page
     When I attach an invalid picture
     And I click the next button
     And I click the done button
@@ -15,7 +15,7 @@ Feature: As a user, I can attach a picture to a recipe and have it display in th
     Given a user exists in the database
     And a recipe exists in the database created by that user
     And I am logged in
-    And I visit that recipe's edit page
+    And I visit the recipe's edit page
     When I attach a valid picture
     And I click the next button
     And I click the done button

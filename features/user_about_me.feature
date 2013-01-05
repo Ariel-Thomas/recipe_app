@@ -4,7 +4,7 @@ Feature: As a user, I can write about myself on my profile page
     Given a user exists in the database
     And that user has a valid about me
     When I visit that user's profile page
-    Then I should see that user's about me text
+    Then I should see the about me text
 
   Scenario: Edit User's about me
     Given a user exists in the database

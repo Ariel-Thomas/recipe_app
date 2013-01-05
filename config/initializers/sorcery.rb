@@ -80,15 +80,15 @@ Rails.application.config.sorcery.configure do |config|
   # config.ca_file =
 
 
-  config.external_providers = [:facebook]
+  config.external_providers = [:twitter,:facebook]
 
   # Twitter wil not accept any requests nor redirect uri containing localhost,
   # make sure you use 0.0.0.0:3000 to access your app in development
   #
-  # config.twitter.key = ""
-  # config.twitter.secret = ""
-  # config.twitter.callback_url = "http://0.0.0.0:3000/oauth/callback?provider=twitter"
-  # config.twitter.user_info_mapping = {:email => "screen_name"}
+  config.twitter.key = ENV["TWITTER_KEY"]
+  config.twitter.secret = ENV["TWITTER_SECRET"]
+  config.twitter.callback_url = "http://0.0.0.0:3000/oauth/callback?provider=twitter"
+  config.twitter.user_info_mapping = {:username => "screen_name"}
   
   config.facebook.key = ENV["FACEBOOK_KEY"]
   config.facebook.secret = ENV["FACEBOOK_SECRET"]

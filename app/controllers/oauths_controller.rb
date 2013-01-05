@@ -21,7 +21,7 @@ class OauthsController < ApplicationController
         redirect_back_or_to root_url
       rescue
         flash[:alert] = "Failed to login from #{provider.titleize}!"
-        redirect_back_or_to root_url
+        redirect_back_or_to sign_in_url
       end
     end
   end
